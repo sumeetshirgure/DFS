@@ -25,44 +25,60 @@ class RFS(Fuse) :
         self.server_hostname = server_hostname
         self.vdir = vdir
         self.server_port = 7897
-        self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.sock.connect((self.server_hostname, self.server_port))
-        self.sock.sendall(bytes(f'{self.vdir}\n', encoding='utf-8'))
-        self.sockfile = self.sock.makefile()
+
+    def create_sock(self):
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sock.connect((self.server_hostname, self.server_port))
+        sockfile = self.sock.makefile()
+        return sock, sockfile
 
     def fsinit(self) :
         pass
 
     def fsdestroy(self) :
-        self.sock.sendall(b'unmount\n')
-        self.sock.close()
+        pass
+        # sock, sockfile = self.create_sock()
+        # sock.sendall(b'unmount\n')
+        # sock.close()
 
-    def get_response(self) :
-        size = int( self.sockfile.readline().strip() )
-        data = self.sockfile.read(size)
+    def get_response(self, sockfile) :
+        size = int( sockfile.readline().strip() )
+        data = sockfile.read(size)
         obj = pickle.loads(data)
         return obj
 
-    def access(self, path, mode) :
-        self.sock.sendall(b'access\n')
-        self.sock.sendall( bytes(path+'\n', encoding="utf-8") )
-        self.sock.sendall( bytes(str(mode)+'\n', encoding="utf-8") )
-        response = self.get_response()
+    def access(self, path, mode):
+        sock, sockfile = self.create_sock()
+
+        sock.sendall(b'fuse_access\n')
+        sock.sendall( bytes(self.vdir+'\n', encoding="utf-8") )
+        sock.sendall( bytes(path+'\n', encoding="utf-8") )
+        sock.sendall( bytes(str(mode)+'\n', encoding="utf-8") )
+        response = self.get_response(sockfile)
+        sockfile.close()
+        sock.close()
         return response
 
     def getattr(self, path):
-        self.sock.sendall(b'fuse_getattr\n')
-        self.sock.sendall( bytes(path+'\n', encoding="utf-8") )
-        st = self.get_response()
+        sock, sockfile = self.create_sock()
+        sock.sendall(b'fuse_getattr\n')
+        sock.sendall( bytes(self.vdir+'\n', encoding="utf-8") )
+        sock.sendall( bytes(path+'\n', encoding="utf-8") )
+        st = self.get_response(sockfile)
+        sockfile.close()
+        sock.close()
         return st
 
     def readlink(self, path) :
         pass
 
     def readdir(self, path) :
-        self.sock.sendall(b'readdir\n')
-        self.sock.sendall( bytes(path, encoding="utf-8") )
-        pass
+        sock, sockfile = self.create_sock()
+        sock.sendall(b'fuse_readdir\n')
+        sock.sendall( bytes(self.vdir+'\n', encoding="utf-8") )
+        sock.sendall( bytes(path, encoding="utf-8") )
+        sockfile.close()
+        sock.close()
 
     def unlink(self, path) :
         pass

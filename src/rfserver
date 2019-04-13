@@ -26,9 +26,10 @@ class ServerHandler(socketserver.StreamRequestHandler):
         self.wfile.write(data)
 
     def fuse_getattr(self) :
+        mount_point = str(self.rfile.readline().strip(), encoding="utf-8")
         path = str(self.rfile.readline().strip(), encoding="utf-8")
         print("getattr called on", path)
-        ost = os.stat( os.path.join(self.mount_point, path) )
+        ost = os.stat( os.path.join(mount_point, path) )
         st = fuse.Stat()
         st.st_nlink = ost.st_nlink
         st.st_size  = ost.st_size
@@ -37,29 +38,33 @@ class ServerHandler(socketserver.StreamRequestHandler):
         st.st_ctime = ost.st_ctime
         self.respond(st)
 
-    def access(self) :
+    def fuse_access(self) :
+        mount_point = str(self.rfile.readline().strip(), encoding="utf-8")
         path = str(self.rfile.readline().strip(), encoding="utf-8")
         mode = int(str(self.rfile.readline().strip(), encoding="utf-8"))
-        # print("access called on", path)
-        value = os.access( os.path.join(self.mount_point, path) )
+        print("access called on", path, mode)
+        value = os.access( os.path.join(mount_point, path), mode)
+        print('ans = ', value)
         self.respond(value)
 
-    def handle(self):
-        # First line contains mount point.
-        self.mount_point = str(self.rfile.readline().strip(), encoding="utf-8")
-        print('MountPoint~:', self.mount_point)
+    def fuse_readdir(self):
+        mount_point = str(self.rfile.readline().strip(), encoding="utf-8")
+        path = str(self.rfile.readline().strip(), encoding="utf-8")
+        print("readdir called on", path)
+        self.respond(list(map(fuse.Direntry, list(os.listdir(os.path.join(mount_point, path))))))
 
-        while True :
-            # Subsequent lines contain commands.
-            self.command = str(self.rfile.readline().strip(), encoding="utf-8")
-            if not self.command : break # Connection closed.
-            if self.command == 'unmount' : break
-            print(f"{self.client_address} command :", self.command)
-            handler = getattr(self, self.command)
-            handler()
+    def handle(self):
+        # Subsequent lines contain commands.
+        self.command = str(self.rfile.readline().strip(), encoding="utf-8")
+        if not self.command : raise Exception # Connection closed.
+        # if self.command == 'unmount' : break
+        print(f"{self.client_address} command :", self.command)
+        handler = getattr(self, self.command)
+        handler()
 
     def finish(self) :
-        print(f"closing connection with {self.client_address}")
+        pass
+        # print(f"closing connection with {self.client_address}")
 
 if __name__ == "__main__":
     HOST, PORT = "localhost", 7897

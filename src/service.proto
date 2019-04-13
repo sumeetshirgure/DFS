@@ -1,0 +1,21 @@
+// python -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. service.proto
+
+syntax="proto2";
+
+service Greeter {
+  
+  rpc mount (MessageString) returns (MessageReply) {}
+}
+
+message MessagePathMode {
+  required string path = 1;
+  required int32 mode = 2;
+}
+
+message MessageString {
+  required string str = 1;  
+}
+
+message MessageReply {
+  required int32 errno = 1;
+}
