@@ -7,6 +7,8 @@ from fuse import Fuse
 
 import socket
 
+import pickle
+
 if not hasattr(fuse, '__version__') :
     raise RuntimeError("Your fuse-py doesn't know of fuse.__version__. Try updating.")
 
@@ -23,25 +25,43 @@ class RFS(Fuse) :
         self.server_hostname = server_hostname
         self.vdir = vdir
         self.server_port = 7897
-        # socket.sock.makefile()
-
-    def fsinit(self) :
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.sock.connect((self.server_hostname, self.server_port))
         self.sock.sendall(bytes(f'{self.vdir}\n', encoding='utf-8'))
+        self.sockfile = self.sock.makefile()
 
+    def fsinit(self) :
+        pass
 
     def fsdestroy(self) :
         self.sock.sendall(b'unmount\n')
         self.sock.close()
 
-    def getattr(self, path) :
-        pass
+    def get_response(self) :
+        size = int( self.sockfile.readline().strip() )
+        data = self.sockfile.read(size)
+        obj = pickle.loads(data)
+        return obj
+
+    def access(self, path, mode) :
+        self.sock.sendall(b'access\n')
+        self.sock.sendall( bytes(path+'\n', encoding="utf-8") )
+        self.sock.sendall( bytes(str(mode)+'\n', encoding="utf-8") )
+        response = self.get_response()
+        return response
+
+    def getattr(self, path):
+        self.sock.sendall(b'fuse_getattr\n')
+        self.sock.sendall( bytes(path+'\n', encoding="utf-8") )
+        st = self.get_response()
+        return st
 
     def readlink(self, path) :
         pass
 
     def readdir(self, path) :
+        self.sock.sendall(b'readdir\n')
+        self.sock.sendall( bytes(path, encoding="utf-8") )
         pass
 
     def unlink(self, path) :
@@ -75,9 +95,6 @@ class RFS(Fuse) :
         pass
 
     def utime(self, path, times) :
-        pass
-
-    def access(self, path, mode) :
         pass
 
     def statfs(self) :

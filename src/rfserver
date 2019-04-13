@@ -1,0 +1,70 @@
+#!/usr/bin/env python3
+
+import socket
+import socketserver
+
+import fuse
+
+import os
+import pickle
+
+class RFServer(socketserver.ThreadingTCPServer) :
+    def server_bind(self) :
+        self.socket.setsockopt(socket.SOL_SOCKET,
+                               socket.SO_REUSEADDR, 1)
+        self.socket.bind(self.server_address)
+
+class ServerHandler(socketserver.StreamRequestHandler):
+
+    def setup(self) :
+        super().setup()
+        print(f"setting up {self.client_address}")
+
+    def respond(self, obj) :
+        data = pickle.dumps(obj) # Linearise object.
+        self.wfile.write( bytes(str(len(data))+'\n', encoding="utf-8") )
+        self.wfile.write(data)
+
+    def fuse_getattr(self) :
+        path = str(self.rfile.readline().strip(), encoding="utf-8")
+        print("getattr called on", path)
+        ost = os.stat( os.path.join(self.mount_point, path) )
+        st = fuse.Stat()
+        st.st_nlink = ost.st_nlink
+        st.st_size  = ost.st_size
+        st.st_atime = ost.st_atime
+        st.st_mtime = ost.st_mtime
+        st.st_ctime = ost.st_ctime
+        self.respond(st)
+
+    def access(self) :
+        path = str(self.rfile.readline().strip(), encoding="utf-8")
+        mode = int(str(self.rfile.readline().strip(), encoding="utf-8"))
+        # print("access called on", path)
+        value = os.access( os.path.join(self.mount_point, path) )
+        self.respond(value)
+
+    def handle(self):
+        # First line contains mount point.
+        self.mount_point = str(self.rfile.readline().strip(), encoding="utf-8")
+        print('MountPoint~:', self.mount_point)
+
+        while True :
+            # Subsequent lines contain commands.
+            self.command = str(self.rfile.readline().strip(), encoding="utf-8")
+            if not self.command : break # Connection closed.
+            if self.command == 'unmount' : break
+            print(f"{self.client_address} command :", self.command)
+            handler = getattr(self, self.command)
+            handler()
+
+    def finish(self) :
+        print(f"closing connection with {self.client_address}")
+
+if __name__ == "__main__":
+    HOST, PORT = "localhost", 7897
+    with RFServer((HOST, PORT), ServerHandler) as server:
+        try :
+            server.serve_forever()
+        except KeyboardInterrupt :
+            print("\rServer killed - exiting.")
