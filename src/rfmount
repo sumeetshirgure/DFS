@@ -19,7 +19,7 @@ import grpc
 import service_pb2
 import service_pb2_grpc
 import simplejson, json
-
+import threading
 
 
 if not hasattr(fuse, '__version__'):
@@ -57,7 +57,7 @@ class Xmp(Fuse):
         global hostname, vdir, rport
         self.hostname, self.vdir, self.rport = hostname, vdir, rport
         # Xmp.log()
-        self.channel = grpc.insecure_channel('localhost:%d' % self.rport)
+        self.channel = grpc.insecure_channel('%s:%d' % (self.hostname, self.rport))
         
         # do stuff to set up your filesystem here, if you want
         #import thread
@@ -78,14 +78,18 @@ class Xmp(Fuse):
     def getattr(self, path):
         Xmp.log(["getattr", path])
         
+        # try:
         stub = service_pb2_grpc.GreeterStub(self.channel)
         response = stub.fuse_getattr(service_pb2.MessageRequest(mpt=self.vdir, path=path))
         ans = pickle.loads(response.pstr)    
+        # except grpc.RpcError as e:
+        #     Xmp.log(e)
 
         return ans
 
     def readlink(self, path):
-        return os.readlink(self.vdir + path)
+        # return os.readlink(self.vdir + path)
+        pass
 
     def readdir(self, path, offset):
         Xmp.log(["readdir", path])
@@ -97,39 +101,50 @@ class Xmp(Fuse):
         return ans
 
     def unlink(self, path):
-        os.unlink(self.vdir + path)
+        # os.unlink(self.vdir + path)
+        pass
 
     def rmdir(self, path):
-        os.rmdir(self.vdir + path)
+        # os.rmdir(self.vdir + path)
+        pass
 
     def symlink(self, path, path1):
-        os.symlink(path, self.vdir + path1)
+        # os.symlink(path, self.vdir + path1)
+        pass
 
     def rename(self, path, path1):
-        os.rename(self.vdir + path, self.vdir + path1)
+        # os.rename(self.vdir + path, self.vdir + path1)
+        pass
 
     def link(self, path, path1):
-        os.link(self.vdir + path, self.vdir + path1)
+        # os.link(self.vdir + path, self.vdir + path1)
+        pass
 
     def chmod(self, path, mode):
-        os.chmod(self.vdir + path, mode)
+        # os.chmod(self.vdir + path, mode)
+        pass
 
     def chown(self, path, user, group):
-        os.chown(self.vdir + path, user, group)
+        # os.chown(self.vdir + path, user, group)
+        pass
 
     def truncate(self, path, len):
-        f = open(self.vdir + path, "a")
-        f.truncate(len)
-        f.close()
+        # f = open(self.vdir + path, "a")
+        # f.truncate(len)
+        # f.close()
+        pass
 
     def mknod(self, path, mode, dev):
-        os.mknod(self.vdir + path, mode, dev)
+        # os.mknod(self.vdir + path, mode, dev)
+        pass
 
     def mkdir(self, path, mode):
-        os.mkdir(self.vdir + path, mode)
+        # os.mkdir(self.vdir + path, mode)
+        pass
 
     def utime(self, path, times):
-        os.utime(self.vdir + path, times)
+        # os.utime(self.vdir + path, times)
+        pass
 
 #    The following utimens method would do the same as the above utime method.
 #    We can't make it better though as the Python stdlib doesn't know of
@@ -141,9 +156,12 @@ class Xmp(Fuse):
     def access(self, path, mode):
         Xmp.log(["access", path])
 
+        # try:
         stub = service_pb2_grpc.GreeterStub(self.channel)
         response = stub.fuse_access(service_pb2.MessageRequest(mpt=self.vdir, path=path, mode=mode))
         ans = pickle.loads(response.pstr)
+        # except Exception as e:
+        #     Xmp.log(str(e))
 
         return ans
 
@@ -166,7 +184,8 @@ class Xmp(Fuse):
 #            # plus null separators.
 #            return len("".join(aa)) + len(aa)
 #        return aa
-
+    
+    # do nothing
     def statfs(self):
         """
         Should return an object with statvfs attributes (f_bsize, f_frsize...).
@@ -183,8 +202,8 @@ class Xmp(Fuse):
             - f_files - total number of file inodes
             - f_ffree - nunber of free file inodes
         """
-
-        return os.statvfs(vdir)
+        pass
+        # return os.statvfs(vdir)
 
     def fsinit(self):
         Xmp.log("fsinit")
@@ -194,47 +213,82 @@ class Xmp(Fuse):
         def __init__(self, path, flags, *mode):
             global hostname, vdir, rport
             self.hostname, self.vdir, self.rport = hostname, vdir, rport
+            self.path = path
+            self.flags = flags
+            self.mode = flag2mode(flags)
+            Xmp.log(["fileinit", self.vdir+path, flags])
 
-            self.file = os.fdopen(os.open(self.vdir + path, flags, *mode),
-                                  flag2mode(flags))
-            self.fd = self.file.fileno()
+            self.channel = grpc.insecure_channel('%s:%d' % (self.hostname, self.rport))
 
-        def read(self, length, offset):
-            self.file.seek(offset)
-            return self.file.read(length)
+            self.curOffset = 0
 
-        def write(self, buf, offset):
-            self.file.seek(offset)
-            self.file.write(buf)
-            return len(buf)
-
-        def release(self, flags):
-            self.file.close()
-
-        def _fflush(self):
-            if 'w' in self.file.mode or 'a' in self.file.mode:
-                self.file.flush()
-
-        def fsync(self, isfsyncfile):
-            self._fflush()
-            if isfsyncfile and hasattr(os, 'fdatasync'):
-                os.fdatasync(self.fd)
-            else:
-                os.fsync(self.fd)
-
-        def flush(self):
-            self._fflush()
-            # cf. xmp_flush() in fusexmp_fh.c
-            os.close(os.dup(self.fd))
+            # self.file = os.fdopen(os.open(self.vdir + path, flags, *mode),
+            #                       flag2mode(flags))
+            # self.fd = self.file.fileno()
 
         def fgetattr(self):
-            return os.fstat(self.fd)
+            Xmp.log(["fgetattr", self.vdir+self.path])
 
+            stub = service_pb2_grpc.GreeterStub(self.channel)            
+            response = stub.fuse_fgetattr(service_pb2.MessageRequest(mpt=self.vdir, path=self.path, 
+                flags=self.flags))
+            ans = pickle.loads(response.pstr)
+
+            return ans
+
+        def read(self, length, offset):
+            Xmp.log(["read", self.vdir+self.path, length, offset])
+
+            stub = service_pb2_grpc.GreeterStub(self.channel)            
+            response = stub.fuse_read(service_pb2.MessageRequest(mpt=self.vdir, path=self.path,
+                    length=length, offset=offset, flags=self.flags))
+            ans = pickle.loads(response.pstr)
+
+            return ans
+
+        # do nothing
+        def write(self, buf, offset):
+            pass
+            # self.file.seek(offset)
+            # self.file.write(buf)
+            # return len(buf)
+
+        # do nothing
+        def release(self, flags):
+            pass
+            # self.file.close()
+
+        # do nothing
+        def _fflush(self):
+            pass
+            # if 'w' in self.file.mode or 'a' in self.file.mode:
+            #     self.file.flush()
+
+        # do nothing
+        def fsync(self, isfsyncfile):
+            pass
+            # self._fflush()
+            # if isfsyncfile and hasattr(os, 'fdatasync'):
+            #     os.fdatasync(self.fd)
+            # else:
+            #     os.fsync(self.fd)
+
+        # do nothing
+        def flush(self):
+            pass
+            # self._fflush()
+            # cf. xmp_flush() in fusexmp_fh.c
+            # os.close(os.dup(self.fd))
+
+        # do nothing
         def ftruncate(self, len):
-            self.file.truncate(len)
+            pass
+            # self.file.truncate(len)
 
+        # do nothing
         def lock(self, cmd, owner, **kw):
-            Xmp.log("lock")
+            pass
+            # Xmp.log("lock")
             # The code here is much rather just a demonstration of the locking
             # API than something which actually was seen to be useful.
 
@@ -259,20 +313,20 @@ class Xmp(Fuse):
 
             # Convert fcntl-ish lock parameters to Python's weird
             # lockf(3)/flock(2) medley locking API...
-            op = { fcntl.F_UNLCK : fcntl.LOCK_UN,
-                   fcntl.F_RDLCK : fcntl.LOCK_SH,
-                   fcntl.F_WRLCK : fcntl.LOCK_EX }[kw['l_type']]
-            if cmd == fcntl.F_GETLK:
-                return -EOPNOTSUPP
-            elif cmd == fcntl.F_SETLK:
-                if op != fcntl.LOCK_UN:
-                    op |= fcntl.LOCK_NB
-            elif cmd == fcntl.F_SETLKW:
-                pass
-            else:
-                return -EINVAL
+            # op = { fcntl.F_UNLCK : fcntl.LOCK_UN,
+            #        fcntl.F_RDLCK : fcntl.LOCK_SH,
+            #        fcntl.F_WRLCK : fcntl.LOCK_EX }[kw['l_type']]
+            # if cmd == fcntl.F_GETLK:
+            #     return -EOPNOTSUPP
+            # elif cmd == fcntl.F_SETLK:
+            #     if op != fcntl.LOCK_UN:
+            #         op |= fcntl.LOCK_NB
+            # elif cmd == fcntl.F_SETLKW:
+            #     pass
+            # else:
+            #     return -EINVAL
 
-            fcntl.lockf(self.fd, op, kw['l_start'], kw['l_len'])
+            # fcntl.lockf(self.fd, op, kw['l_start'], kw['l_len'])
 
 
     def main(self, *a, **kw):

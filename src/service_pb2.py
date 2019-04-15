@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='',
   syntax='proto2',
   serialized_options=None,
-  serialized_pb=_b('\n\rservice.proto\"9\n\x0eMessageRequest\x12\x0b\n\x03mpt\x18\x01 \x01(\t\x12\x0c\n\x04path\x18\x02 \x01(\t\x12\x0c\n\x04mode\x18\x03 \x01(\x05\"\x1c\n\x0cMessageReply\x12\x0c\n\x04pstr\x18\x01 \x01(\x0c\x32\x9e\x01\n\x07Greeter\x12/\n\x0b\x66use_access\x12\x0f.MessageRequest\x1a\r.MessageReply\"\x00\x12\x30\n\x0c\x66use_readdir\x12\x0f.MessageRequest\x1a\r.MessageReply\"\x00\x12\x30\n\x0c\x66use_getattr\x12\x0f.MessageRequest\x1a\r.MessageReply\"\x00')
+  serialized_pb=_b('\n\rservice.proto\"h\n\x0eMessageRequest\x12\x0b\n\x03mpt\x18\x01 \x01(\t\x12\x0c\n\x04path\x18\x02 \x01(\t\x12\x0c\n\x04mode\x18\x03 \x01(\x05\x12\x0e\n\x06length\x18\x04 \x01(\x05\x12\x0e\n\x06offset\x18\x05 \x01(\x05\x12\r\n\x05\x66lags\x18\x06 \x01(\x05\"\x1c\n\x0cMessageReply\x12\x0c\n\x04pstr\x18\x01 \x01(\x0c\x32\x80\x02\n\x07Greeter\x12/\n\x0b\x66use_access\x12\x0f.MessageRequest\x1a\r.MessageReply\"\x00\x12\x30\n\x0c\x66use_readdir\x12\x0f.MessageRequest\x1a\r.MessageReply\"\x00\x12\x30\n\x0c\x66use_getattr\x12\x0f.MessageRequest\x1a\r.MessageReply\"\x00\x12-\n\tfuse_read\x12\x0f.MessageRequest\x1a\r.MessageReply\"\x00\x12\x31\n\rfuse_fgetattr\x12\x0f.MessageRequest\x1a\r.MessageReply\"\x00')
 )
 
 
@@ -53,6 +53,27 @@ _MESSAGEREQUEST = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='length', full_name='MessageRequest.length', index=3,
+      number=4, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='offset', full_name='MessageRequest.offset', index=4,
+      number=5, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='flags', full_name='MessageRequest.flags', index=5,
+      number=6, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -66,7 +87,7 @@ _MESSAGEREQUEST = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=17,
-  serialized_end=74,
+  serialized_end=121,
 )
 
 
@@ -96,8 +117,8 @@ _MESSAGEREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=76,
-  serialized_end=104,
+  serialized_start=123,
+  serialized_end=151,
 )
 
 DESCRIPTOR.message_types_by_name['MessageRequest'] = _MESSAGEREQUEST
@@ -126,8 +147,8 @@ _GREETER = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=107,
-  serialized_end=265,
+  serialized_start=154,
+  serialized_end=410,
   methods=[
   _descriptor.MethodDescriptor(
     name='fuse_access',
@@ -151,6 +172,24 @@ _GREETER = _descriptor.ServiceDescriptor(
     name='fuse_getattr',
     full_name='Greeter.fuse_getattr',
     index=2,
+    containing_service=None,
+    input_type=_MESSAGEREQUEST,
+    output_type=_MESSAGEREPLY,
+    serialized_options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='fuse_read',
+    full_name='Greeter.fuse_read',
+    index=3,
+    containing_service=None,
+    input_type=_MESSAGEREQUEST,
+    output_type=_MESSAGEREPLY,
+    serialized_options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='fuse_fgetattr',
+    full_name='Greeter.fuse_fgetattr',
+    index=4,
     containing_service=None,
     input_type=_MESSAGEREQUEST,
     output_type=_MESSAGEREPLY,

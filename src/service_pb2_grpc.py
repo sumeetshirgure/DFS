@@ -29,6 +29,16 @@ class GreeterStub(object):
         request_serializer=service__pb2.MessageRequest.SerializeToString,
         response_deserializer=service__pb2.MessageReply.FromString,
         )
+    self.fuse_read = channel.unary_unary(
+        '/Greeter/fuse_read',
+        request_serializer=service__pb2.MessageRequest.SerializeToString,
+        response_deserializer=service__pb2.MessageReply.FromString,
+        )
+    self.fuse_fgetattr = channel.unary_unary(
+        '/Greeter/fuse_fgetattr',
+        request_serializer=service__pb2.MessageRequest.SerializeToString,
+        response_deserializer=service__pb2.MessageReply.FromString,
+        )
 
 
 class GreeterServicer(object):
@@ -56,6 +66,20 @@ class GreeterServicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
+  def fuse_read(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def fuse_fgetattr(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
 
 def add_GreeterServicer_to_server(servicer, server):
   rpc_method_handlers = {
@@ -71,6 +95,16 @@ def add_GreeterServicer_to_server(servicer, server):
       ),
       'fuse_getattr': grpc.unary_unary_rpc_method_handler(
           servicer.fuse_getattr,
+          request_deserializer=service__pb2.MessageRequest.FromString,
+          response_serializer=service__pb2.MessageReply.SerializeToString,
+      ),
+      'fuse_read': grpc.unary_unary_rpc_method_handler(
+          servicer.fuse_read,
+          request_deserializer=service__pb2.MessageRequest.FromString,
+          response_serializer=service__pb2.MessageReply.SerializeToString,
+      ),
+      'fuse_fgetattr': grpc.unary_unary_rpc_method_handler(
+          servicer.fuse_fgetattr,
           request_deserializer=service__pb2.MessageRequest.FromString,
           response_serializer=service__pb2.MessageReply.SerializeToString,
       ),
