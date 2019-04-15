@@ -19,29 +19,36 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='',
   syntax='proto2',
   serialized_options=None,
-  serialized_pb=_b('\n\rservice.proto\"-\n\x0fMessagePathMode\x12\x0c\n\x04path\x18\x01 \x02(\t\x12\x0c\n\x04mode\x18\x02 \x02(\x05\"\x1c\n\rMessageString\x12\x0b\n\x03str\x18\x01 \x02(\t\"\x1d\n\x0cMessageReply\x12\r\n\x05\x65rrno\x18\x01 \x02(\x05\x32\x33\n\x07Greeter\x12(\n\x05mount\x12\x0e.MessageString\x1a\r.MessageReply\"\x00')
+  serialized_pb=_b('\n\rservice.proto\"9\n\x0eMessageRequest\x12\x0b\n\x03mpt\x18\x01 \x01(\t\x12\x0c\n\x04path\x18\x02 \x01(\t\x12\x0c\n\x04mode\x18\x03 \x01(\x05\"\x1c\n\x0cMessageReply\x12\x0c\n\x04pstr\x18\x01 \x01(\x0c\x32\x9e\x01\n\x07Greeter\x12/\n\x0b\x66use_access\x12\x0f.MessageRequest\x1a\r.MessageReply\"\x00\x12\x30\n\x0c\x66use_readdir\x12\x0f.MessageRequest\x1a\r.MessageReply\"\x00\x12\x30\n\x0c\x66use_getattr\x12\x0f.MessageRequest\x1a\r.MessageReply\"\x00')
 )
 
 
 
 
-_MESSAGEPATHMODE = _descriptor.Descriptor(
-  name='MessagePathMode',
-  full_name='MessagePathMode',
+_MESSAGEREQUEST = _descriptor.Descriptor(
+  name='MessageRequest',
+  full_name='MessageRequest',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='path', full_name='MessagePathMode.path', index=0,
-      number=1, type=9, cpp_type=9, label=2,
+      name='mpt', full_name='MessageRequest.mpt', index=0,
+      number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='mode', full_name='MessagePathMode.mode', index=1,
-      number=2, type=5, cpp_type=1, label=2,
+      name='path', full_name='MessageRequest.path', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='mode', full_name='MessageRequest.mode', index=2,
+      number=3, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -59,38 +66,7 @@ _MESSAGEPATHMODE = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=17,
-  serialized_end=62,
-)
-
-
-_MESSAGESTRING = _descriptor.Descriptor(
-  name='MessageString',
-  full_name='MessageString',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='str', full_name='MessageString.str', index=0,
-      number=1, type=9, cpp_type=9, label=2,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=64,
-  serialized_end=92,
+  serialized_end=74,
 )
 
 
@@ -102,9 +78,9 @@ _MESSAGEREPLY = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='errno', full_name='MessageReply.errno', index=0,
-      number=1, type=5, cpp_type=1, label=2,
-      has_default_value=False, default_value=0,
+      name='pstr', full_name='MessageReply.pstr', index=0,
+      number=1, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b(""),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
@@ -120,28 +96,20 @@ _MESSAGEREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=94,
-  serialized_end=123,
+  serialized_start=76,
+  serialized_end=104,
 )
 
-DESCRIPTOR.message_types_by_name['MessagePathMode'] = _MESSAGEPATHMODE
-DESCRIPTOR.message_types_by_name['MessageString'] = _MESSAGESTRING
+DESCRIPTOR.message_types_by_name['MessageRequest'] = _MESSAGEREQUEST
 DESCRIPTOR.message_types_by_name['MessageReply'] = _MESSAGEREPLY
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
-MessagePathMode = _reflection.GeneratedProtocolMessageType('MessagePathMode', (_message.Message,), dict(
-  DESCRIPTOR = _MESSAGEPATHMODE,
+MessageRequest = _reflection.GeneratedProtocolMessageType('MessageRequest', (_message.Message,), dict(
+  DESCRIPTOR = _MESSAGEREQUEST,
   __module__ = 'service_pb2'
-  # @@protoc_insertion_point(class_scope:MessagePathMode)
+  # @@protoc_insertion_point(class_scope:MessageRequest)
   ))
-_sym_db.RegisterMessage(MessagePathMode)
-
-MessageString = _reflection.GeneratedProtocolMessageType('MessageString', (_message.Message,), dict(
-  DESCRIPTOR = _MESSAGESTRING,
-  __module__ = 'service_pb2'
-  # @@protoc_insertion_point(class_scope:MessageString)
-  ))
-_sym_db.RegisterMessage(MessageString)
+_sym_db.RegisterMessage(MessageRequest)
 
 MessageReply = _reflection.GeneratedProtocolMessageType('MessageReply', (_message.Message,), dict(
   DESCRIPTOR = _MESSAGEREPLY,
@@ -158,15 +126,33 @@ _GREETER = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=125,
-  serialized_end=176,
+  serialized_start=107,
+  serialized_end=265,
   methods=[
   _descriptor.MethodDescriptor(
-    name='mount',
-    full_name='Greeter.mount',
+    name='fuse_access',
+    full_name='Greeter.fuse_access',
     index=0,
     containing_service=None,
-    input_type=_MESSAGESTRING,
+    input_type=_MESSAGEREQUEST,
+    output_type=_MESSAGEREPLY,
+    serialized_options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='fuse_readdir',
+    full_name='Greeter.fuse_readdir',
+    index=1,
+    containing_service=None,
+    input_type=_MESSAGEREQUEST,
+    output_type=_MESSAGEREPLY,
+    serialized_options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='fuse_getattr',
+    full_name='Greeter.fuse_getattr',
+    index=2,
+    containing_service=None,
+    input_type=_MESSAGEREQUEST,
     output_type=_MESSAGEREPLY,
     serialized_options=None,
   ),

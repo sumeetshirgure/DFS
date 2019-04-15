@@ -1,75 +1,86 @@
 #!/usr/bin/env python3
 
-import socket
-import socketserver
-
+from concurrent import futures
+import time
+import logging
+import os, sys
+import grpc, pickle
 import fuse
+import simplejson, json
 
-import os
-import pickle
+import service_pb2
+import service_pb2_grpc
 
-class RFServer(socketserver.ThreadingTCPServer) :
-    def server_bind(self) :
-        self.socket.setsockopt(socket.SOL_SOCKET,
-                               socket.SO_REUSEADDR, 1)
-        self.socket.bind(self.server_address)
+_ONE_DAY_IN_SECONDS = 60 * 24 * 24
 
-class ServerHandler(socketserver.StreamRequestHandler):
+logging.basicConfig()
+logger = logging.getLogger('tcpserver')
+hdlr = logging.FileHandler('/home/kira/DFS/src/server.log')
+logger.addHandler(hdlr)
+logger.setLevel(logging.INFO)
+rport = 7897
 
-    def setup(self) :
-        super().setup()
-        print(f"setting up {self.client_address}")
 
-    def respond(self, obj) :
-        data = pickle.dumps(obj) # Linearise object.
-        self.wfile.write( bytes(str(len(data))+'\n', encoding="utf-8") )
-        self.wfile.write(data)
+class MyStat(fuse.Stat):
+    def __init__(self):
+        self.st_mode = 0
+        self.st_ino = 0
+        self.st_dev = 0
+        self.st_nlink = 0
+        self.st_uid = 0
+        self.st_gid = 0
+        self.st_size = 0
+        self.st_atime = 0
+        self.st_mtime = 0
+        self.st_ctime = 0
 
-    def fuse_getattr(self) :
-        mount_point = str(self.rfile.readline().strip(), encoding="utf-8")
-        path = str(self.rfile.readline().strip(), encoding="utf-8")
-        print("getattr called on", path)
-        ost = os.stat( os.path.join(mount_point, path) )
-        st = fuse.Stat()
-        st.st_nlink = ost.st_nlink
-        st.st_size  = ost.st_size
-        st.st_atime = ost.st_atime
-        st.st_mtime = ost.st_mtime
-        st.st_ctime = ost.st_ctime
-        self.respond(st)
 
-    def fuse_access(self) :
-        mount_point = str(self.rfile.readline().strip(), encoding="utf-8")
-        path = str(self.rfile.readline().strip(), encoding="utf-8")
-        mode = int(str(self.rfile.readline().strip(), encoding="utf-8"))
-        print("access called on", path, mode)
-        value = os.access( os.path.join(mount_point, path), mode)
-        print('ans = ', value)
-        self.respond(value)
+class Greeter(service_pb2_grpc.GreeterServicer):
 
-    def fuse_readdir(self):
-        mount_point = str(self.rfile.readline().strip(), encoding="utf-8")
-        path = str(self.rfile.readline().strip(), encoding="utf-8")
-        print("readdir called on", path)
-        self.respond(list(map(fuse.Direntry, list(os.listdir(os.path.join(mount_point, path))))))
+    def fuse_access(self, request, context):
+        global logger
+        
+        path = request.mpt + request.path
+        logger.info("access called on %s %d %d", path, request.mode)
+        ans = 0
+        if not os.access(request.path, request.mode):
+            ans = -EACCES
 
-    def handle(self):
-        # Subsequent lines contain commands.
-        self.command = str(self.rfile.readline().strip(), encoding="utf-8")
-        if not self.command : raise Exception # Connection closed.
-        # if self.command == 'unmount' : break
-        print(f"{self.client_address} command :", self.command)
-        handler = getattr(self, self.command)
-        handler()
+        ans = pickle.dumps(ans)
+        return service_pb2.MessageReply(pstr=ans)
 
-    def finish(self) :
-        pass
-        # print(f"closing connection with {self.client_address}")
+    def fuse_readdir(self, request, context):
+        global logger
+        
+        path = request.mpt + request.path
+        logger.info("readdir called on %s", path)
+        ans = list(map(fuse.Direntry, list(os.listdir(path))))
+        ans = pickle.dumps(ans)
 
-if __name__ == "__main__":
-    HOST, PORT = "localhost", 7897
-    with RFServer((HOST, PORT), ServerHandler) as server:
-        try :
-            server.serve_forever()
-        except KeyboardInterrupt :
-            print("\rServer killed - exiting.")
+        return service_pb2.MessageReply(pstr=ans)
+
+    def fuse_getattr(self, request, context):
+        global logger
+
+        path = request.mpt + request.path
+        logger.info("getattr called on %s", path)
+        ans = os.lstat(path)
+        ans = pickle.dumps(ans)
+        
+        return service_pb2.MessageReply(pstr=ans)
+
+def serve():
+    global rport
+    server = grpc.server(futures.ThreadPoolExecutor(max_workers=1))
+    service_pb2_grpc.add_GreeterServicer_to_server(Greeter(), server)
+    server.add_insecure_port('[::]:7897')
+    server.start()
+    try:
+        while True:
+            time.sleep(_ONE_DAY_IN_SECONDS)
+    except KeyboardInterrupt:
+        server.stop(0)
+
+
+if __name__ == '__main__':
+    serve()

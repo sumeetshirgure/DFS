@@ -4,18 +4,17 @@ syntax="proto2";
 
 service Greeter {
   
-  rpc mount (MessageString) returns (MessageReply) {}
+  rpc fuse_access (MessageRequest) returns (MessageReply) {}
+  rpc fuse_readdir (MessageRequest) returns (MessageReply) {}
+  rpc fuse_getattr (MessageRequest) returns (MessageReply) {}
 }
 
-message MessagePathMode {
-  required string path = 1;
-  required int32 mode = 2;
-}
-
-message MessageString {
-  required string str = 1;  
+message MessageRequest {
+  optional string mpt = 1;
+  optional string path = 2;
+  optional int32 mode = 3;
 }
 
 message MessageReply {
-  required int32 errno = 1;
+  optional bytes pstr = 1;
 }

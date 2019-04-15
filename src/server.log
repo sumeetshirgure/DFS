@@ -1,0 +1,158 @@
+access called on /home/kira/aa/ 1 0
+access called on /home/kira/aa/ 1 b'\x80\x03K\x00.'
+access called on /home/kira/aa/ 4 0
+access called on /home/kira/aa/ 4 b'\x80\x03K\x00.'
+access called on /home/kira/aa/ 1 0
+access called on /home/kira/aa/ 1 b'\x80\x03K\x00.'
+access called on /home/kira/aa/ 1 0
+access called on /home/kira/aa/ 1 b'\x80\x03K\x00.'
+access called on /home/kira/aa/ 4 0
+access called on /home/kira/aa/ 4 b'\x80\x03K\x00.'
+access called on /home/kira/aa/ 1 0
+access called on /home/kira/aa/ 1 b'\x80\x03K\x00.'
+access called on /home/kira/aa/ 1 0
+access called on /home/kira/aa/ 1 b'\x80\x03K\x00.'
+access called on /home/kira/aa/ 4 0
+access called on /home/kira/aa/ 4 b'\x80\x03K\x00.'
+access called on /home/kira/aa/ 1 0
+access called on /home/kira/aa/ 1 b'\x80\x03K\x00.'
+access called on /home/kira/aa/ 1 0
+access called on /home/kira/aa/ 1 b'\x80\x03K\x00.'
+access called on /home/kira/aa/ 4 0
+access called on /home/kira/aa/ 4 b'\x80\x03K\x00.'
+access called on /home/kira/aa/ 1 0
+access called on /home/kira/aa/ 1 b'\x80\x03K\x00.'
+access called on /home/kira/aa/ 1 0
+access called on /home/kira/aa/ 1 b'\x80\x03K\x00.'
+access called on /home/kira/aa/ 4 0
+access called on /home/kira/aa/ 4 b'\x80\x03K\x00.'
+access called on /home/kira/aa/ 1 0
+access called on /home/kira/aa/ 1 b'\x80\x03K\x00.'
+access called on /home/kira/aa/ 1 0
+access called on /home/kira/aa/ 1 b'\x80\x03K\x00.'
+access called on /home/kira/aa/ 4 0
+access called on /home/kira/aa/ 4 b'\x80\x03K\x00.'
+access called on /home/kira/aa/ 1 0
+access called on /home/kira/aa/ 1 b'\x80\x03K\x00.'
+access called on /home/kira/aa/ 1 0
+access called on /home/kira/aa/ 1 b'\x80\x03K\x00.'
+access called on /home/kira/aa/ 4 0
+access called on /home/kira/aa/ 4 b'\x80\x03K\x00.'
+access called on /home/kira/aa/ 1 0
+access called on /home/kira/aa/ 1 b'\x80\x03K\x00.'
+access called on /home/kira/aa/ 1 0
+access called on /home/kira/aa/ 1 b'\x80\x03K\x00.'
+access called on /home/kira/aa/ 4 0
+access called on /home/kira/aa/ 4 b'\x80\x03K\x00.'
+access called on /home/kira/aa/ 1 0
+access called on /home/kira/aa/ 1 b'\x80\x03K\x00.'
+access called on /home/kira/aa/ 1 0
+access called on /home/kira/aa/ 1 b"b'\\x80\\x03K\\x00.'"
+access called on /home/kira/aa/ 4 0
+access called on /home/kira/aa/ 4 b"b'\\x80\\x03K\\x00.'"
+access called on /home/kira/aa/ 1 0
+access called on /home/kira/aa/ 1 b"b'\\x80\\x03K\\x00.'"
+access called on /home/kira/aa/ 1 0
+access called on /home/kira/aa/ 1 b"b'\\x80\\x03K\\x00.'"
+access called on /home/kira/aa/ 4 0
+access called on /home/kira/aa/ 4 b"b'\\x80\\x03K\\x00.'"
+access called on /home/kira/aa/ 1 0
+access called on /home/kira/aa/ 1 b"b'\\x80\\x03K\\x00.'"
+access called on /home/kira/aa/ 1 0
+access called on /home/kira/aa/ 4 0
+access called on /home/kira/aa/ 1 0
+access called on /home/kira/aa/ 1 0
+access called on /home/kira/aa/ 4 0
+getattr called on /home/kira/aa/
+getattr called on /home/kira/aa/
+getattr called on /home/kira/aa/.xdg-volume-info
+getattr called on /home/kira/aa/autorun.inf
+getattr called on /home/kira/aa/
+getattr called on /home/kira/aa/.Trash
+getattr called on /home/kira/aa/
+getattr called on /home/kira/aa/.Trash-1000
+getattr called on /home/kira/aa/
+getattr called on /home/kira/aa/
+getattr called on /home/kira/aa/
+getattr called on /home/kira/aa/
+getattr called on /home/kira/aa/
+getattr called on /home/kira/aa/
+getattr called on /home/kira/aa/
+getattr called on /home/kira/aa/
+getattr called on /home/kira/aa/
+getattr called on /home/kira/aa/
+getattr called on /home/kira/aa/
+getattr called on /home/kira/aa/
+getattr called on /home/kira/aa/
+getattr called on /home/kira/aa/
+getattr called on /home/kira/aa/
+getattr called on /home/kira/aa/
+getattr called on /home/kira/aa/
+getattr called on /home/kira/aa/
+getattr called on /home/kira/aa/
+getattr called on /home/kira/aa/
+getattr called on /home/kira/aa/autorun.inf
+getattr called on /home/kira/aa/
+getattr called on /home/kira/aa/
+readdir called on /home/kira/aa/
+getattr called on /home/kira/aa/
+getattr called on /home/kira/aa/
+readdir called on /home/kira/aa/
+getattr called on /home/kira/aa/
+getattr called on /home/kira/aa/
+getattr called on /home/kira/aa/.xdg-volume-info
+getattr called on /home/kira/aa/autorun.inf
+readdir called on /home/kira/aa/
+getattr called on /home/kira/aa/.Trash
+getattr called on /home/kira/aa/log.txt
+getattr called on /home/kira/aa/.Trash-1000
+getattr called on /home/kira/aa/
+readdir called on /home/kira/aa/
+getattr called on /home/kira/aa/
+readdir called on /home/kira/aa/
+getattr called on /home/kira/aa/
+readdir called on /home/kira/aa/
+getattr called on /home/kira/aa/
+readdir called on /home/kira/aa/
+getattr called on /home/kira/aa/
+readdir called on /home/kira/aa/
+getattr called on /home/kira/aa/
+readdir called on /home/kira/aa/
+getattr called on /home/kira/aa/
+readdir called on /home/kira/aa/
+getattr called on /home/kira/aa/
+readdir called on /home/kira/aa/
+getattr called on /home/kira/aa/
+readdir called on /home/kira/aa/
+getattr called on /home/kira/aa/
+readdir called on /home/kira/aa/
+getattr called on /home/kira/aa/
+readdir called on /home/kira/aa/
+getattr called on /home/kira/aa/
+readdir called on /home/kira/aa/
+getattr called on /home/kira/aa/
+readdir called on /home/kira/aa/
+getattr called on /home/kira/aa/
+readdir called on /home/kira/aa/
+getattr called on /home/kira/aa/
+readdir called on /home/kira/aa/
+getattr called on /home/kira/aa/
+readdir called on /home/kira/aa/
+getattr called on /home/kira/aa/
+readdir called on /home/kira/aa/
+getattr called on /home/kira/aa/
+readdir called on /home/kira/aa/
+getattr called on /home/kira/aa/
+readdir called on /home/kira/aa/
+getattr called on /home/kira/aa/
+readdir called on /home/kira/aa/
+getattr called on /home/kira/aa/
+readdir called on /home/kira/aa/
+getattr called on /home/kira/aa/
+readdir called on /home/kira/aa/
+getattr called on /home/kira/aa/autorun.inf
+getattr called on /home/kira/aa/
+readdir called on /home/kira/aa/
+getattr called on /home/kira/aa/
+getattr called on /home/kira/aa/log.txt
+getattr called on /home/kira/aa/

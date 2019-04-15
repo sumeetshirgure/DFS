@@ -14,9 +14,19 @@ class GreeterStub(object):
     Args:
       channel: A grpc.Channel.
     """
-    self.mount = channel.unary_unary(
-        '/Greeter/mount',
-        request_serializer=service__pb2.MessageString.SerializeToString,
+    self.fuse_access = channel.unary_unary(
+        '/Greeter/fuse_access',
+        request_serializer=service__pb2.MessageRequest.SerializeToString,
+        response_deserializer=service__pb2.MessageReply.FromString,
+        )
+    self.fuse_readdir = channel.unary_unary(
+        '/Greeter/fuse_readdir',
+        request_serializer=service__pb2.MessageRequest.SerializeToString,
+        response_deserializer=service__pb2.MessageReply.FromString,
+        )
+    self.fuse_getattr = channel.unary_unary(
+        '/Greeter/fuse_getattr',
+        request_serializer=service__pb2.MessageRequest.SerializeToString,
         response_deserializer=service__pb2.MessageReply.FromString,
         )
 
@@ -25,7 +35,21 @@ class GreeterServicer(object):
   # missing associated documentation comment in .proto file
   pass
 
-  def mount(self, request, context):
+  def fuse_access(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def fuse_readdir(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def fuse_getattr(self, request, context):
     # missing associated documentation comment in .proto file
     pass
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -35,9 +59,19 @@ class GreeterServicer(object):
 
 def add_GreeterServicer_to_server(servicer, server):
   rpc_method_handlers = {
-      'mount': grpc.unary_unary_rpc_method_handler(
-          servicer.mount,
-          request_deserializer=service__pb2.MessageString.FromString,
+      'fuse_access': grpc.unary_unary_rpc_method_handler(
+          servicer.fuse_access,
+          request_deserializer=service__pb2.MessageRequest.FromString,
+          response_serializer=service__pb2.MessageReply.SerializeToString,
+      ),
+      'fuse_readdir': grpc.unary_unary_rpc_method_handler(
+          servicer.fuse_readdir,
+          request_deserializer=service__pb2.MessageRequest.FromString,
+          response_serializer=service__pb2.MessageReply.SerializeToString,
+      ),
+      'fuse_getattr': grpc.unary_unary_rpc_method_handler(
+          servicer.fuse_getattr,
+          request_deserializer=service__pb2.MessageRequest.FromString,
           response_serializer=service__pb2.MessageReply.SerializeToString,
       ),
   }
