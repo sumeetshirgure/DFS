@@ -19,7 +19,9 @@ import grpc
 import service_pb2
 import service_pb2_grpc
 import simplejson, json
+from threading import Lock
 
+mutex = Lock()
 
 
 if not hasattr(fuse, '__version__'):
@@ -56,7 +58,7 @@ class Xmp(Fuse):
 
         global hostname, vdir, rport
         self.hostname, self.vdir, self.rport = hostname, vdir, rport
-        # Xmp.log()
+        Xmp.log('localhost:%d' % self.rport)
         self.channel = grpc.insecure_channel('localhost:%d' % self.rport)
         
         # do stuff to set up your filesystem here, if you want
@@ -78,23 +80,22 @@ class Xmp(Fuse):
     def getattr(self, path):
         Xmp.log(["getattr", path])
         
-        stub = service_pb2_grpc.GreeterStub(self.channel)
-        response = stub.fuse_getattr(service_pb2.MessageRequest(mpt=self.vdir, path=path))
-        ans = pickle.loads(response.pstr)    
+        return os.lstat(self.vdir+path) 
 
-        return ans
+        # return ans
 
     def readlink(self, path):
         return os.readlink(self.vdir + path)
 
     def readdir(self, path, offset):
         Xmp.log(["readdir", path])
+        return list(map(fuse.Direntry, list(os.listdir(self.vdir+path))))
 
-        stub = service_pb2_grpc.GreeterStub(self.channel)
-        response = stub.fuse_readdir(service_pb2.MessageRequest(mpt=self.vdir, path=path))
-        ans = pickle.loads(response.pstr)
+        # stub = service_pb2_grpc.GreeterStub(self.channel)
+        # response = stub.fuse_readdir(service_pb2.MessageRequest(mpt=self.vdir, path=path))
+        # ans = pickle.loads(response.pstr)
 
-        return ans
+        # return ans
 
     def unlink(self, path):
         os.unlink(self.vdir + path)
@@ -139,12 +140,18 @@ class Xmp(Fuse):
 #      os.utime(self.vdir + path, (ts_acc.tv_sec, ts_mod.tv_sec))
 
     def access(self, path, mode):
+        mutex.acquire()
         Xmp.log(["access", path])
+
+        # if not os.access(self.vdir + path, mode):
+        #     return -EACCES
+        # return 0
 
         stub = service_pb2_grpc.GreeterStub(self.channel)
         response = stub.fuse_access(service_pb2.MessageRequest(mpt=self.vdir, path=path, mode=mode))
         ans = pickle.loads(response.pstr)
 
+        mutex.release()
         return ans
 
 #    This is how we could add stub extended attribute handlers...

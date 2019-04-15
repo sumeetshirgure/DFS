@@ -8,6 +8,13 @@ import grpc, pickle
 import fuse
 import simplejson, json
 
+from errno import *
+from stat import *
+import fcntl
+import _find_fuse_parts
+import fuse
+from fuse import Fuse
+
 import service_pb2
 import service_pb2_grpc
 
@@ -41,11 +48,11 @@ class Greeter(service_pb2_grpc.GreeterServicer):
         global logger
         
         path = request.mpt + request.path
-        logger.info("access called on %s %d %d", path, request.mode)
         ans = 0
-        if not os.access(request.path, request.mode):
+        if not os.access(path, request.mode):
             ans = -EACCES
 
+        logger.info("access called on %s %d %d", path, request.mode, ans)
         ans = pickle.dumps(ans)
         return service_pb2.MessageReply(pstr=ans)
 

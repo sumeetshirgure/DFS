@@ -1,158 +1,711 @@
-access called on /home/kira/aa/ 1 0
-access called on /home/kira/aa/ 1 b'\x80\x03K\x00.'
-access called on /home/kira/aa/ 4 0
-access called on /home/kira/aa/ 4 b'\x80\x03K\x00.'
-access called on /home/kira/aa/ 1 0
-access called on /home/kira/aa/ 1 b'\x80\x03K\x00.'
-access called on /home/kira/aa/ 1 0
-access called on /home/kira/aa/ 1 b'\x80\x03K\x00.'
-access called on /home/kira/aa/ 4 0
-access called on /home/kira/aa/ 4 b'\x80\x03K\x00.'
-access called on /home/kira/aa/ 1 0
-access called on /home/kira/aa/ 1 b'\x80\x03K\x00.'
-access called on /home/kira/aa/ 1 0
-access called on /home/kira/aa/ 1 b'\x80\x03K\x00.'
-access called on /home/kira/aa/ 4 0
-access called on /home/kira/aa/ 4 b'\x80\x03K\x00.'
-access called on /home/kira/aa/ 1 0
-access called on /home/kira/aa/ 1 b'\x80\x03K\x00.'
-access called on /home/kira/aa/ 1 0
-access called on /home/kira/aa/ 1 b'\x80\x03K\x00.'
-access called on /home/kira/aa/ 4 0
-access called on /home/kira/aa/ 4 b'\x80\x03K\x00.'
-access called on /home/kira/aa/ 1 0
-access called on /home/kira/aa/ 1 b'\x80\x03K\x00.'
-access called on /home/kira/aa/ 1 0
-access called on /home/kira/aa/ 1 b'\x80\x03K\x00.'
-access called on /home/kira/aa/ 4 0
-access called on /home/kira/aa/ 4 b'\x80\x03K\x00.'
-access called on /home/kira/aa/ 1 0
-access called on /home/kira/aa/ 1 b'\x80\x03K\x00.'
-access called on /home/kira/aa/ 1 0
-access called on /home/kira/aa/ 1 b'\x80\x03K\x00.'
-access called on /home/kira/aa/ 4 0
-access called on /home/kira/aa/ 4 b'\x80\x03K\x00.'
-access called on /home/kira/aa/ 1 0
-access called on /home/kira/aa/ 1 b'\x80\x03K\x00.'
-access called on /home/kira/aa/ 1 0
-access called on /home/kira/aa/ 1 b'\x80\x03K\x00.'
-access called on /home/kira/aa/ 4 0
-access called on /home/kira/aa/ 4 b'\x80\x03K\x00.'
-access called on /home/kira/aa/ 1 0
-access called on /home/kira/aa/ 1 b'\x80\x03K\x00.'
-access called on /home/kira/aa/ 1 0
-access called on /home/kira/aa/ 1 b'\x80\x03K\x00.'
-access called on /home/kira/aa/ 4 0
-access called on /home/kira/aa/ 4 b'\x80\x03K\x00.'
-access called on /home/kira/aa/ 1 0
-access called on /home/kira/aa/ 1 b'\x80\x03K\x00.'
-access called on /home/kira/aa/ 1 0
-access called on /home/kira/aa/ 1 b"b'\\x80\\x03K\\x00.'"
-access called on /home/kira/aa/ 4 0
-access called on /home/kira/aa/ 4 b"b'\\x80\\x03K\\x00.'"
-access called on /home/kira/aa/ 1 0
-access called on /home/kira/aa/ 1 b"b'\\x80\\x03K\\x00.'"
-access called on /home/kira/aa/ 1 0
-access called on /home/kira/aa/ 1 b"b'\\x80\\x03K\\x00.'"
-access called on /home/kira/aa/ 4 0
-access called on /home/kira/aa/ 4 b"b'\\x80\\x03K\\x00.'"
-access called on /home/kira/aa/ 1 0
-access called on /home/kira/aa/ 1 b"b'\\x80\\x03K\\x00.'"
-access called on /home/kira/aa/ 1 0
-access called on /home/kira/aa/ 4 0
-access called on /home/kira/aa/ 1 0
-access called on /home/kira/aa/ 1 0
-access called on /home/kira/aa/ 4 0
-getattr called on /home/kira/aa/
-getattr called on /home/kira/aa/
-getattr called on /home/kira/aa/.xdg-volume-info
-getattr called on /home/kira/aa/autorun.inf
-getattr called on /home/kira/aa/
-getattr called on /home/kira/aa/.Trash
-getattr called on /home/kira/aa/
-getattr called on /home/kira/aa/.Trash-1000
-getattr called on /home/kira/aa/
-getattr called on /home/kira/aa/
-getattr called on /home/kira/aa/
-getattr called on /home/kira/aa/
-getattr called on /home/kira/aa/
-getattr called on /home/kira/aa/
-getattr called on /home/kira/aa/
-getattr called on /home/kira/aa/
-getattr called on /home/kira/aa/
-getattr called on /home/kira/aa/
-getattr called on /home/kira/aa/
-getattr called on /home/kira/aa/
-getattr called on /home/kira/aa/
-getattr called on /home/kira/aa/
-getattr called on /home/kira/aa/
-getattr called on /home/kira/aa/
-getattr called on /home/kira/aa/
-getattr called on /home/kira/aa/
-getattr called on /home/kira/aa/
-getattr called on /home/kira/aa/
-getattr called on /home/kira/aa/autorun.inf
-getattr called on /home/kira/aa/
-getattr called on /home/kira/aa/
-readdir called on /home/kira/aa/
-getattr called on /home/kira/aa/
-getattr called on /home/kira/aa/
-readdir called on /home/kira/aa/
-getattr called on /home/kira/aa/
-getattr called on /home/kira/aa/
-getattr called on /home/kira/aa/.xdg-volume-info
-getattr called on /home/kira/aa/autorun.inf
-readdir called on /home/kira/aa/
-getattr called on /home/kira/aa/.Trash
-getattr called on /home/kira/aa/log.txt
-getattr called on /home/kira/aa/.Trash-1000
-getattr called on /home/kira/aa/
-readdir called on /home/kira/aa/
-getattr called on /home/kira/aa/
-readdir called on /home/kira/aa/
-getattr called on /home/kira/aa/
-readdir called on /home/kira/aa/
-getattr called on /home/kira/aa/
-readdir called on /home/kira/aa/
-getattr called on /home/kira/aa/
-readdir called on /home/kira/aa/
-getattr called on /home/kira/aa/
-readdir called on /home/kira/aa/
-getattr called on /home/kira/aa/
-readdir called on /home/kira/aa/
-getattr called on /home/kira/aa/
-readdir called on /home/kira/aa/
-getattr called on /home/kira/aa/
-readdir called on /home/kira/aa/
-getattr called on /home/kira/aa/
-readdir called on /home/kira/aa/
-getattr called on /home/kira/aa/
-readdir called on /home/kira/aa/
-getattr called on /home/kira/aa/
-readdir called on /home/kira/aa/
-getattr called on /home/kira/aa/
-readdir called on /home/kira/aa/
-getattr called on /home/kira/aa/
-readdir called on /home/kira/aa/
-getattr called on /home/kira/aa/
-readdir called on /home/kira/aa/
-getattr called on /home/kira/aa/
-readdir called on /home/kira/aa/
-getattr called on /home/kira/aa/
-readdir called on /home/kira/aa/
-getattr called on /home/kira/aa/
-readdir called on /home/kira/aa/
-getattr called on /home/kira/aa/
-readdir called on /home/kira/aa/
-getattr called on /home/kira/aa/
-readdir called on /home/kira/aa/
-getattr called on /home/kira/aa/
-readdir called on /home/kira/aa/
-getattr called on /home/kira/aa/
-readdir called on /home/kira/aa/
-getattr called on /home/kira/aa/autorun.inf
-getattr called on /home/kira/aa/
-readdir called on /home/kira/aa/
-getattr called on /home/kira/aa/
-getattr called on /home/kira/aa/log.txt
-getattr called on /home/kira/aa/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/.xdg-volume-info
+access called on /home/kira/ass7/ 4
+getattr called on /home/kira/ass7/autorun.inf
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/.Trash
+getattr called on /home/kira/ass7/rsocket.h
+getattr called on /home/kira/ass7/.Trash-1000
+getattr called on /home/kira/ass7/yay
+getattr called on /home/kira/ass7/user1.c
+getattr called on /home/kira/ass7/Assgn7_documentation.txt
+getattr called on /home/kira/ass7/user2.c
+getattr called on /home/kira/ass7/makefile
+getattr called on /home/kira/ass7/rsocket.c
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/autorun.inf
+getattr called on /home/kira/ass7/
+access called on /home/kira/ass7/ 1
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/rsocket.h
+getattr called on /home/kira/ass7/yay
+getattr called on /home/kira/ass7/user1.c
+getattr called on /home/kira/ass7/Assgn7_documentation.txt
+getattr called on /home/kira/ass7/user2.c
+getattr called on /home/kira/ass7/makefile
+getattr called on /home/kira/ass7/rsocket.c
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/yay
+access called on /home/kira/ass7/yay 1
+access called on /home/kira/ass7/yay 1
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/rsocket.h
+getattr called on /home/kira/ass7/yay
+getattr called on /home/kira/ass7/user1.c
+getattr called on /home/kira/ass7/Assgn7_documentation.txt
+getattr called on /home/kira/ass7/user2.c
+getattr called on /home/kira/ass7/makefile
+getattr called on /home/kira/ass7/rsocket.c
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/yay
+access called on /home/kira/ass7/yay 1
+access called on /home/kira/ass7/yay 1
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/.xdg-volume-info
+access called on /home/kira/ass7/ 4
+access called on /home/kira/ass7/ 1
+getattr called on /home/kira/ass7/autorun.inf
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/.Trash
+getattr called on /home/kira/ass7/rsocket.h
+getattr called on /home/kira/ass7/.Trash-1000
+getattr called on /home/kira/ass7/yay
+getattr called on /home/kira/ass7/user1.c
+getattr called on /home/kira/ass7/Assgn7_documentation.txt
+getattr called on /home/kira/ass7/user2.c
+getattr called on /home/kira/ass7/makefile
+getattr called on /home/kira/ass7/rsocket.c
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/autorun.inf
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/yay
+access called on /home/kira/ass7/yay 1
+access called on /home/kira/ass7/yay 1
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/rsocket.h
+getattr called on /home/kira/ass7/yay
+getattr called on /home/kira/ass7/user1.c
+getattr called on /home/kira/ass7/Assgn7_documentation.txt
+getattr called on /home/kira/ass7/user2.c
+getattr called on /home/kira/ass7/makefile
+getattr called on /home/kira/ass7/rsocket.c
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/yay
+access called on /home/kira/ass7/yay 1
+access called on /home/kira/ass7/yay 1
+getattr called on /home/kira/ass7/
+access called on /home/kira/ass7/ 4
+access called on /home/kira/ass7/ 2
+access called on /home/kira/ass7/ 1
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/.xdg-volume-info
+access called on /home/kira/ass7/ 4
+access called on /home/kira/ass7/ 1
+getattr called on /home/kira/ass7/autorun.inf
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/.Trash
+getattr called on /home/kira/ass7/rsocket.h
+getattr called on /home/kira/ass7/.Trash-1000
+getattr called on /home/kira/ass7/yay
+getattr called on /home/kira/ass7/user1.c
+getattr called on /home/kira/ass7/Assgn7_documentation.txt
+getattr called on /home/kira/ass7/user2.c
+getattr called on /home/kira/ass7/makefile
+getattr called on /home/kira/ass7/rsocket.c
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/autorun.inf
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/rsocket.h
+getattr called on /home/kira/ass7/yay
+getattr called on /home/kira/ass7/user1.c
+getattr called on /home/kira/ass7/Assgn7_documentation.txt
+getattr called on /home/kira/ass7/user2.c
+getattr called on /home/kira/ass7/makefile
+getattr called on /home/kira/ass7/rsocket.c
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/yay
+access called on /home/kira/ass7/yay 1
+access called on /home/kira/ass7/yay 1
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/.xdg-volume-info
+access called on /home/kira/ass7/ 4
+access called on /home/kira/ass7/ 1
+getattr called on /home/kira/ass7/autorun.inf
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/.Trash
+getattr called on /home/kira/ass7/rsocket.h
+getattr called on /home/kira/ass7/.Trash-1000
+getattr called on /home/kira/ass7/yay
+getattr called on /home/kira/ass7/user1.c
+getattr called on /home/kira/ass7/Assgn7_documentation.txt
+getattr called on /home/kira/ass7/user2.c
+getattr called on /home/kira/ass7/makefile
+getattr called on /home/kira/ass7/rsocket.c
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/autorun.inf
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/rsocket.h
+getattr called on /home/kira/ass7/yay
+getattr called on /home/kira/ass7/user1.c
+getattr called on /home/kira/ass7/Assgn7_documentation.txt
+getattr called on /home/kira/ass7/user2.c
+getattr called on /home/kira/ass7/makefile
+getattr called on /home/kira/ass7/rsocket.c
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/yay
+access called on /home/kira/ass7/yay 1
+access called on /home/kira/ass7/yay 1
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+access called on /home/kira/ass7/ 1
+getattr called on /home/kira/ass7/
+access called on /home/kira/ass7/ 4
+access called on /home/kira/ass7/ 2
+access called on /home/kira/ass7/ 1
+getattr called on /home/kira/ass7/
+access called on /home/kira/ass7/ 2
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/rsocket.h
+getattr called on /home/kira/ass7/.hidden
+access called on /home/kira/ass7/rsocket.h 4
+access called on /home/kira/ass7/rsocket.h 2
+access called on /home/kira/ass7/rsocket.h 1
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/yay
+access called on /home/kira/ass7/yay 4
+access called on /home/kira/ass7/yay 2
+access called on /home/kira/ass7/yay 1
+getattr called on /home/kira/ass7/user1.c
+access called on /home/kira/ass7/user1.c 4
+access called on /home/kira/ass7/user1.c 2
+access called on /home/kira/ass7/user1.c 1
+getattr called on /home/kira/ass7/Assgn7_documentation.txt
+access called on /home/kira/ass7/Assgn7_documentation.txt 4
+access called on /home/kira/ass7/Assgn7_documentation.txt 2
+access called on /home/kira/ass7/Assgn7_documentation.txt 1
+getattr called on /home/kira/ass7/user2.c
+access called on /home/kira/ass7/user2.c 4
+access called on /home/kira/ass7/user2.c 2
+access called on /home/kira/ass7/user2.c 1
+getattr called on /home/kira/ass7/makefile
+access called on /home/kira/ass7/makefile 4
+access called on /home/kira/ass7/makefile 2
+access called on /home/kira/ass7/makefile 1
+getattr called on /home/kira/ass7/rsocket.c
+access called on /home/kira/ass7/rsocket.c 4
+access called on /home/kira/ass7/rsocket.c 2
+access called on /home/kira/ass7/rsocket.c 1
+readdir called on /home/kira/ass7/yay
+getattr called on /home/kira/ass7/yay/Makefile
+getattr called on /home/kira/ass7/yay/.hidden
+getattr called on /home/kira/ass7/yay/rsocket.h
+getattr called on /home/kira/ass7/yay/documentation.txt
+getattr called on /home/kira/ass7/yay/user2
+getattr called on /home/kira/ass7/yay/user1
+getattr called on /home/kira/ass7/yay/user1.c
+getattr called on /home/kira/ass7/yay/user2.c
+getattr called on /home/kira/ass7/yay/rsocket.h.gch
+getattr called on /home/kira/ass7/yay/librsocket.a
+getattr called on /home/kira/ass7/yay/rsocket.o
+getattr called on /home/kira/ass7/yay/rsocket.c
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/.xdg-volume-info
+access called on /home/kira/ass7/ 4
+getattr called on /home/kira/ass7/autorun.inf
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/.Trash
+getattr called on /home/kira/ass7/rsocket.h
+getattr called on /home/kira/ass7/.Trash-1000
+getattr called on /home/kira/ass7/yay
+getattr called on /home/kira/ass7/user1.c
+getattr called on /home/kira/ass7/Assgn7_documentation.txt
+getattr called on /home/kira/ass7/user2.c
+getattr called on /home/kira/ass7/makefile
+getattr called on /home/kira/ass7/rsocket.c
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/autorun.inf
+getattr called on /home/kira/ass7/
+access called on /home/kira/ass7/ 1
+readdir called on /home/kira/ass7/
+getattr called on /home/kira/ass7/rsocket.h
+getattr called on /home/kira/ass7/yay
+getattr called on /home/kira/ass7/user1.c
+getattr called on /home/kira/ass7/Assgn7_documentation.txt
+getattr called on /home/kira/ass7/user2.c
+getattr called on /home/kira/ass7/makefile
+getattr called on /home/kira/ass7/rsocket.c
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/yay
+access called on /home/kira/ass7/yay 1
+access called on /home/kira/ass7/yay 1
+access called on /home/kira/ass7/ 1
+readdir called on /home/kira/ass7/
+access called on /home/kira/ass7/ 4
+readdir called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+readdir called on /home/kira/ass7/
+access called on /home/kira/ass7/yay 1
+access called on /home/kira/ass7/yay 1
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/.xdg-volume-info
+getattr called on /home/kira/ass7/autorun.inf
+getattr called on /home/kira/ass7/rsocket.h
+getattr called on /home/kira/ass7/yay
+getattr called on /home/kira/ass7/user1.c
+getattr called on /home/kira/ass7/Assgn7_documentation.txt
+getattr called on /home/kira/ass7/user2.c
+getattr called on /home/kira/ass7/makefile
+getattr called on /home/kira/ass7/rsocket.c
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/autorun.inf
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/.xdg-volume-info
+getattr called on /home/kira/ass7/autorun.inf
+getattr called on /home/kira/ass7/rsocket.h
+getattr called on /home/kira/ass7/yay
+getattr called on /home/kira/ass7/user1.c
+getattr called on /home/kira/ass7/Assgn7_documentation.txt
+getattr called on /home/kira/ass7/user2.c
+getattr called on /home/kira/ass7/makefile
+getattr called on /home/kira/ass7/rsocket.c
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/autorun.inf
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/.xdg-volume-info
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/autorun.inf
+getattr called on /home/kira/ass7/rsocket.h
+getattr called on /home/kira/ass7/yay
+getattr called on /home/kira/ass7/user1.c
+getattr called on /home/kira/ass7/Assgn7_documentation.txt
+getattr called on /home/kira/ass7/user2.c
+getattr called on /home/kira/ass7/makefile
+getattr called on /home/kira/ass7/rsocket.c
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/
+getattr called on /home/kira/ass7/autorun.inf
+getattr called on /home/kira/ass7/
+access called on /home/kira/ass7/ 1
+access called on /home/kira/ass7/ 4
+access called on /home/kira/ass7/yay 1
+access called on /home/kira/ass7/yay 1
+access called on /home/kira/ass7/ 1
+access called on /home/kira/ass7/ 4
+access called on /home/kira/ass7/yay 1
+access called on /home/kira/ass7/yay 1
+access called on /home/kira/ass7/ 1
+access called on /home/kira/ass7/ 4
+access called on /home/kira/ass7/yay 1
+access called on /home/kira/ass7/yay 1
+access called on /home/kira/ass7/ 1
+access called on /home/kira/ass7/ 4
+access called on /home/kira/ass7/yay 1
+access called on /home/kira/ass7/yay 1
+access called on /home/kira/ass7/ 4
+access called on /home/kira/ass7/ 1
+access called on /home/kira/ass7/yay 1
+access called on /home/kira/ass7/yay 1
+access called on /home/kira/ass7/ 1 0
+access called on /home/kira/ass7/ 4 0
+access called on /home/kira/ass7/yay 1 -13
+access called on /home/kira/ass7/yay 1 -13
+access called on /home/kira/ass7/ 4 0
+access called on /home/kira/ass7/ 1 0
+access called on /home/kira/ass7/yay 1 -13
+access called on /home/kira/ass7/yay 1 -13
+access called on /home/kira/ass7/yay 1 -13
+access called on /home/kira/ass7/yay 1 -13
+access called on /home/kira/ML/ 4 0
+access called on /home/kira/ML/ 1 0
+access called on /home/kira/ML/data_train 1 -13
+access called on /home/kira/ML/data_train 1 -13
+access called on /home/kira/ML/ 4 0
+access called on /home/kira/ML/ 1 0
+access called on /home/kira/ML/data_train 1 0
+getattr called on /home/kira/ML/
+getattr called on /home/kira/ML/
+getattr called on /home/kira/ML/.xdg-volume-info
+access called on /home/kira/ML/ 4 0
+getattr called on /home/kira/ML/autorun.inf
+readdir called on /home/kira/ML/
+getattr called on /home/kira/ML/.Trash
+getattr called on /home/kira/ML/data_train
+getattr called on /home/kira/ML/.Trash-1000
+getattr called on /home/kira/ML/data_test1_blank
+getattr called on /home/kira/ML/data_train.ans
+getattr called on /home/kira/ML/data_test2_blank
+getattr called on /home/kira/ML/
+readdir called on /home/kira/ML/
+getattr called on /home/kira/ML/
+readdir called on /home/kira/ML/
+getattr called on /home/kira/ML/
+readdir called on /home/kira/ML/
+getattr called on /home/kira/ML/
+readdir called on /home/kira/ML/
+getattr called on /home/kira/ML/
+readdir called on /home/kira/ML/
+getattr called on /home/kira/ML/
+readdir called on /home/kira/ML/
+getattr called on /home/kira/ML/
+readdir called on /home/kira/ML/
+getattr called on /home/kira/ML/
+readdir called on /home/kira/ML/
+getattr called on /home/kira/ML/
+readdir called on /home/kira/ML/
+getattr called on /home/kira/ML/
+readdir called on /home/kira/ML/
+getattr called on /home/kira/ML/
+readdir called on /home/kira/ML/
+getattr called on /home/kira/ML/
+readdir called on /home/kira/ML/
+getattr called on /home/kira/ML/
+readdir called on /home/kira/ML/
+getattr called on /home/kira/ML/
+readdir called on /home/kira/ML/
+getattr called on /home/kira/ML/
+readdir called on /home/kira/ML/
+getattr called on /home/kira/ML/
+readdir called on /home/kira/ML/
+getattr called on /home/kira/ML/
+readdir called on /home/kira/ML/
+getattr called on /home/kira/ML/
+readdir called on /home/kira/ML/
+getattr called on /home/kira/ML/
+readdir called on /home/kira/ML/
+getattr called on /home/kira/ML/
+readdir called on /home/kira/ML/
+getattr called on /home/kira/ML/
+readdir called on /home/kira/ML/
+getattr called on /home/kira/ML/
+readdir called on /home/kira/ML/
+getattr called on /home/kira/ML/autorun.inf
+getattr called on /home/kira/ML/
+access called on /home/kira/ML/ 1 0
+readdir called on /home/kira/ML/
+getattr called on /home/kira/ML/data_train
+getattr called on /home/kira/ML/data_test1_blank
+getattr called on /home/kira/ML/data_train.ans
+getattr called on /home/kira/ML/data_test2_blank
+getattr called on /home/kira/ML/
+getattr called on /home/kira/ML/data_train
+access called on /home/kira/ML/data_train 1 0
+getattr called on /home/kira/ML/
+getattr called on /home/kira/ML/data_train
+access called on /home/kira/ML/ 1 0
+getattr called on /home/kira/ML/
+readdir called on /home/kira/ML/
+getattr called on /home/kira/ML/data_train
+getattr called on /home/kira/ML/data_test1_blank
+getattr called on /home/kira/ML/data_train.ans
+getattr called on /home/kira/ML/data_test2_blank
+getattr called on /home/kira/ML/
+readdir called on /home/kira/ML/
+getattr called on /home/kira/ML/
+readdir called on /home/kira/ML/
+getattr called on /home/kira/ML/
+readdir called on /home/kira/ML/
+getattr called on /home/kira/ML/
+readdir called on /home/kira/ML/
+getattr called on /home/kira/ML/data_train.ans
+getattr called on /home/kira/ML/
+readdir called on /home/kira/ML/
+getattr called on /home/kira/ML/
+getattr called on /home/kira/ML/data_train.ans
+getattr called on /home/kira/ML/
