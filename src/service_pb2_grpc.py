@@ -39,6 +39,21 @@ class GreeterStub(object):
         request_serializer=service__pb2.MessageRequest.SerializeToString,
         response_deserializer=service__pb2.MessageReply.FromString,
         )
+    self.s_replicate = channel.unary_unary(
+        '/Greeter/s_replicate',
+        request_serializer=service__pb2.SReplicationRequest.SerializeToString,
+        response_deserializer=service__pb2.MessageReply.FromString,
+        )
+    self.c_replicate = channel.stream_unary(
+        '/Greeter/c_replicate',
+        request_serializer=service__pb2.CReplicationRequest.SerializeToString,
+        response_deserializer=service__pb2.MessageReply.FromString,
+        )
+    self.c_empty = channel.unary_unary(
+        '/Greeter/c_empty',
+        request_serializer=service__pb2.CReplicationRequest.SerializeToString,
+        response_deserializer=service__pb2.MessageReply.FromString,
+        )
 
 
 class GreeterServicer(object):
@@ -80,6 +95,27 @@ class GreeterServicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
+  def s_replicate(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def c_replicate(self, request_iterator, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def c_empty(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
 
 def add_GreeterServicer_to_server(servicer, server):
   rpc_method_handlers = {
@@ -108,7 +144,64 @@ def add_GreeterServicer_to_server(servicer, server):
           request_deserializer=service__pb2.MessageRequest.FromString,
           response_serializer=service__pb2.MessageReply.SerializeToString,
       ),
+      's_replicate': grpc.unary_unary_rpc_method_handler(
+          servicer.s_replicate,
+          request_deserializer=service__pb2.SReplicationRequest.FromString,
+          response_serializer=service__pb2.MessageReply.SerializeToString,
+      ),
+      'c_replicate': grpc.stream_unary_rpc_method_handler(
+          servicer.c_replicate,
+          request_deserializer=service__pb2.CReplicationRequest.FromString,
+          response_serializer=service__pb2.MessageReply.SerializeToString,
+      ),
+      'c_empty': grpc.unary_unary_rpc_method_handler(
+          servicer.c_empty,
+          request_deserializer=service__pb2.CReplicationRequest.FromString,
+          response_serializer=service__pb2.MessageReply.SerializeToString,
+      ),
   }
   generic_handler = grpc.method_handlers_generic_handler(
       'Greeter', rpc_method_handlers)
+  server.add_generic_rpc_handlers((generic_handler,))
+
+
+class CGreeterStub(object):
+  # missing associated documentation comment in .proto file
+  pass
+
+  def __init__(self, channel):
+    """Constructor.
+
+    Args:
+      channel: A grpc.Channel.
+    """
+    self.c_join = channel.unary_unary(
+        '/CGreeter/c_join',
+        request_serializer=service__pb2.CMessageRequest.SerializeToString,
+        response_deserializer=service__pb2.MessageReply.FromString,
+        )
+
+
+class CGreeterServicer(object):
+  # missing associated documentation comment in .proto file
+  pass
+
+  def c_join(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+
+def add_CGreeterServicer_to_server(servicer, server):
+  rpc_method_handlers = {
+      'c_join': grpc.unary_unary_rpc_method_handler(
+          servicer.c_join,
+          request_deserializer=service__pb2.CMessageRequest.FromString,
+          response_serializer=service__pb2.MessageReply.SerializeToString,
+      ),
+  }
+  generic_handler = grpc.method_handlers_generic_handler(
+      'CGreeter', rpc_method_handlers)
   server.add_generic_rpc_handlers((generic_handler,))

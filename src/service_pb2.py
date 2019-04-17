@@ -19,10 +19,159 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='',
   syntax='proto2',
   serialized_options=None,
-  serialized_pb=_b('\n\rservice.proto\"h\n\x0eMessageRequest\x12\x0b\n\x03mpt\x18\x01 \x01(\t\x12\x0c\n\x04path\x18\x02 \x01(\t\x12\x0c\n\x04mode\x18\x03 \x01(\x05\x12\x0e\n\x06length\x18\x04 \x01(\x05\x12\x0e\n\x06offset\x18\x05 \x01(\x05\x12\r\n\x05\x66lags\x18\x06 \x01(\x05\"\x1c\n\x0cMessageReply\x12\x0c\n\x04pstr\x18\x01 \x01(\x0c\x32\x80\x02\n\x07Greeter\x12/\n\x0b\x66use_access\x12\x0f.MessageRequest\x1a\r.MessageReply\"\x00\x12\x30\n\x0c\x66use_readdir\x12\x0f.MessageRequest\x1a\r.MessageReply\"\x00\x12\x30\n\x0c\x66use_getattr\x12\x0f.MessageRequest\x1a\r.MessageReply\"\x00\x12-\n\tfuse_read\x12\x0f.MessageRequest\x1a\r.MessageReply\"\x00\x12\x31\n\rfuse_fgetattr\x12\x0f.MessageRequest\x1a\r.MessageReply\"\x00')
+  serialized_pb=_b('\n\rservice.proto\"[\n\x13SReplicationRequest\x12\r\n\x05mydir\x18\x01 \x01(\t\x12\x0c\n\x04odir\x18\x02 \x01(\t\x12\x0c\n\x04type\x18\x03 \x01(\x05\x12\x0b\n\x03oip\x18\x04 \x01(\t\x12\x0c\n\x04myip\x18\x05 \x01(\t\"Y\n\x13\x43ReplicationRequest\x12\x0b\n\x03\x64\x61t\x18\x01 \x01(\x0c\x12\x0c\n\x04path\x18\x02 \x01(\t\x12\r\n\x05isdir\x18\x03 \x01(\x08\x12\n\n\x02ip\x18\x04 \x01(\t\x12\x0c\n\x04type\x18\x05 \x01(\x05\"\x1d\n\x0f\x43MessageRequest\x12\n\n\x02ip\x18\x01 \x01(\t\"h\n\x0eMessageRequest\x12\x0b\n\x03mpt\x18\x01 \x01(\t\x12\x0c\n\x04path\x18\x02 \x01(\t\x12\x0c\n\x04mode\x18\x03 \x01(\x05\x12\x0e\n\x06length\x18\x04 \x01(\x05\x12\x0e\n\x06offset\x18\x05 \x01(\x05\x12\r\n\x05\x66lags\x18\x06 \x01(\x05\"\x1c\n\x0cMessageReply\x12\x0c\n\x04pstr\x18\x01 \x01(\x0c\x32\xa0\x03\n\x07Greeter\x12/\n\x0b\x66use_access\x12\x0f.MessageRequest\x1a\r.MessageReply\"\x00\x12\x30\n\x0c\x66use_readdir\x12\x0f.MessageRequest\x1a\r.MessageReply\"\x00\x12\x30\n\x0c\x66use_getattr\x12\x0f.MessageRequest\x1a\r.MessageReply\"\x00\x12-\n\tfuse_read\x12\x0f.MessageRequest\x1a\r.MessageReply\"\x00\x12\x31\n\rfuse_fgetattr\x12\x0f.MessageRequest\x1a\r.MessageReply\"\x00\x12\x34\n\x0bs_replicate\x12\x14.SReplicationRequest\x1a\r.MessageReply\"\x00\x12\x36\n\x0b\x63_replicate\x12\x14.CReplicationRequest\x1a\r.MessageReply\"\x00(\x01\x12\x30\n\x07\x63_empty\x12\x14.CReplicationRequest\x1a\r.MessageReply\"\x00\x32\x37\n\x08\x43Greeter\x12+\n\x06\x63_join\x12\x10.CMessageRequest\x1a\r.MessageReply\"\x00')
 )
 
 
+
+
+_SREPLICATIONREQUEST = _descriptor.Descriptor(
+  name='SReplicationRequest',
+  full_name='SReplicationRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='mydir', full_name='SReplicationRequest.mydir', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='odir', full_name='SReplicationRequest.odir', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='type', full_name='SReplicationRequest.type', index=2,
+      number=3, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='oip', full_name='SReplicationRequest.oip', index=3,
+      number=4, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='myip', full_name='SReplicationRequest.myip', index=4,
+      number=5, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=17,
+  serialized_end=108,
+)
+
+
+_CREPLICATIONREQUEST = _descriptor.Descriptor(
+  name='CReplicationRequest',
+  full_name='CReplicationRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='dat', full_name='CReplicationRequest.dat', index=0,
+      number=1, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b(""),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='path', full_name='CReplicationRequest.path', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='isdir', full_name='CReplicationRequest.isdir', index=2,
+      number=3, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='ip', full_name='CReplicationRequest.ip', index=3,
+      number=4, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='type', full_name='CReplicationRequest.type', index=4,
+      number=5, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=110,
+  serialized_end=199,
+)
+
+
+_CMESSAGEREQUEST = _descriptor.Descriptor(
+  name='CMessageRequest',
+  full_name='CMessageRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='ip', full_name='CMessageRequest.ip', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=201,
+  serialized_end=230,
+)
 
 
 _MESSAGEREQUEST = _descriptor.Descriptor(
@@ -86,8 +235,8 @@ _MESSAGEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=17,
-  serialized_end=121,
+  serialized_start=232,
+  serialized_end=336,
 )
 
 
@@ -117,13 +266,37 @@ _MESSAGEREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=123,
-  serialized_end=151,
+  serialized_start=338,
+  serialized_end=366,
 )
 
+DESCRIPTOR.message_types_by_name['SReplicationRequest'] = _SREPLICATIONREQUEST
+DESCRIPTOR.message_types_by_name['CReplicationRequest'] = _CREPLICATIONREQUEST
+DESCRIPTOR.message_types_by_name['CMessageRequest'] = _CMESSAGEREQUEST
 DESCRIPTOR.message_types_by_name['MessageRequest'] = _MESSAGEREQUEST
 DESCRIPTOR.message_types_by_name['MessageReply'] = _MESSAGEREPLY
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
+
+SReplicationRequest = _reflection.GeneratedProtocolMessageType('SReplicationRequest', (_message.Message,), dict(
+  DESCRIPTOR = _SREPLICATIONREQUEST,
+  __module__ = 'service_pb2'
+  # @@protoc_insertion_point(class_scope:SReplicationRequest)
+  ))
+_sym_db.RegisterMessage(SReplicationRequest)
+
+CReplicationRequest = _reflection.GeneratedProtocolMessageType('CReplicationRequest', (_message.Message,), dict(
+  DESCRIPTOR = _CREPLICATIONREQUEST,
+  __module__ = 'service_pb2'
+  # @@protoc_insertion_point(class_scope:CReplicationRequest)
+  ))
+_sym_db.RegisterMessage(CReplicationRequest)
+
+CMessageRequest = _reflection.GeneratedProtocolMessageType('CMessageRequest', (_message.Message,), dict(
+  DESCRIPTOR = _CMESSAGEREQUEST,
+  __module__ = 'service_pb2'
+  # @@protoc_insertion_point(class_scope:CMessageRequest)
+  ))
+_sym_db.RegisterMessage(CMessageRequest)
 
 MessageRequest = _reflection.GeneratedProtocolMessageType('MessageRequest', (_message.Message,), dict(
   DESCRIPTOR = _MESSAGEREQUEST,
@@ -147,8 +320,8 @@ _GREETER = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=154,
-  serialized_end=410,
+  serialized_start=369,
+  serialized_end=785,
   methods=[
   _descriptor.MethodDescriptor(
     name='fuse_access',
@@ -195,9 +368,60 @@ _GREETER = _descriptor.ServiceDescriptor(
     output_type=_MESSAGEREPLY,
     serialized_options=None,
   ),
+  _descriptor.MethodDescriptor(
+    name='s_replicate',
+    full_name='Greeter.s_replicate',
+    index=5,
+    containing_service=None,
+    input_type=_SREPLICATIONREQUEST,
+    output_type=_MESSAGEREPLY,
+    serialized_options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='c_replicate',
+    full_name='Greeter.c_replicate',
+    index=6,
+    containing_service=None,
+    input_type=_CREPLICATIONREQUEST,
+    output_type=_MESSAGEREPLY,
+    serialized_options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='c_empty',
+    full_name='Greeter.c_empty',
+    index=7,
+    containing_service=None,
+    input_type=_CREPLICATIONREQUEST,
+    output_type=_MESSAGEREPLY,
+    serialized_options=None,
+  ),
 ])
 _sym_db.RegisterServiceDescriptor(_GREETER)
 
 DESCRIPTOR.services_by_name['Greeter'] = _GREETER
+
+
+_CGREETER = _descriptor.ServiceDescriptor(
+  name='CGreeter',
+  full_name='CGreeter',
+  file=DESCRIPTOR,
+  index=1,
+  serialized_options=None,
+  serialized_start=787,
+  serialized_end=842,
+  methods=[
+  _descriptor.MethodDescriptor(
+    name='c_join',
+    full_name='CGreeter.c_join',
+    index=0,
+    containing_service=None,
+    input_type=_CMESSAGEREQUEST,
+    output_type=_MESSAGEREPLY,
+    serialized_options=None,
+  ),
+])
+_sym_db.RegisterServiceDescriptor(_CGREETER)
+
+DESCRIPTOR.services_by_name['CGreeter'] = _CGREETER
 
 # @@protoc_insertion_point(module_scope)

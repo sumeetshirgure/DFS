@@ -1,62 +1,19 @@
-getattr called on /home/kira/ML/
-getattr called on /home/kira/ML/.xdg-volume-info
-access called on /home/kira/ML/ 4 0
-getattr called on /home/kira/ML/autorun.inf
-getattr called on /home/kira/ML/A.cpp
-readdir called on /home/kira/ML/
-getattr called on /home/kira/ML/.Trash
-getattr called on /home/kira/ML/.Trash-1000
-getattr called on /home/kira/ML/data_train
-getattr called on /home/kira/ML/data_test1_blank
-getattr called on /home/kira/ML/data_train.ans
-getattr called on /home/kira/ML/data_test2_blank
-getattr called on /home/kira/ML/
-readdir called on /home/kira/ML/
-getattr called on /home/kira/ML/
-readdir called on /home/kira/ML/
-getattr called on /home/kira/ML/
-readdir called on /home/kira/ML/
-getattr called on /home/kira/ML/
-readdir called on /home/kira/ML/
-getattr called on /home/kira/ML/
-readdir called on /home/kira/ML/
-getattr called on /home/kira/ML/
-readdir called on /home/kira/ML/
-getattr called on /home/kira/ML/
-readdir called on /home/kira/ML/
-getattr called on /home/kira/ML/
-readdir called on /home/kira/ML/
-getattr called on /home/kira/ML/
-readdir called on /home/kira/ML/
-getattr called on /home/kira/ML/
-readdir called on /home/kira/ML/
-getattr called on /home/kira/ML/
-readdir called on /home/kira/ML/
-getattr called on /home/kira/ML/
-readdir called on /home/kira/ML/
-getattr called on /home/kira/ML/
-readdir called on /home/kira/ML/
-getattr called on /home/kira/ML/
-readdir called on /home/kira/ML/
-getattr called on /home/kira/ML/
-readdir called on /home/kira/ML/
-getattr called on /home/kira/ML/
-readdir called on /home/kira/ML/
-getattr called on /home/kira/ML/
-readdir called on /home/kira/ML/
-getattr called on /home/kira/ML/
-readdir called on /home/kira/ML/
-getattr called on /home/kira/ML/
-readdir called on /home/kira/ML/
-getattr called on /home/kira/ML/
-readdir called on /home/kira/ML/
-getattr called on /home/kira/ML/
-readdir called on /home/kira/ML/
-getattr called on /home/kira/ML/
-readdir called on /home/kira/ML/
-getattr called on /home/kira/ML/autorun.inf
-read called on /home/kira/ML/A.cpp 4096 0
-fgetattr called on /home/kira/ML/A.cpp 32768
-getattr called on /home/kira/ML/A.cpp
-read called on /home/kira/ML/A.cpp 4096 0
-fgetattr called on /home/kira/ML/A.cpp 32768
+replicate s 10.109.57.163 10.5.16.76 1
+repd ../myfs-replicas/10.109.57.163/ass7
+repd ../myfs-replicas/10.109.57.163/ass7/yay
+repff ../myfs/ass7/mytraceroute_16CS10012.c
+repf ../myfs-replicas/10.109.57.163/ass7/mytraceroute_16CS10012.c
+repff ../myfs/ass7/yay/Makefile
+repf ../myfs-replicas/10.109.57.163/ass7/yay/Makefile
+repff ../myfs/ass7/yay/rsocket.h
+repf ../myfs-replicas/10.109.57.163/ass7/yay/rsocket.h
+repff ../myfs/ass7/yay/documentation.txt
+repf ../myfs-replicas/10.109.57.163/ass7/yay/documentation.txt
+repff ../myfs/ass7/yay/user1.c
+repf ../myfs-replicas/10.109.57.163/ass7/yay/user1.c
+repff ../myfs/ass7/yay/user2.c
+repf ../myfs-replicas/10.109.57.163/ass7/yay/user2.c
+repff ../myfs/ass7/yay/rsocket.c
+repf ../myfs-replicas/10.109.57.163/ass7/yay/rsocket.c
+empty ../myfs-replicas/10.5.16.76
+replicate c

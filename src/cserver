@@ -1,0 +1,97 @@
+#!/usr/bin/env python3
+
+from concurrent import futures
+import time
+import logging
+import os, sys
+import grpc, pickle
+import fuse
+import simplejson, json
+
+from errno import *
+from stat import *
+import fcntl
+import _find_fuse_parts
+import fuse
+from fuse import Fuse
+
+import service_pb2
+import service_pb2_grpc
+import random
+
+
+_ONE_DAY_IN_SECONDS = 60 * 24 * 24
+
+logging.basicConfig()
+logger = logging.getLogger('cserver')
+hdlr = logging.FileHandler('cserver.log')
+logger.addHandler(hdlr)
+logger.setLevel(logging.INFO)
+cport = 7899
+rport = 7897
+
+def flag2mode(flags):
+    md = {os.O_RDONLY: 'r', os.O_WRONLY: 'w', os.O_RDWR: 'w+'}
+    m = md[flags & (os.O_RDONLY | os.O_WRONLY | os.O_RDWR)]
+
+    if flags & os.O_APPEND:
+        m = m.replace('w', 'a', 1)
+
+    return m
+
+allClients = set()
+replicaDict = {}
+
+class CGreeter(service_pb2_grpc.CGreeterServicer):
+
+    def c_join(self, request, context):
+        # please be ipv4
+        clientIP = context.peer().split(':')[1]
+        logger.info('join %s', clientIP)
+        if clientIP in allClients:
+            # pending
+            pass
+        else:
+            if len(allClients) == 0:
+                pass
+            elif len(allClients) == 1:
+                otherIP = list(allClients)[0]
+
+
+                c2 = grpc.insecure_channel('%s:%d'%(clientIP, rport))
+                s2 = service_pb2_grpc.GreeterStub(c2)
+                s2.s_replicate(service_pb2.SReplicationRequest(myip=clientIP, oip = otherIP, type=1))                
+
+
+                c1 = grpc.insecure_channel('%s:%d'%(otherIP, rport))
+                s1 = service_pb2_grpc.GreeterStub(c1)
+                s1.s_replicate(service_pb2.SReplicationRequest(myip=otherIP, oip=clientIP, type=1))
+
+                replicaDict[clientIP] = otherIP
+                replicaDict[otherIP] = clientIP
+
+            else:
+                otherIP = random.choice(list(allClients))
+                c1 = grpc.insecure_channel('%s:%d'%(clientIP, rport))
+                s1 = service_pb2_grpc.GreeterStub(c1)
+                s1.s_replicate(service_pb2.SReplicationRequest(myip=clientIP, oip=otherIP, type=1))
+                replicaDict[clientIP] = otherIP
+
+            allClients.add(clientIP)
+        return service_pb2.MessageReply(pstr=b'1')
+    
+
+def serve():
+    server = grpc.server(futures.ThreadPoolExecutor(max_workers=1))
+    service_pb2_grpc.add_CGreeterServicer_to_server(CGreeter(), server)
+    server.add_insecure_port('[::]:%d'%cport)
+    server.start()
+    try:
+        while True:
+            time.sleep(_ONE_DAY_IN_SECONDS)
+    except KeyboardInterrupt:
+        server.stop(0)
+
+
+if __name__ == '__main__':
+    serve()

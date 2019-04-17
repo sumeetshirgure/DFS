@@ -1,4 +1,4 @@
-// python -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. service.proto
+// python3 -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. service.proto
 
 syntax="proto2";
 
@@ -9,7 +9,38 @@ service Greeter {
   rpc fuse_getattr (MessageRequest) returns (MessageReply) {}
   rpc fuse_read (MessageRequest) returns (MessageReply) {}
   rpc fuse_fgetattr (MessageRequest) returns (MessageReply) {}
+
+  rpc s_replicate(SReplicationRequest) returns (MessageReply) {}
+  rpc c_replicate(stream CReplicationRequest) returns (MessageReply) {}
+
+  rpc c_empty(CReplicationRequest) returns (MessageReply) {}
 }
+
+service CGreeter {
+ 	rpc c_join (CMessageRequest) returns (MessageReply) {}
+}
+
+
+message SReplicationRequest {
+	optional string mydir = 1;
+    optional string odir = 2;
+    optional int32 type = 3;
+    optional string oip = 4;
+    optional string myip = 5;
+}
+
+message CReplicationRequest {
+	optional bytes dat = 1;
+	optional string path = 2;
+	optional bool isdir = 3;
+	optional string ip = 4;
+	optional int32 type = 5;
+}
+
+message CMessageRequest {
+	optional string ip = 1;
+}
+
 
 message MessageRequest {
   optional string mpt = 1;

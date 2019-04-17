@@ -17,108 +17,149 @@ from fuse import Fuse
 
 import service_pb2
 import service_pb2_grpc
+import shutil
 
 _ONE_DAY_IN_SECONDS = 60 * 24 * 24
 
 logging.basicConfig()
 logger = logging.getLogger('tcpserver')
-hdlr = logging.FileHandler('/home/kira/DFS/src/server.log')
+hdlr = logging.FileHandler('server.log')
 logger.addHandler(hdlr)
 logger.setLevel(logging.INFO)
 rport = 7897
+cip = '10.5.16.76'
+cport = 7899
 
 def flag2mode(flags):
-    md = {os.O_RDONLY: 'r', os.O_WRONLY: 'w', os.O_RDWR: 'w+'}
-    m = md[flags & (os.O_RDONLY | os.O_WRONLY | os.O_RDWR)]
+	md = {os.O_RDONLY: 'r', os.O_WRONLY: 'w', os.O_RDWR: 'w+'}
+	m = md[flags & (os.O_RDONLY | os.O_WRONLY | os.O_RDWR)]
 
-    if flags | os.O_APPEND:
-        m = m.replace('w', 'a', 1)
+	if flags & os.O_APPEND:
+		m = m.replace('w', 'a', 1)
 
-    return m
-
-class MyStat(fuse.Stat):
-    def __init__(self):
-        self.st_mode = 0
-        self.st_ino = 0
-        self.st_dev = 0
-        self.st_nlink = 0
-        self.st_uid = 0
-        self.st_gid = 0
-        self.st_size = 0
-        self.st_atime = 0
-        self.st_mtime = 0
-        self.st_ctime = 0
+	return m
 
 
 class Greeter(service_pb2_grpc.GreeterServicer):
 
-    def fuse_access(self, request, context):
-        global logger
-        
-        path = request.mpt + request.path
-        ans = 0
-        if not os.access(path, request.mode):
-            ans = -EACCES
+	def c_empty(self, request, context):
+		logger.info('empty %s', request.path)
+		if os.path.exists(request.path):
+			shutil.rmtree(request.path)
+		os.mkdir(request.path)
+		return service_pb2.MessageReply(pstr=b'1')
 
-        logger.info("access called on %s %d %d", path, request.mode, ans)
-        ans = pickle.dumps(ans)
-        return service_pb2.MessageReply(pstr=ans)
 
-    def fuse_readdir(self, request, context):
-        global logger
-        
-        path = request.mpt + request.path
-        logger.info("readdir called on %s", path)
-        ans = list(map(fuse.Direntry, list(os.listdir(path))))
-        ans = pickle.dumps(ans)
+	def c_replicate(self, request_iterator, context):
+		logger.info('replicate c')
+		for req in request_iterator:
+			if req.isdir:
+				os.mkdir(req.path)
+			else:
+				f=open(req.path,'wb')
+				f.write(req.dat)
+				f.close()
+		return service_pb2.MessageReply(pstr=b'1')
 
-        return service_pb2.MessageReply(pstr=ans)
 
-    def fuse_getattr(self, request, context):
-        global logger
 
-        path = request.mpt + request.path
-        logger.info("getattr called on %s", path)
-        ans = os.lstat(path)
-        ans = pickle.dumps(ans)
-        
-        return service_pb2.MessageReply(pstr=ans)
+	def s_replicate(self, request, context):
+		logger.info('replicate s %s %s %d', request.myip, request.oip, request.type)
+		oip = request.oip
+		if not request.type:
+			
+		else:
+			def dfs():
+				for e in os.walk('../myfs/'):
+					for d in e[1]:
+						dd = os.path.join(e[0], d)
+						path = dd.replace('/myfs/', '/myfs-replicas/%s/'%request.myip, 1)
+						yield service_pb2.CReplicationRequest(path=path,isdir=True,ip=request.myip,type=request.type)
+					for f in e[2]:
+						dat=''
+						ff = os.path.join(e[0], f)
+						logger.info('repff %s', ff)
+						with open(ff, 'rb') as fd:
+							dat = fd.read()
+						
+						path = ff.replace('/myfs/', '/myfs-replicas/%s/'%request.myip, 1)
+						yield service_pb2.CReplicationRequest(dat=dat,path=path,isdir=False,ip=request.myip,type=request.type)
 
-    def fuse_read(self, request, context):
-        global logger
-        path = request.mpt + request.path
-        logger.info("read called on %s %d %d", path, request.length, request.offset)
-        
-        f = os.fdopen(os.open(path, request.flags), mode=flag2mode(request.flags))
-        f.seek(request.offset)
-        ans = pickle.dumps(f.read(request.length))
-        f.close()
+			ans=[]
+			for i in dfs():
+				ans.append(i)
+			c1 = grpc.insecure_channel('%s:%d'%(request.oip, rport))
+			s1 = service_pb2_grpc.GreeterStub(c1)
+			s1.c_empty(service_pb2.CReplicationRequest(path='../myfs-replicas/%s'%request.myip))
+			s1.c_replicate(iter(ans))
+			return service_pb2.MessageReply(pstr=b'1')
+		
 
-        return service_pb2.MessageReply(pstr=ans)
 
-    def fuse_fgetattr(self, request, context):
-        global logger
-        path = request.mpt + request.path
-        logger.info("fgetattr called on %s %d", path, request.flags)
-        
-        f = os.fdopen(os.open(path, request.flags), mode=flag2mode(request.flags))
-        ans = pickle.dumps(os.fstat(f.fileno()))
-        f.close()
-        
-        return service_pb2.MessageReply(pstr=ans)
+	def fuse_access(self, request, context):
+		path = request.mpt + request.path
+		ans = 0
+		if not os.access(path, request.mode):
+			ans = -EACCES
+
+		logger.info("access called on %s %d %d", path, request.mode, ans)
+		ans = pickle.dumps(ans)
+		return service_pb2.MessageReply(pstr=ans)
+
+	def fuse_readdir(self, request, context):
+		path = request.mpt + request.path
+		logger.info("readdir called on %s", path)
+		ans = list(map(fuse.Direntry, list(os.listdir(path))))
+		ans = pickle.dumps(ans)
+
+		return service_pb2.MessageReply(pstr=ans)
+
+	def fuse_getattr(self, request, context):
+		path = request.mpt + request.path
+		logger.info("getattr called on %s", path)
+		ans = os.lstat(path)
+		ans = pickle.dumps(ans)
+		
+		return service_pb2.MessageReply(pstr=ans)
+
+	def fuse_read(self, request, context):
+		path = request.mpt + request.path
+		logger.info("read called on %s %d %d", path, request.length, request.offset)
+		
+		f = os.fdopen(os.open(path, request.flags), mode=flag2mode(request.flags))
+		f.seek(request.offset)
+		ans = pickle.dumps(f.read(request.length))
+		f.close()
+
+		return service_pb2.MessageReply(pstr=ans)
+
+	def fuse_fgetattr(self, request, context):
+		path = request.mpt + request.path
+		logger.info("fgetattr called on %s %d", path, request.flags)
+		
+		f = os.fdopen(os.open(path, request.flags), mode=flag2mode(request.flags))
+		ans = pickle.dumps(os.fstat(f.fileno()))
+		f.close()
+		
+		return service_pb2.MessageReply(pstr=ans)
 
 def serve():
-    global rport
-    server = grpc.server(futures.ThreadPoolExecutor(max_workers=1))
-    service_pb2_grpc.add_GreeterServicer_to_server(Greeter(), server)
-    server.add_insecure_port('[::]:7897')
-    server.start()
-    try:
-        while True:
-            time.sleep(_ONE_DAY_IN_SECONDS)
-    except KeyboardInterrupt:
-        server.stop(0)
+	server = grpc.server(futures.ThreadPoolExecutor(max_workers=1))
+	service_pb2_grpc.add_GreeterServicer_to_server(Greeter(), server)
+	server.add_insecure_port('[::]:%d' % rport)
+	server.start()
+
+	cserver = grpc.insecure_channel('%s:%d'%(cip, cport))
+	stub = service_pb2_grpc.CGreeterStub(cserver)
+	# get ip from context in server
+	stub.c_join(service_pb2.CMessageRequest())
+
+	try:
+		while True:
+			time.sleep(_ONE_DAY_IN_SECONDS)
+	except KeyboardInterrupt:
+		server.stop(0)
 
 
 if __name__ == '__main__':
-    serve()
+	serve()

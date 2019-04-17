@@ -33,7 +33,7 @@ def flag2mode(flags):
     md = {os.O_RDONLY: 'r', os.O_WRONLY: 'w', os.O_RDWR: 'w+'}
     m = md[flags & (os.O_RDONLY | os.O_WRONLY | os.O_RDWR)]
 
-    if flags | os.O_APPEND:
+    if flags & os.O_APPEND:
         m = m.replace('w', 'a', 1)
 
     return m
@@ -41,23 +41,25 @@ def flag2mode(flags):
 hostname = ""
 vdir = ""
 rport = 7897
+channel = ""
+
+logging.basicConfig()
+logger = logging.getLogger('mounter')
+hdlr = logging.FileHandler('client.log')
+logger.addHandler(hdlr)
+logger.setLevel(logging.INFO)
 
 class Xmp(Fuse):
-
-    @staticmethod
-    def log(s):
-        f = open("/home/kira/DFS/src/rfslog.txt", "a+")
-        f.write(str(s) + "\n")
-        f.close()
 
     def __init__(self, *args, **kw):
         
         Fuse.__init__(self, *args, **kw)
 
-        global hostname, vdir, rport
+        global hostname, vdir, rport, channel
         self.hostname, self.vdir, self.rport = hostname, vdir, rport
         # Xmp.log()
-        self.channel = grpc.insecure_channel('%s:%d' % (self.hostname, self.rport))
+        channel = grpc.insecure_channel('%s:%d' % (self.hostname, self.rport))
+        self.channel = channel
         
         # do stuff to set up your filesystem here, if you want
         #import thread
@@ -76,7 +78,7 @@ class Xmp(Fuse):
 #            print "mythread: ticking"
 
     def getattr(self, path):
-        Xmp.log(["getattr", path])
+        logger.info("getattr %s", path)
         
         # try:
         stub = service_pb2_grpc.GreeterStub(self.channel)
@@ -92,7 +94,7 @@ class Xmp(Fuse):
         pass
 
     def readdir(self, path, offset):
-        Xmp.log(["readdir", path])
+        logger.info("readdir %s", path)
 
         stub = service_pb2_grpc.GreeterStub(self.channel)
         response = stub.fuse_readdir(service_pb2.MessageRequest(mpt=self.vdir, path=path))
@@ -154,7 +156,7 @@ class Xmp(Fuse):
 #      os.utime(self.vdir + path, (ts_acc.tv_sec, ts_mod.tv_sec))
 
     def access(self, path, mode):
-        Xmp.log(["access", path])
+        logger.info("access %s", path)
 
         # try:
         stub = service_pb2_grpc.GreeterStub(self.channel)
@@ -206,7 +208,7 @@ class Xmp(Fuse):
         # return os.statvfs(vdir)
 
     def fsinit(self):
-        Xmp.log("fsinit")
+        logger.info("fsinit")
 
     class XmpFile(object):
 
@@ -216,9 +218,10 @@ class Xmp(Fuse):
             self.path = path
             self.flags = flags
             self.mode = flag2mode(flags)
-            Xmp.log(["fileinit", self.vdir+path, flags])
+            
+            logger.info("fileinit %s %d", self.vdir+path, flags)
 
-            self.channel = grpc.insecure_channel('%s:%d' % (self.hostname, self.rport))
+            self.channel = channel
 
             self.curOffset = 0
 
@@ -227,7 +230,7 @@ class Xmp(Fuse):
             # self.fd = self.file.fileno()
 
         def fgetattr(self):
-            Xmp.log(["fgetattr", self.vdir+self.path])
+            logger.info("fgetattr %s", self.vdir+self.path)
 
             stub = service_pb2_grpc.GreeterStub(self.channel)            
             response = stub.fuse_fgetattr(service_pb2.MessageRequest(mpt=self.vdir, path=self.path, 
@@ -237,7 +240,7 @@ class Xmp(Fuse):
             return ans
 
         def read(self, length, offset):
-            Xmp.log(["read", self.vdir+self.path, length, offset])
+            logger.info("read %s %d %d", self.vdir+self.path, length, offset)
 
             stub = service_pb2_grpc.GreeterStub(self.channel)            
             response = stub.fuse_read(service_pb2.MessageRequest(mpt=self.vdir, path=self.path,
