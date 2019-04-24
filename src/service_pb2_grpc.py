@@ -180,6 +180,11 @@ class CGreeterStub(object):
         request_serializer=service__pb2.CMessageRequest.SerializeToString,
         response_deserializer=service__pb2.MessageReply.FromString,
         )
+    self.c_getR = channel.unary_unary(
+        '/CGreeter/c_getR',
+        request_serializer=service__pb2.CMessageRequest.SerializeToString,
+        response_deserializer=service__pb2.MessageReply.FromString,
+        )
 
 
 class CGreeterServicer(object):
@@ -193,11 +198,23 @@ class CGreeterServicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
+  def c_getR(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
 
 def add_CGreeterServicer_to_server(servicer, server):
   rpc_method_handlers = {
       'c_join': grpc.unary_unary_rpc_method_handler(
           servicer.c_join,
+          request_deserializer=service__pb2.CMessageRequest.FromString,
+          response_serializer=service__pb2.MessageReply.SerializeToString,
+      ),
+      'c_getR': grpc.unary_unary_rpc_method_handler(
+          servicer.c_getR,
           request_deserializer=service__pb2.CMessageRequest.FromString,
           response_serializer=service__pb2.MessageReply.SerializeToString,
       ),

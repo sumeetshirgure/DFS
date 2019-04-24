@@ -18,6 +18,7 @@ from fuse import Fuse
 import service_pb2
 import service_pb2_grpc
 import shutil
+import threading
 
 _ONE_DAY_IN_SECONDS = 60 * 24 * 24
 
@@ -29,6 +30,9 @@ logger.setLevel(logging.INFO)
 rport = 7897
 cip = '10.5.16.76'
 cport = 7899
+isBackup = False
+
+wmutex = threading.Lock()
 
 def flag2mode(flags):
 	md = {os.O_RDONLY: 'r', os.O_WRONLY: 'w', os.O_RDWR: 'w+'}
@@ -43,22 +47,29 @@ def flag2mode(flags):
 class Greeter(service_pb2_grpc.GreeterServicer):
 
 	def c_empty(self, request, context):
+		wmutex.acquire()
+
 		logger.info('empty %s', request.path)
 		if os.path.exists(request.path):
 			shutil.rmtree(request.path)
 		os.mkdir(request.path)
+
+		wmutex.release()
 		return service_pb2.MessageReply(pstr=b'1')
 
 
 	def c_replicate(self, request_iterator, context):
+		wmutex.acquire()
 		logger.info('replicate c')
 		for req in request_iterator:
+			logger.info(req.path)
 			if req.isdir:
 				os.mkdir(req.path)
 			else:
 				f=open(req.path,'wb')
 				f.write(req.dat)
 				f.close()
+		wmutex.release()
 		return service_pb2.MessageReply(pstr=b'1')
 
 
@@ -66,33 +77,38 @@ class Greeter(service_pb2_grpc.GreeterServicer):
 	def s_replicate(self, request, context):
 		logger.info('replicate s %s %s %d', request.myip, request.oip, request.type)
 		oip = request.oip
+		
+		p1 = '/myfs-replicas/%s'%request.myip
+		p2 = '/myfs'
 		if not request.type:
-			
-		else:
-			def dfs():
-				for e in os.walk('../myfs/'):
-					for d in e[1]:
-						dd = os.path.join(e[0], d)
-						path = dd.replace('/myfs/', '/myfs-replicas/%s/'%request.myip, 1)
-						yield service_pb2.CReplicationRequest(path=path,isdir=True,ip=request.myip,type=request.type)
-					for f in e[2]:
-						dat=''
-						ff = os.path.join(e[0], f)
-						logger.info('repff %s', ff)
-						with open(ff, 'rb') as fd:
-							dat = fd.read()
-						
-						path = ff.replace('/myfs/', '/myfs-replicas/%s/'%request.myip, 1)
-						yield service_pb2.CReplicationRequest(dat=dat,path=path,isdir=False,ip=request.myip,type=request.type)
+			p1 = '/myfs'
+			p2 = '/myfs-replicas/%s'%request.oip
+		logger.info('%s %s', p1, p2)
+		def dfs():
+			for e in os.walk('..'+p2):
+				for d in e[1]:
+					dd = os.path.join(e[0], d)
+					path = dd.replace(p2, p1, 1)
+					yield service_pb2.CReplicationRequest(path=path,isdir=True,ip=request.myip,type=request.type)
+				for f in e[2]:
+					dat=''
+					ff = os.path.join(e[0], f)
+					logger.info('repff %s', ff)
+					with open(ff, 'rb') as fd:
+						dat = fd.read()
+					
+					path = ff.replace(p2, p1, 1)
+					yield service_pb2.CReplicationRequest(dat=dat,path=path,isdir=False,ip=request.myip,type=request.type)
 
-			ans=[]
-			for i in dfs():
-				ans.append(i)
-			c1 = grpc.insecure_channel('%s:%d'%(request.oip, rport))
-			s1 = service_pb2_grpc.GreeterStub(c1)
-			s1.c_empty(service_pb2.CReplicationRequest(path='../myfs-replicas/%s'%request.myip))
-			s1.c_replicate(iter(ans))
-			return service_pb2.MessageReply(pstr=b'1')
+		ans=[]
+		for i in dfs():
+			ans.append(i)
+		c1 = grpc.insecure_channel('%s:%d'%(request.oip, rport))
+		s1 = service_pb2_grpc.GreeterStub(c1)
+		s1.c_empty(service_pb2.CReplicationRequest(path='..'+p1))
+		s1.c_replicate(iter(ans))
+		return service_pb2.MessageReply(pstr=b'1')
+		
 		
 
 
@@ -117,7 +133,12 @@ class Greeter(service_pb2_grpc.GreeterServicer):
 	def fuse_getattr(self, request, context):
 		path = request.mpt + request.path
 		logger.info("getattr called on %s", path)
-		ans = os.lstat(path)
+
+		try:
+			ans = os.lstat(path)
+		except OSError as e:
+			ans = e
+
 		ans = pickle.dumps(ans)
 		
 		return service_pb2.MessageReply(pstr=ans)
@@ -126,10 +147,15 @@ class Greeter(service_pb2_grpc.GreeterServicer):
 		path = request.mpt + request.path
 		logger.info("read called on %s %d %d", path, request.length, request.offset)
 		
-		f = os.fdopen(os.open(path, request.flags), mode=flag2mode(request.flags))
+		f = os.fdopen(os.open(path, request.flags), flag2mode(request.flags))
 		f.seek(request.offset)
 		ans = pickle.dumps(f.read(request.length))
 		f.close()
+
+		# f = os.open(path, request.flags)
+		# os.lseek(f, request.offset, 0)
+		# ans = pickle.dumps(os.read(f, request.length))
+		# os.close(f)
 
 		return service_pb2.MessageReply(pstr=ans)
 
@@ -137,9 +163,12 @@ class Greeter(service_pb2_grpc.GreeterServicer):
 		path = request.mpt + request.path
 		logger.info("fgetattr called on %s %d", path, request.flags)
 		
-		f = os.fdopen(os.open(path, request.flags), mode=flag2mode(request.flags))
-		ans = pickle.dumps(os.fstat(f.fileno()))
-		f.close()
+		try:
+			f = os.open(path, request.flags)
+			ans = pickle.dumps(os.fstat(f))
+			os.close(f)
+		except OSError as e:
+			ans = e
 		
 		return service_pb2.MessageReply(pstr=ans)
 
@@ -153,6 +182,7 @@ def serve():
 	stub = service_pb2_grpc.CGreeterStub(cserver)
 	# get ip from context in server
 	stub.c_join(service_pb2.CMessageRequest())
+	logger.info('Replication done')
 
 	try:
 		while True:

@@ -18,6 +18,7 @@ service Greeter {
 
 service CGreeter {
  	rpc c_join (CMessageRequest) returns (MessageReply) {}
+ 	rpc c_getR (CMessageRequest) returns (MessageReply) {}
 }
 
 

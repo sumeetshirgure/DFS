@@ -1,0 +1,537 @@
+fsinit
+access /
+getattr /.xdg-volume-info
+getattr /
+getattr /autorun.inf
+getattr /.Trash
+readdir /
+getattr /.Trash-1000
+getattr /abc
+getattr /abc.txt
+getattr /ICPC
+getattr /aa
+getattr /
+readdir /
+getattr /
+readdir /
+getattr /
+readdir /
+getattr /
+readdir /
+getattr /
+readdir /
+getattr /
+readdir /
+getattr /
+readdir /
+getattr /
+readdir /
+getattr /
+readdir /
+getattr /
+readdir /
+getattr /
+readdir /
+getattr /
+readdir /
+getattr /
+readdir /
+getattr /
+readdir /
+getattr /
+readdir /
+getattr /
+readdir /
+getattr /
+readdir /
+getattr /
+readdir /
+getattr /
+readdir /
+getattr /
+readdir /
+getattr /
+readdir /
+getattr /
+readdir /
+getattr /autorun.inf
+getattr /
+getattr /ICPC
+access /ICPC
+getattr /ICPC
+readdir /ICPC
+getattr /ICPC/A.cpp
+getattr /ICPC/a.out
+getattr /ICPC/in.txt
+getattr /ICPC/C.cpp~
+getattr /ICPC/C.cpp
+getattr /ICPC/C
+getattr /ICPC/B.cpp
+getattr /ICPC/in.txt
+fileinit ../myfs/ICPC/in.txt 32768 <class 'tuple'>
+read ../myfs/ICPC/in.txt 4096 0
+4
+1 2 3 4
+1 4 3 2
+fgetattr ../myfs/ICPC/in.txt
+flush
+lock
+release
+getattr /ICPC/a.out
+fileinit ../myfs/ICPC/a.out 32768 <class 'tuple'>
+read ../myfs/ICPC/a.out 24576 0
+<_Rendezvous of RPC that terminated with:
+	status = StatusCode.UNKNOWN
+	details = "Exception calling application: 'utf-8' codec can't decode byte 0xf0 in position 24: invalid continuation byte"
+	debug_error_string = "{"created":"@1556131220.016414850","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Exception calling application: 'utf-8' codec can't decode byte 0xf0 in position 24: invalid continuation byte","grpc_status":2}"
+>
+read ../myfs/ICPC/a.out 4096 0
+<_Rendezvous of RPC that terminated with:
+	status = StatusCode.UNKNOWN
+	details = "Exception calling application: 'utf-8' codec can't decode byte 0xf0 in position 24: invalid continuation byte"
+	debug_error_string = "{"created":"@1556131220.057471612","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Exception calling application: 'utf-8' codec can't decode byte 0xf0 in position 24: invalid continuation byte","grpc_status":2}"
+>
+flush
+lock
+release
+getattr /ICPC
+access /ICPC
+access /ICPC
+getattr /ICPC/rfserver
+access /ICPC
+access /ICPC
+access /ICPC
+access /ICPC
+access /ICPC
+access /ICPC
+access /ICPC
+access /ICPC
+access /ICPC
+access /ICPC
+access /ICPC
+access /ICPC
+access /ICPC
+access /ICPC
+access /ICPC
+access /ICPC
+access /ICPC
+access /ICPC
+access /ICPC
+access /ICPC
+access /ICPC
+access /ICPC
+access /ICPC
+access /ICPC
+access /ICPC
+access /ICPC
+access /ICPC
+access /ICPC
+access /ICPC
+access /ICPC
+access /ICPC
+access /ICPC
+access /ICPC
+access /ICPC
+access /ICPC
+access /ICPC
+access /ICPC
+access /ICPC
+access /ICPC
+access /ICPC
+access /ICPC
+access /ICPC
+access /ICPC
+access /ICPC
+access /ICPC
+access /ICPC
+access /ICPC
+access /ICPC
+access /ICPC
+access /ICPC
+access /ICPC
+access /ICPC
+access /ICPC
+access /ICPC
+access /ICPC
+access /ICPC
+access /ICPC
+access /ICPC
+getattr /ICPC/rfserver
+getattr /ICPC/rfserver
+getattr /ICPC/rfserver
+getattr /ICPC/rfserver
+getattr /ICPC/rfserver
+getattr /ICPC/rfserver
+getattr /ICPC/rfserver
+getattr /ICPC/.rfserver.swp
+getattr /ICPC/.rfserver.swp
+fileinit ../myfs/ICPC/.rfserver.swp 32962 <class 'tuple'>
+33152
+fgetattr ../myfs/ICPC/.rfserver.swp
+getattr /ICPC/.rfserver.swpx
+getattr /ICPC/.rfserver.swpx
+fileinit ../myfs/ICPC/.rfserver.swpx 32962 <class 'tuple'>
+33152
+fgetattr ../myfs/ICPC/.rfserver.swpx
+flush
+lock
+release
+unlink
+flush
+lock
+release
+unlink
+getattr /ICPC/.rfserver.swp
+getattr /ICPC/.rfserver.swx
+fileinit ../myfs/ICPC/.rfserver.swp 32768 <class 'tuple'>
+read ../myfs/ICPC/.rfserver.swp 4096 0
+
+flush
+lock
+release
+getattr /ICPC/.rfserver.swp
+fileinit ../myfs/ICPC/.rfserver.swp 32768 <class 'tuple'>
+read ../myfs/ICPC/.rfserver.swp 4096 0
+
+flush
+lock
+release
+getattr /ICPC/rfserver
+getattr /ICPC/.rfserver.swp
+getattr /ICPC/.rfserver.swo
+getattr /ICPC/.rfserver.swo
+getattr /ICPC/.rfserver.swo
+getattr /ICPC/.rfserver.swo
+fileinit ../myfs/ICPC/.rfserver.swo 164034 <class 'tuple'>
+33152
+fgetattr ../myfs/ICPC/.rfserver.swo
+write
+flush
+lock
+release
+unlink
+getattr /ICPC/rfserver
+getattr /ICPC/rfserver
+access /ICPC
+access /ICPC
+getattr /ICPC
+readdir /ICPC
+getattr /ICPC/A.cpp
+getattr /ICPC/a.out
+getattr /ICPC/in.txt
+getattr /ICPC/C.cpp~
+getattr /ICPC/C.cpp
+getattr /ICPC/C
+getattr /ICPC/B.cpp
+getattr /
+getattr /ICPC
+fsinit
+access /
+getattr /.Trash
+getattr /.xdg-volume-info
+getattr /
+getattr /autorun.inf
+getattr /.Trash-1000
+readdir /
+getattr /abc
+getattr /abc.txt
+getattr /ICPC
+getattr /aa
+getattr /
+readdir /
+getattr /
+readdir /
+getattr /
+readdir /
+getattr /
+readdir /
+getattr /
+readdir /
+getattr /
+readdir /
+getattr /
+readdir /
+getattr /
+readdir /
+getattr /
+readdir /
+getattr /
+readdir /
+getattr /
+readdir /
+getattr /
+readdir /
+getattr /
+readdir /
+getattr /
+readdir /
+getattr /
+readdir /
+getattr /
+readdir /
+getattr /
+readdir /
+getattr /
+readdir /
+getattr /
+readdir /
+getattr /
+readdir /
+getattr /
+readdir /
+getattr /
+readdir /
+getattr /autorun.inf
+getattr /
+getattr /
+getattr /
+access /
+getattr /
+getattr /ICPC
+access /ICPC
+getattr /ICPC/in.txt
+fileinit ../myfs/ICPC/in.txt 32768 <class 'tuple'>
+read ../myfs/ICPC/in.txt 4096 0
+4
+1 2 3 4
+1 4 3 2
+fgetattr ../myfs/ICPC/in.txt
+flush
+lock
+release
+getattr /ICPC/a.out
+fileinit ../myfs/ICPC/a.out 32768 <class 'tuple'>
+read ../myfs/ICPC/a.out 24576 0
+<_Rendezvous of RPC that terminated with:
+	status = StatusCode.UNKNOWN
+	details = "Exception calling application: 'utf-8' codec can't decode byte 0xf0 in position 24: invalid continuation byte"
+	debug_error_string = "{"created":"@1556131381.988877197","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Exception calling application: 'utf-8' codec can't decode byte 0xf0 in position 24: invalid continuation byte","grpc_status":2}"
+>
+read ../myfs/ICPC/a.out 4096 0
+<_Rendezvous of RPC that terminated with:
+	status = StatusCode.UNKNOWN
+	details = "Exception calling application: 'utf-8' codec can't decode byte 0xf0 in position 24: invalid continuation byte"
+	debug_error_string = "{"created":"@1556131382.036652794","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Exception calling application: 'utf-8' codec can't decode byte 0xf0 in position 24: invalid continuation byte","grpc_status":2}"
+>
+flush
+lock
+release
+getattr /
+getattr /ICPC
+fsinit
+access /
+<_Rendezvous of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "Connect Failed"
+	debug_error_string = "{"created":"@1556131490.138588342","description":"Failed to create subchannel","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":2267,"referenced_errors":[{"created":"@1556131490.138585787","description":"Pick Cancelled","file":"src/core/ext/filters/client_channel/lb_policy/pick_first/pick_first.cc","file_line":242,"referenced_errors":[{"created":"@1556131490.138562932","description":"Connect Failed","file":"src/core/ext/filters/client_channel/subchannel.cc","file_line":962,"grpc_status":14,"referenced_errors":[{"created":"@1556131490.138548750","description":"Failed to connect to remote host: Connection refused","errno":111,"file":"src/core/lib/iomgr/tcp_client_posix.cc","file_line":207,"os_error":"Connection refused","syscall":"connect","target_address":"ipv4:10.5.16.76:7897"}]}]}]}"
+>
+change channel
+access /
+getattr /.xdg-volume-info
+getattr /
+getattr /autorun.inf
+getattr /.Trash
+readdir /
+getattr /.Trash-1000
+getattr /abc
+getattr /abc.txt
+getattr /aa
+getattr /ICPC
+getattr /
+readdir /
+getattr /
+readdir /
+getattr /
+readdir /
+getattr /
+readdir /
+getattr /
+readdir /
+getattr /
+readdir /
+getattr /
+readdir /
+getattr /
+readdir /
+getattr /
+readdir /
+getattr /
+readdir /
+getattr /
+readdir /
+getattr /
+readdir /
+getattr /
+readdir /
+getattr /
+readdir /
+getattr /
+readdir /
+getattr /
+readdir /
+getattr /
+readdir /
+getattr /
+readdir /
+getattr /
+readdir /
+getattr /
+readdir /
+getattr /
+readdir /
+getattr /
+readdir /
+getattr /autorun.inf
+getattr /
+getattr /
+access /
+getattr /
+getattr /ICPC
+access /ICPC
+getattr /ICPC/in.txt
+fileinit ../myfs-replicas/10.5.16.76/ICPC/in.txt 32768 <class 'tuple'>
+read ../myfs-replicas/10.5.16.76/ICPC/in.txt 4096 0
+4
+1 2 3 4
+1 4 3 2
+fgetattr ../myfs-replicas/10.5.16.76/ICPC/in.txt
+flush
+lock
+release
+getattr /ICPC/a.out
+fileinit ../myfs-replicas/10.5.16.76/ICPC/a.out 32768 <class 'tuple'>
+read ../myfs-replicas/10.5.16.76/ICPC/a.out 24576 0
+<_Rendezvous of RPC that terminated with:
+	status = StatusCode.UNKNOWN
+	details = "Exception calling application: 'utf-8' codec can't decode byte 0xf0 in position 24: invalid continuation byte"
+	debug_error_string = "{"created":"@1556131498.495244300","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Exception calling application: 'utf-8' codec can't decode byte 0xf0 in position 24: invalid continuation byte","grpc_status":2}"
+>
+read ../myfs-replicas/10.5.16.76/ICPC/a.out 4096 0
+<_Rendezvous of RPC that terminated with:
+	status = StatusCode.UNKNOWN
+	details = "Exception calling application: 'utf-8' codec can't decode byte 0xf0 in position 24: invalid continuation byte"
+	debug_error_string = "{"created":"@1556131498.533742342","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Exception calling application: 'utf-8' codec can't decode byte 0xf0 in position 24: invalid continuation byte","grpc_status":2}"
+>
+flush
+lock
+release
+getattr /ICPC/in.txt
+fileinit ../myfs-replicas/10.5.16.76/ICPC/in.txt 32768 <class 'tuple'>
+read ../myfs-replicas/10.5.16.76/ICPC/in.txt 4096 0
+4
+1 2 3 4
+1 4 3 2
+fgetattr ../myfs-replicas/10.5.16.76/ICPC/in.txt
+flush
+lock
+release
+getattr /ICPC/a.out
+fileinit ../myfs-replicas/10.5.16.76/ICPC/a.out 32768 <class 'tuple'>
+read ../myfs-replicas/10.5.16.76/ICPC/a.out 24576 0
+<_Rendezvous of RPC that terminated with:
+	status = StatusCode.UNKNOWN
+	details = "Exception calling application: 'utf-8' codec can't decode byte 0xf0 in position 24: invalid continuation byte"
+	debug_error_string = "{"created":"@1556131572.348673036","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Exception calling application: 'utf-8' codec can't decode byte 0xf0 in position 24: invalid continuation byte","grpc_status":2}"
+>
+read ../myfs-replicas/10.5.16.76/ICPC/a.out 4096 0
+<_Rendezvous of RPC that terminated with:
+	status = StatusCode.UNKNOWN
+	details = "Exception calling application: 'utf-8' codec can't decode byte 0xf0 in position 24: invalid continuation byte"
+	debug_error_string = "{"created":"@1556131572.351930716","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Exception calling application: 'utf-8' codec can't decode byte 0xf0 in position 24: invalid continuation byte","grpc_status":2}"
+>
+flush
+lock
+release
+getattr /ICPC/a.out
+fileinit ../myfs-replicas/10.5.16.76/ICPC/a.out 32768 <class 'tuple'>
+read ../myfs-replicas/10.5.16.76/ICPC/a.out 24576 0
+<_Rendezvous of RPC that terminated with:
+	status = StatusCode.UNKNOWN
+	details = "Exception calling application: 'utf-8' codec can't decode byte 0xf0 in position 24: invalid continuation byte"
+	debug_error_string = "{"created":"@1556131754.880321785","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Exception calling application: 'utf-8' codec can't decode byte 0xf0 in position 24: invalid continuation byte","grpc_status":2}"
+>
+read ../myfs-replicas/10.5.16.76/ICPC/a.out 4096 0
+<_Rendezvous of RPC that terminated with:
+	status = StatusCode.UNKNOWN
+	details = "Exception calling application: 'utf-8' codec can't decode byte 0xf0 in position 24: invalid continuation byte"
+	debug_error_string = "{"created":"@1556131754.883569753","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Exception calling application: 'utf-8' codec can't decode byte 0xf0 in position 24: invalid continuation byte","grpc_status":2}"
+>
+flush
+lock
+release
+getattr /ICPC/in.txt
+fileinit ../myfs-replicas/10.5.16.76/ICPC/in.txt 32768 <class 'tuple'>
+read ../myfs-replicas/10.5.16.76/ICPC/in.txt 4096 0
+4
+1 2 3 4
+1 4 3 2
+fgetattr ../myfs-replicas/10.5.16.76/ICPC/in.txt
+flush
+lock
+release
+getattr /ICPC/a.out
+fileinit ../myfs-replicas/10.5.16.76/ICPC/a.out 32768 <class 'tuple'>
+read ../myfs-replicas/10.5.16.76/ICPC/a.out 24576 0
+<_Rendezvous of RPC that terminated with:
+	status = StatusCode.UNKNOWN
+	details = "Exception calling application: 'utf-8' codec can't decode byte 0xf0 in position 24: invalid continuation byte"
+	debug_error_string = "{"created":"@1556131763.144397063","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Exception calling application: 'utf-8' codec can't decode byte 0xf0 in position 24: invalid continuation byte","grpc_status":2}"
+>
+read ../myfs-replicas/10.5.16.76/ICPC/a.out 4096 0
+<_Rendezvous of RPC that terminated with:
+	status = StatusCode.UNKNOWN
+	details = "Exception calling application: 'utf-8' codec can't decode byte 0xf0 in position 24: invalid continuation byte"
+	debug_error_string = "{"created":"@1556131763.146904849","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Exception calling application: 'utf-8' codec can't decode byte 0xf0 in position 24: invalid continuation byte","grpc_status":2}"
+>
+flush
+lock
+release
+getattr /ICPC/a.out
+fileinit ../myfs-replicas/10.5.16.76/ICPC/a.out 32768 <class 'tuple'>
+read ../myfs-replicas/10.5.16.76/ICPC/a.out 24576 0
+<_Rendezvous of RPC that terminated with:
+	status = StatusCode.UNKNOWN
+	details = "Exception calling application: 'utf-8' codec can't decode byte 0xf0 in position 24: invalid continuation byte"
+	debug_error_string = "{"created":"@1556131796.010087977","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Exception calling application: 'utf-8' codec can't decode byte 0xf0 in position 24: invalid continuation byte","grpc_status":2}"
+>
+read ../myfs-replicas/10.5.16.76/ICPC/a.out 4096 0
+<_Rendezvous of RPC that terminated with:
+	status = StatusCode.UNKNOWN
+	details = "Exception calling application: 'utf-8' codec can't decode byte 0xf0 in position 24: invalid continuation byte"
+	debug_error_string = "{"created":"@1556131796.012056982","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Exception calling application: 'utf-8' codec can't decode byte 0xf0 in position 24: invalid continuation byte","grpc_status":2}"
+>
+flush
+lock
+release
+getattr /ICPC/in.txt
+fileinit ../myfs-replicas/10.5.16.76/ICPC/in.txt 32768 <class 'tuple'>
+read ../myfs-replicas/10.5.16.76/ICPC/in.txt 4096 0
+4
+1 2 3 4
+1 4 3 2
+fgetattr ../myfs-replicas/10.5.16.76/ICPC/in.txt
+flush
+lock
+release
+getattr /ICPC/readline
+getattr /ICPC/readline.x86_64-linux-gnu.so
+getattr /ICPC/readline.so
+getattr /ICPC/readlinemodule.so
+getattr /ICPC/readline.py
+getattr /ICPC/readline.pyc
+getattr /ICPC
+readdir /ICPC
+getattr /ICPC
+getattr /ICPC/in.txt
+fileinit ../myfs-replicas/10.5.16.76/ICPC/in.txt 32768 <class 'tuple'>
+fgetattr ../myfs-replicas/10.5.16.76/ICPC/in.txt
+read ../myfs-replicas/10.5.16.76/ICPC/in.txt 4096 0
+4
+1 2 3 4
+1 4 3 2
+fgetattr ../myfs-replicas/10.5.16.76/ICPC/in.txt
+flush
+lock
+release
+getattr /
+getattr /ICPC

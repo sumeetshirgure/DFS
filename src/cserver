@@ -17,7 +17,7 @@ from fuse import Fuse
 
 import service_pb2
 import service_pb2_grpc
-import random
+import random, threading
 
 
 _ONE_DAY_IN_SECONDS = 60 * 24 * 24
@@ -30,68 +30,95 @@ logger.setLevel(logging.INFO)
 cport = 7899
 rport = 7897
 
+
+
 def flag2mode(flags):
-    md = {os.O_RDONLY: 'r', os.O_WRONLY: 'w', os.O_RDWR: 'w+'}
-    m = md[flags & (os.O_RDONLY | os.O_WRONLY | os.O_RDWR)]
+	md = {os.O_RDONLY: 'r', os.O_WRONLY: 'w', os.O_RDWR: 'w+'}
+	m = md[flags & (os.O_RDONLY | os.O_WRONLY | os.O_RDWR)]
 
-    if flags & os.O_APPEND:
-        m = m.replace('w', 'a', 1)
+	if flags & os.O_APPEND:
+		m = m.replace('w', 'a', 1)
 
-    return m
+	return m
 
 allClients = set()
 replicaDict = {}
+dmutex = threading.Lock()
 
 class CGreeter(service_pb2_grpc.CGreeterServicer):
 
-    def c_join(self, request, context):
-        # please be ipv4
-        clientIP = context.peer().split(':')[1]
-        logger.info('join %s', clientIP)
-        if clientIP in allClients:
-            # pending
-            pass
-        else:
-            if len(allClients) == 0:
-                pass
-            elif len(allClients) == 1:
-                otherIP = list(allClients)[0]
+	def c_getR(self, request, context):
+		oip = replicaDict[request.ip]
+		logger.info('getR %s %s', request.ip, oip)
+		return service_pb2.MessageReply(pstr=pickle.dumps(oip))
+
+	def c_join(self, request, context):
+
+		dmutex.acquire()
+		global allClients, replicaDict
+
+		# please be ipv4
+		clientIP = context.peer().split(':')[1]
+		logger.info('join %s', clientIP)
+		if clientIP in allClients:
+			otherIP = replicaDict[clientIP]
+
+			logger.info('here')
+
+			with grpc.insecure_channel('%s:%d'%(otherIP, rport)) as c1:
+				s1 = service_pb2_grpc.GreeterStub(c1)
+				s1.s_replicate(service_pb2.SReplicationRequest(myip=otherIP, oip=clientIP, type=0))
+
+			for c, r in replicaDict.items():
+				if r == clientIP:                        
+					with grpc.insecure_channel('%s:%d'%(c, rport)) as c1:
+						s1 = service_pb2_grpc.GreeterStub(c1)
+						s1.s_replicate(service_pb2.SReplicationRequest(myip=c, oip=r, type=1))                    
+
+		else:
+			if len(allClients) == 0:
+				pass
+			elif len(allClients) == 1:
+				otherIP = list(allClients)[0]
 
 
-                c2 = grpc.insecure_channel('%s:%d'%(clientIP, rport))
-                s2 = service_pb2_grpc.GreeterStub(c2)
-                s2.s_replicate(service_pb2.SReplicationRequest(myip=clientIP, oip = otherIP, type=1))                
+				with grpc.insecure_channel('%s:%d'%(clientIP, rport)) as c2:
+					s2 = service_pb2_grpc.GreeterStub(c2)
+					s2.s_replicate(service_pb2.SReplicationRequest(myip=clientIP, oip = otherIP, type=1))                
 
 
-                c1 = grpc.insecure_channel('%s:%d'%(otherIP, rport))
-                s1 = service_pb2_grpc.GreeterStub(c1)
-                s1.s_replicate(service_pb2.SReplicationRequest(myip=otherIP, oip=clientIP, type=1))
+				with grpc.insecure_channel('%s:%d'%(otherIP, rport)) as c1:
+					s1 = service_pb2_grpc.GreeterStub(c1)
+					s1.s_replicate(service_pb2.SReplicationRequest(myip=otherIP, oip=clientIP, type=1))
 
-                replicaDict[clientIP] = otherIP
-                replicaDict[otherIP] = clientIP
+				replicaDict[clientIP] = otherIP
+				replicaDict[otherIP] = clientIP
 
-            else:
-                otherIP = random.choice(list(allClients))
-                c1 = grpc.insecure_channel('%s:%d'%(clientIP, rport))
-                s1 = service_pb2_grpc.GreeterStub(c1)
-                s1.s_replicate(service_pb2.SReplicationRequest(myip=clientIP, oip=otherIP, type=1))
-                replicaDict[clientIP] = otherIP
+			else:
+				otherIP = random.choice(list(allClients))
+				with grpc.insecure_channel('%s:%d'%(clientIP, rport)) as c1:
+					s1 = service_pb2_grpc.GreeterStub(c1)
+					s1.s_replicate(service_pb2.SReplicationRequest(myip=clientIP, oip=otherIP, type=1))
 
-            allClients.add(clientIP)
-        return service_pb2.MessageReply(pstr=b'1')
-    
+				replicaDict[clientIP] = otherIP
+
+			allClients.add(clientIP)
+
+		dmutex.release()
+		return service_pb2.MessageReply(pstr=b'1')
+	
 
 def serve():
-    server = grpc.server(futures.ThreadPoolExecutor(max_workers=1))
-    service_pb2_grpc.add_CGreeterServicer_to_server(CGreeter(), server)
-    server.add_insecure_port('[::]:%d'%cport)
-    server.start()
-    try:
-        while True:
-            time.sleep(_ONE_DAY_IN_SECONDS)
-    except KeyboardInterrupt:
-        server.stop(0)
+	server = grpc.server(futures.ThreadPoolExecutor(max_workers=1))
+	service_pb2_grpc.add_CGreeterServicer_to_server(CGreeter(), server)
+	server.add_insecure_port('[::]:%d'%cport)
+	server.start()
+	try:
+		while True:
+			time.sleep(_ONE_DAY_IN_SECONDS)
+	except KeyboardInterrupt:
+		server.stop(0)
 
 
 if __name__ == '__main__':
-    serve()
+	serve()
