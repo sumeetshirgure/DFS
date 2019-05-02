@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='',
   syntax='proto2',
   serialized_options=None,
-  serialized_pb=_b('\n\rservice.proto\"[\n\x13SReplicationRequest\x12\r\n\x05mydir\x18\x01 \x01(\t\x12\x0c\n\x04odir\x18\x02 \x01(\t\x12\x0c\n\x04type\x18\x03 \x01(\x05\x12\x0b\n\x03oip\x18\x04 \x01(\t\x12\x0c\n\x04myip\x18\x05 \x01(\t\"f\n\x13\x43ReplicationRequest\x12\x0b\n\x03\x64\x61t\x18\x01 \x01(\x0c\x12\x0c\n\x04path\x18\x02 \x01(\t\x12\r\n\x05isdir\x18\x03 \x01(\x08\x12\n\n\x02ip\x18\x04 \x01(\t\x12\x0c\n\x04type\x18\x05 \x01(\x05\x12\x0b\n\x03vno\x18\x06 \x01(\x05\"A\n\x0f\x43MessageRequest\x12\n\n\x02ip\x18\x01 \x01(\t\x12\x0f\n\x07rchoice\x18\x02 \x01(\t\x12\x11\n\tbyPrimary\x18\x03 \x01(\x08\"\xb9\x01\n\x0eMessageRequest\x12\x0b\n\x03mpt\x18\x01 \x01(\t\x12\x0c\n\x04path\x18\x02 \x01(\t\x12\x0c\n\x04mode\x18\x03 \x01(\x05\x12\x0e\n\x06length\x18\x04 \x01(\x05\x12\x0e\n\x06offset\x18\x05 \x01(\x05\x12\r\n\x05\x66lags\x18\x06 \x01(\x05\x12\x11\n\tisReplica\x18\x07 \x01(\x08\x12\x11\n\tbyPrimary\x18\x08 \x01(\x08\x12\r\n\x05\x62list\x18\t \x01(\x0c\x12\x0b\n\x03vno\x18\n \x01(\x05\x12\r\n\x05path1\x18\x0b \x01(\t\"\x1c\n\x0cMessageReply\x12\x0c\n\x04pstr\x18\x01 \x01(\x0c\x32\xf0\x05\n\x07Greeter\x12/\n\x0b\x66use_access\x12\x0f.MessageRequest\x1a\r.MessageReply\"\x00\x12\x30\n\x0c\x66use_readdir\x12\x0f.MessageRequest\x1a\r.MessageReply\"\x00\x12\x30\n\x0c\x66use_getattr\x12\x0f.MessageRequest\x1a\r.MessageReply\"\x00\x12-\n\tfuse_read\x12\x0f.MessageRequest\x1a\r.MessageReply\"\x00\x12\x31\n\rfuse_fgetattr\x12\x0f.MessageRequest\x1a\r.MessageReply\"\x00\x12.\n\nfuse_mkdir\x12\x0f.MessageRequest\x1a\r.MessageReply\"\x00\x12.\n\nfuse_rmdir\x12\x0f.MessageRequest\x1a\r.MessageReply\"\x00\x12/\n\x0b\x66use_rename\x12\x0f.MessageRequest\x1a\r.MessageReply\"\x00\x12/\n\x0b\x66use_unlink\x12\x0f.MessageRequest\x1a\r.MessageReply\"\x00\x12\x31\n\rfuse_truncate\x12\x0f.MessageRequest\x1a\r.MessageReply\"\x00\x12.\n\nfuse_write\x12\x0f.MessageRequest\x1a\r.MessageReply\"\x00\x12\x34\n\x0bs_replicate\x12\x14.SReplicationRequest\x1a\r.MessageReply\"\x00\x12\x36\n\x0b\x63_replicate\x12\x14.CReplicationRequest\x1a\r.MessageReply\"\x00(\x01\x12\x30\n\x07\x63_empty\x12\x14.CReplicationRequest\x1a\r.MessageReply\"\x00\x12)\n\x05get_v\x12\x0f.MessageRequest\x1a\r.MessageReply\"\x00\x32\x95\x01\n\x08\x43Greeter\x12+\n\x06\x63_join\x12\x10.CMessageRequest\x1a\r.MessageReply\"\x00\x12+\n\x06\x63_getR\x12\x10.CMessageRequest\x1a\r.MessageReply\"\x00\x12/\n\nsand_nodes\x12\x10.CMessageRequest\x1a\r.MessageReply\"\x00')
+  serialized_pb=_b('\n\rservice.proto\"[\n\x13SReplicationRequest\x12\r\n\x05mydir\x18\x01 \x01(\t\x12\x0c\n\x04odir\x18\x02 \x01(\t\x12\x0c\n\x04type\x18\x03 \x01(\x05\x12\x0b\n\x03oip\x18\x04 \x01(\t\x12\x0c\n\x04myip\x18\x05 \x01(\t\"f\n\x13\x43ReplicationRequest\x12\x0b\n\x03\x64\x61t\x18\x01 \x01(\x0c\x12\x0c\n\x04path\x18\x02 \x01(\t\x12\r\n\x05isdir\x18\x03 \x01(\x08\x12\n\n\x02ip\x18\x04 \x01(\t\x12\x0c\n\x04type\x18\x05 \x01(\x05\x12\x0b\n\x03vno\x18\x06 \x01(\x05\"H\n\x0f\x43MessageRequest\x12\n\n\x02ip\x18\x01 \x01(\t\x12\x11\n\tbyPrimary\x18\x02 \x01(\x08\x12\n\n\x02p1\x18\x03 \x01(\x0c\x12\n\n\x02p2\x18\x04 \x01(\x0c\"\xb9\x01\n\x0eMessageRequest\x12\x0b\n\x03mpt\x18\x01 \x01(\t\x12\x0c\n\x04path\x18\x02 \x01(\t\x12\x0c\n\x04mode\x18\x03 \x01(\x05\x12\x0e\n\x06length\x18\x04 \x01(\x05\x12\x0e\n\x06offset\x18\x05 \x01(\x05\x12\r\n\x05\x66lags\x18\x06 \x01(\x05\x12\x11\n\tisReplica\x18\x07 \x01(\x08\x12\x11\n\tbyPrimary\x18\x08 \x01(\x08\x12\r\n\x05\x62list\x18\t \x01(\x0c\x12\x0b\n\x03vno\x18\n \x01(\x05\x12\r\n\x05path1\x18\x0b \x01(\t\"\x1c\n\x0cMessageReply\x12\x0c\n\x04pstr\x18\x01 \x01(\x0c\x32\xf0\x05\n\x07Greeter\x12/\n\x0b\x66use_access\x12\x0f.MessageRequest\x1a\r.MessageReply\"\x00\x12\x30\n\x0c\x66use_readdir\x12\x0f.MessageRequest\x1a\r.MessageReply\"\x00\x12\x30\n\x0c\x66use_getattr\x12\x0f.MessageRequest\x1a\r.MessageReply\"\x00\x12-\n\tfuse_read\x12\x0f.MessageRequest\x1a\r.MessageReply\"\x00\x12\x31\n\rfuse_fgetattr\x12\x0f.MessageRequest\x1a\r.MessageReply\"\x00\x12.\n\nfuse_mkdir\x12\x0f.MessageRequest\x1a\r.MessageReply\"\x00\x12.\n\nfuse_rmdir\x12\x0f.MessageRequest\x1a\r.MessageReply\"\x00\x12/\n\x0b\x66use_rename\x12\x0f.MessageRequest\x1a\r.MessageReply\"\x00\x12/\n\x0b\x66use_unlink\x12\x0f.MessageRequest\x1a\r.MessageReply\"\x00\x12\x31\n\rfuse_truncate\x12\x0f.MessageRequest\x1a\r.MessageReply\"\x00\x12.\n\nfuse_write\x12\x0f.MessageRequest\x1a\r.MessageReply\"\x00\x12\x34\n\x0bs_replicate\x12\x14.SReplicationRequest\x1a\r.MessageReply\"\x00\x12\x36\n\x0b\x63_replicate\x12\x14.CReplicationRequest\x1a\r.MessageReply\"\x00(\x01\x12\x30\n\x07\x63_empty\x12\x14.CReplicationRequest\x1a\r.MessageReply\"\x00\x12)\n\x05get_v\x12\x0f.MessageRequest\x1a\r.MessageReply\"\x00\x32\x95\x01\n\x08\x43Greeter\x12+\n\x06\x63_join\x12\x10.CMessageRequest\x1a\r.MessageReply\"\x00\x12+\n\x06\x63_getR\x12\x10.CMessageRequest\x1a\r.MessageReply\"\x00\x12/\n\nsand_nodes\x12\x10.CMessageRequest\x1a\r.MessageReply\"\x00')
 )
 
 
@@ -165,16 +165,23 @@ _CMESSAGEREQUEST = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='rchoice', full_name='CMessageRequest.rchoice', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
+      name='byPrimary', full_name='CMessageRequest.byPrimary', index=1,
+      number=2, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='byPrimary', full_name='CMessageRequest.byPrimary', index=2,
-      number=3, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
+      name='p1', full_name='CMessageRequest.p1', index=2,
+      number=3, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b(""),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='p2', full_name='CMessageRequest.p2', index=3,
+      number=4, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b(""),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
@@ -191,7 +198,7 @@ _CMESSAGEREQUEST = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=214,
-  serialized_end=279,
+  serialized_end=286,
 )
 
 
@@ -291,8 +298,8 @@ _MESSAGEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=282,
-  serialized_end=467,
+  serialized_start=289,
+  serialized_end=474,
 )
 
 
@@ -322,8 +329,8 @@ _MESSAGEREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=469,
-  serialized_end=497,
+  serialized_start=476,
+  serialized_end=504,
 )
 
 DESCRIPTOR.message_types_by_name['SReplicationRequest'] = _SREPLICATIONREQUEST
@@ -376,8 +383,8 @@ _GREETER = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=500,
-  serialized_end=1252,
+  serialized_start=507,
+  serialized_end=1259,
   methods=[
   _descriptor.MethodDescriptor(
     name='fuse_access',
@@ -526,8 +533,8 @@ _CGREETER = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=1,
   serialized_options=None,
-  serialized_start=1255,
-  serialized_end=1404,
+  serialized_start=1262,
+  serialized_end=1411,
   methods=[
   _descriptor.MethodDescriptor(
     name='c_join',

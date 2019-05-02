@@ -1,0 +1,713 @@
+[191 @   __init__()] got replica id
+[472 @     fsinit()] fsinit
+[412 @     access()] access / 4
+[229 @    getattr()] getattr /.xdg-volume-info
+[229 @    getattr()] getattr /
+[229 @    getattr()] getattr /autorun.inf
+[229 @    getattr()] getattr /.Trash
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /.Trash-1000
+[229 @    getattr()] getattr /ass7
+[229 @    getattr()] getattr /
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /autorun.inf
+[229 @    getattr()] getattr /
+[412 @     access()] access / 4
+[412 @     access()] access / 2
+[412 @     access()] access / 1
+[229 @    getattr()] getattr /
+[229 @    getattr()] getattr /
+[412 @     access()] access / 2
+[229 @    getattr()] getattr /.Trash
+[229 @    getattr()] getattr /.Trash-1000
+[412 @     access()] access / 2
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /ass7
+[229 @    getattr()] getattr /.hidden
+[412 @     access()] access /ass7 4
+[412 @     access()] access /ass7 2
+[412 @     access()] access /ass7 1
+[229 @    getattr()] getattr /
+[229 @    getattr()] getattr /ass7
+[229 @    getattr()] getattr /ass7
+[229 @    getattr()] getattr /ass7
+[229 @    getattr()] getattr /ass7/ee
+[229 @    getattr()] getattr /
+[412 @     access()] access /ass7 2
+[229 @    getattr()] getattr /.Trash
+[229 @    getattr()] getattr /.Trash-1000
+[412 @     access()] access / 2
+[254 @    readdir()] readdir /ass7
+[229 @    getattr()] getattr /ass7/mytraceroute_16CS10012.c
+[229 @    getattr()] getattr /ass7/.hidden
+[412 @     access()] access /ass7/mytraceroute_16CS10012.c 4
+[412 @     access()] access /ass7/mytraceroute_16CS10012.c 2
+[412 @     access()] access /ass7/mytraceroute_16CS10012.c 1
+[229 @    getattr()] getattr /ass7
+[229 @    getattr()] getattr /ass7/yay
+[412 @     access()] access /ass7/yay 4
+[412 @     access()] access /ass7/yay 2
+[412 @     access()] access /ass7/yay 1
+[412 @     access()] access / 2
+[229 @    getattr()] getattr /.Trash
+[229 @    getattr()] getattr /.Trash-1000
+[412 @     access()] access / 2
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /ass7
+[412 @     access()] access /ass7 4
+[412 @     access()] access /ass7 2
+[412 @     access()] access /ass7 1
+[229 @    getattr()] getattr /
+[229 @    getattr()] getattr /
+[412 @     access()] access / 4
+[412 @     access()] access / 2
+[412 @     access()] access / 1
+[229 @    getattr()] getattr /
+[412 @     access()] access / 4
+[412 @     access()] access / 2
+[412 @     access()] access / 1
+[229 @    getattr()] getattr /
+[229 @    getattr()] getattr /
+[412 @     access()] access / 2
+[229 @    getattr()] getattr /.Trash
+[229 @    getattr()] getattr /.Trash-1000
+[412 @     access()] access / 2
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /ass7
+[229 @    getattr()] getattr /.hidden
+[412 @     access()] access /ass7 4
+[412 @     access()] access /ass7 2
+[412 @     access()] access /ass7 1
+[229 @    getattr()] getattr /
+[229 @    getattr()] getattr /ass7
+[229 @    getattr()] getattr /ass7
+[229 @    getattr()] getattr /ass7
+[229 @    getattr()] getattr /
+[412 @     access()] access /ass7 2
+[229 @    getattr()] getattr /.Trash
+[229 @    getattr()] getattr /.Trash-1000
+[412 @     access()] access / 2
+[254 @    readdir()] readdir /ass7
+[229 @    getattr()] getattr /ass7/mytraceroute_16CS10012.c
+[229 @    getattr()] getattr /ass7/.hidden
+[412 @     access()] access /ass7/mytraceroute_16CS10012.c 4
+[412 @     access()] access /ass7/mytraceroute_16CS10012.c 2
+[412 @     access()] access /ass7/mytraceroute_16CS10012.c 1
+[229 @    getattr()] getattr /ass7
+[229 @    getattr()] getattr /ass7/yay
+[412 @     access()] access /ass7/yay 4
+[412 @     access()] access /ass7/yay 2
+[412 @     access()] access /ass7/yay 1
+[229 @    getattr()] getattr /
+[229 @    getattr()] getattr /
+[229 @    getattr()] getattr /
+[412 @     access()] access / 2
+[229 @    getattr()] getattr /.Trash
+[229 @    getattr()] getattr /.Trash-1000
+[412 @     access()] access / 2
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /ass7
+[229 @    getattr()] getattr /.hidden
+[412 @     access()] access /ass7 4
+[412 @     access()] access /ass7 2
+[412 @     access()] access /ass7 1
+[229 @    getattr()] getattr /
+[452 @     statfs()] statfs
+[229 @    getattr()] getattr /
+[452 @     statfs()] statfs
+[229 @    getattr()] getattr /shirgure
+[379 @      mkdir()] mkdir
+[386 @      mkdir()] 
+[229 @    getattr()] getattr /shirgure
+[412 @     access()] access / 2
+[229 @    getattr()] getattr /
+[229 @    getattr()] getattr /.Trash
+[229 @    getattr()] getattr /.Trash-1000
+[412 @     access()] access / 2
+[229 @    getattr()] getattr /.hidden
+[412 @     access()] access /shirgure 4
+[412 @     access()] access /shirgure 2
+[412 @     access()] access /shirgure 1
+[412 @     access()] access / 2
+[229 @    getattr()] getattr /.Trash
+[229 @    getattr()] getattr /.Trash-1000
+[412 @     access()] access / 2
+[412 @     access()] access /shirgure 4
+[412 @     access()] access /shirgure 2
+[412 @     access()] access /shirgure 1
+[254 @    readdir()] readdir /shirgure
+[229 @    getattr()] getattr /shirgure
+[412 @     access()] access / 2
+[229 @    getattr()] getattr /.Trash
+[229 @    getattr()] getattr /.Trash-1000
+[412 @     access()] access / 2
+[412 @     access()] access /shirgure 4
+[412 @     access()] access /shirgure 2
+[412 @     access()] access /shirgure 1
+[229 @    getattr()] getattr /shirgure
+[229 @    getattr()] getattr /shirgure
+[229 @    getattr()] getattr /shirgure
+[452 @     statfs()] statfs
+[229 @    getattr()] getattr /
+[229 @    getattr()] getattr /
+[412 @     access()] access /shirgure 2
+[229 @    getattr()] getattr /.Trash
+[229 @    getattr()] getattr /.Trash-1000
+[412 @     access()] access / 2
+[254 @    readdir()] readdir /shirgure
+[229 @    getattr()] getattr /
+[412 @     access()] access / 1
+[229 @    getattr()] getattr /
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /shirgure
+[229 @    getattr()] getattr /
+[412 @     access()] access /shirgure 1
+[254 @    readdir()] readdir /shirgure
+[229 @    getattr()] getattr /shirgure
+[229 @    getattr()] getattr /shirgure
+[254 @    readdir()] readdir /shirgure
+[229 @    getattr()] getattr /shirgure
+[229 @    getattr()] getattr /shirgure/ss.txt
+[485 @   __init__()] fileinit ../myfs/shirgure/ss.txt 34881 <class 'tuple'>
+[493 @   fgetattr()] fgetattr ../myfs/shirgure/ss.txt
+[677 @      flush()] flush
+[229 @    getattr()] getattr /shirgure
+[631 @    _fflush()] _fflush 0
+[691 @       lock()] lock
+[229 @    getattr()] getattr /shirgure
+[399 @      utime()] utime
+[229 @    getattr()] getattr /shirgure/ss.txt
+[412 @     access()] access /shirgure 2
+[677 @      flush()] flush
+[631 @    _fflush()] _fflush 0
+[691 @       lock()] lock
+[631 @    _fflush()] _fflush 0
+[661 @    release()] release
+[229 @    getattr()] getattr /
+[229 @    getattr()] getattr /.Trash
+[229 @    getattr()] getattr /.Trash-1000
+[412 @     access()] access / 2
+[229 @    getattr()] getattr /shirgure/.hidden
+[412 @     access()] access /shirgure/ss.txt 4
+[412 @     access()] access /shirgure/ss.txt 2
+[412 @     access()] access /shirgure/ss.txt 1
+[412 @     access()] access /shirgure 2
+[229 @    getattr()] getattr /.Trash
+[229 @    getattr()] getattr /.Trash-1000
+[412 @     access()] access / 2
+[412 @     access()] access /shirgure/ss.txt 4
+[412 @     access()] access /shirgure/ss.txt 2
+[412 @     access()] access /shirgure/ss.txt 1
+[229 @    getattr()] getattr /shirgure/ss.txt
+[485 @   __init__()] fileinit ../myfs/shirgure/ss.txt 32769 <class 'tuple'>
+[314 @   truncate()] truncate /shirgure/ss.txt 0
+[331 @   truncate()] truncate done
+[229 @    getattr()] getattr /shirgure/ss.txt
+[677 @      flush()] flush
+[631 @    _fflush()] _fflush 0
+[691 @       lock()] lock
+[604 @      write()] write ../myfs/shirgure/ss.txt abc
+ 0
+[515 @      get_v()] get_v ../myfs/shirgure/ss.txt
+[530 @      get_v()] get_v ../myfs/shirgure/ss.txt 1 0
+[616 @      write()] here 0
+[677 @      flush()] flush
+[631 @    _fflush()] _fflush 1
+[691 @       lock()] lock
+[631 @    _fflush()] _fflush 0
+[661 @    release()] release
+[229 @    getattr()] getattr /shirgure
+[412 @     access()] access /shirgure 2
+[229 @    getattr()] getattr /
+[229 @    getattr()] getattr /.Trash
+[229 @    getattr()] getattr /.Trash-1000
+[412 @     access()] access / 2
+[229 @    getattr()] getattr /shirgure/ss.txt
+[412 @     access()] access /shirgure/ss.txt 4
+[412 @     access()] access /shirgure/ss.txt 2
+[412 @     access()] access /shirgure/ss.txt 1
+[229 @    getattr()] getattr /shirgure
+[229 @    getattr()] getattr /shirgure/ss.txt
+[485 @   __init__()] fileinit ../myfs/shirgure/ss.txt 32768 <class 'tuple'>
+[536 @       read()] read ../myfs/shirgure/ss.txt 4096 0
+[515 @      get_v()] get_v ../myfs/shirgure/ss.txt
+[530 @      get_v()] get_v ../myfs/shirgure/ss.txt 2 4
+[540 @       read()] init vno = 2
+[599 @       read()] vno read = 2
+[493 @   fgetattr()] fgetattr ../myfs/shirgure/ss.txt
+[677 @      flush()] flush
+[631 @    _fflush()] _fflush 0
+[691 @       lock()] lock
+[631 @    _fflush()] _fflush 0
+[661 @    release()] release
+[229 @    getattr()] getattr /shirgure/ss.txt
+[515 @      get_v()] get_v ../myfs/shirgure/ss.txt
+[530 @      get_v()] get_v ../myfs/shirgure/ss.txt 2 4
+[485 @   __init__()] fileinit ../myfs/shirgure/ss.txt 33793 <class 'tuple'>
+[677 @      flush()] flush
+[631 @    _fflush()] _fflush 0
+[691 @       lock()] lock
+[604 @      write()] write ../myfs/shirgure/ss.txt aasdfasdfsadfadsfbc
+ 4
+[515 @      get_v()] get_v ../myfs/shirgure/ss.txt
+[530 @      get_v()] get_v ../myfs/shirgure/ss.txt 2 4
+[616 @      write()] here 0
+[616 @      write()] here 10
+[616 @      write()] here 20
+[677 @      flush()] flush
+[631 @    _fflush()] _fflush 3
+[691 @       lock()] lock
+[631 @    _fflush()] _fflush 0
+[661 @    release()] release
+[229 @    getattr()] getattr /shirgure
+[412 @     access()] access /shirgure 2
+[229 @    getattr()] getattr /
+[229 @    getattr()] getattr /.Trash
+[229 @    getattr()] getattr /.Trash-1000
+[412 @     access()] access / 2
+[229 @    getattr()] getattr /shirgure/ss.txt
+[229 @    getattr()] getattr /shirgure/.hidden
+[412 @     access()] access /shirgure/ss.txt 4
+[412 @     access()] access /shirgure/ss.txt 2
+[412 @     access()] access /shirgure/ss.txt 1
+[229 @    getattr()] getattr /shirgure/ss.txt
+[485 @   __init__()] fileinit ../myfs/shirgure/ss.txt 32768 <class 'tuple'>
+[536 @       read()] read ../myfs/shirgure/ss.txt 4096 0
+[515 @      get_v()] get_v ../myfs/shirgure/ss.txt
+[530 @      get_v()] get_v ../myfs/shirgure/ss.txt 3 24
+[540 @       read()] init vno = 3
+[129 @        get()] Found in cache: /shirgure/ss.txt 3910
+[129 @        get()] Found in cache: /shirgure/ss.txt 3960
+[129 @        get()] Found in cache: /shirgure/ss.txt 3990
+[129 @        get()] Found in cache: /shirgure/ss.txt 4000
+[129 @        get()] Found in cache: /shirgure/ss.txt 4030
+[129 @        get()] Found in cache: /shirgure/ss.txt 4040
+[129 @        get()] Found in cache: /shirgure/ss.txt 4050
+[129 @        get()] Found in cache: /shirgure/ss.txt 4060
+[129 @        get()] Found in cache: /shirgure/ss.txt 4070
+[129 @        get()] Found in cache: /shirgure/ss.txt 4080
+[129 @        get()] Found in cache: /shirgure/ss.txt 4090
+[599 @       read()] vno read = 3
+[493 @   fgetattr()] fgetattr ../myfs/shirgure/ss.txt
+[677 @      flush()] flush
+[631 @    _fflush()] _fflush 0
+[691 @       lock()] lock
+[631 @    _fflush()] _fflush 0
+[661 @    release()] release
+[229 @    getattr()] getattr /shirgure
+[229 @    getattr()] getattr /shirgure/ss.txt
+[485 @   __init__()] fileinit ../myfs/shirgure/ss.txt 32768 <class 'tuple'>
+[536 @       read()] read ../myfs/shirgure/ss.txt 4096 0
+[515 @      get_v()] get_v ../myfs/shirgure/ss.txt
+[530 @      get_v()] get_v ../myfs/shirgure/ss.txt 3 24
+[540 @       read()] init vno = 3
+[129 @        get()] Found in cache: /shirgure/ss.txt 3750
+[129 @        get()] Found in cache: /shirgure/ss.txt 3860
+[129 @        get()] Found in cache: /shirgure/ss.txt 3880
+[129 @        get()] Found in cache: /shirgure/ss.txt 3940
+[129 @        get()] Found in cache: /shirgure/ss.txt 4020
+[129 @        get()] Found in cache: /shirgure/ss.txt 4030
+[129 @        get()] Found in cache: /shirgure/ss.txt 4050
+[129 @        get()] Found in cache: /shirgure/ss.txt 4060
+[129 @        get()] Found in cache: /shirgure/ss.txt 4070
+[129 @        get()] Found in cache: /shirgure/ss.txt 4080
+[129 @        get()] Found in cache: /shirgure/ss.txt 4090
+[599 @       read()] vno read = 3
+[493 @   fgetattr()] fgetattr ../myfs/shirgure/ss.txt
+[677 @      flush()] flush
+[631 @    _fflush()] _fflush 0
+[691 @       lock()] lock
+[631 @    _fflush()] _fflush 0
+[661 @    release()] release
+[229 @    getattr()] getattr /shirgure
+[229 @    getattr()] getattr /shirgure/ss.txt
+[229 @    getattr()] getattr /
+[229 @    getattr()] getattr /shirgure
+[229 @    getattr()] getattr /shirgure/ss.txt
+[229 @    getattr()] getattr /shirgure
+[229 @    getattr()] getattr /shirgure/ss.txt
+[229 @    getattr()] getattr /shirgure
+[229 @    getattr()] getattr /shirgure/ss.txt
+[229 @    getattr()] getattr /shirgure
+[229 @    getattr()] getattr /shirgure/ss.txt
+[229 @    getattr()] getattr /shirgure
+[229 @    getattr()] getattr /shirgure/ss.txt
+[229 @    getattr()] getattr /shirgure
+[229 @    getattr()] getattr /shirgure/ss.txt
+[229 @    getattr()] getattr /shirgure
+[229 @    getattr()] getattr /shirgure/ss.txt
+[229 @    getattr()] getattr /shirgure
+[229 @    getattr()] getattr /shirgure/ss.txt
+[485 @   __init__()] fileinit ../myfs/shirgure/ss.txt 32769 <class 'tuple'>
+[314 @   truncate()] truncate /shirgure/ss.txt 0
+[325 @   truncate()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.UNKNOWN
+	details = "Exception calling application: <_Rendezvous of RPC that terminated with:
+	status = StatusCode.UNKNOWN
+	details = "Exception calling application: '10.5.16.206'"
+	debug_error_string = "{"created":"@1556778409.125322528","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Exception calling application: '10.5.16.206'","grpc_status":2}"
+>"
+	debug_error_string = "{"created":"@1556778382.068838890","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Exception calling application: <_Rendezvous of RPC that terminated with:\n\tstatus = StatusCode.UNKNOWN\n\tdetails = "Exception calling application: '10.5.16.206'"\n\tdebug_error_string = "{"created":"@1556778409.125322528","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Exception calling application: '10.5.16.206'","grpc_status":2}"\n>","grpc_status":2}"
+>
+[631 @    _fflush()] _fflush 0
+[661 @    release()] release
+[412 @     access()] access /shirgure/ss.txt 2
+[229 @    getattr()] getattr /shirgure
+[229 @    getattr()] getattr /shirgure/ss.txt
+[229 @    getattr()] getattr /shirgure
+[229 @    getattr()] getattr /shirgure
+[229 @    getattr()] getattr /shirgure/ss.txt
+[229 @    getattr()] getattr /shirgure/ss.txt
+[229 @    getattr()] getattr /shirgure
+[229 @    getattr()] getattr /shirgure/ss.txt
+[229 @    getattr()] getattr /
+[229 @    getattr()] getattr /shirgure
+[229 @    getattr()] getattr /shirgure/ss.txt
+[229 @    getattr()] getattr /
+[229 @    getattr()] getattr /shirgure
+[229 @    getattr()] getattr /shirgure/ss.txt
+[229 @    getattr()] getattr /shirgure
+[229 @    getattr()] getattr /shirgure/ss.txt
+[229 @    getattr()] getattr /shirgure
+[229 @    getattr()] getattr /shirgure/ss.txt
+[229 @    getattr()] getattr /shirgure
+[229 @    getattr()] getattr /shirgure/ss.txt
+[229 @    getattr()] getattr /shirgure
+[229 @    getattr()] getattr /shirgure/ss.txt
+[229 @    getattr()] getattr /shirgure
+[229 @    getattr()] getattr /shirgure/ss.txt
+[191 @   __init__()] got replica id
+[472 @     fsinit()] fsinit
+[412 @     access()] access / 4
+[229 @    getattr()] getattr /.xdg-volume-info
+[229 @    getattr()] getattr /
+[229 @    getattr()] getattr /autorun.inf
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /.Trash
+[229 @    getattr()] getattr /ass7
+[229 @    getattr()] getattr /.Trash-1000
+[229 @    getattr()] getattr /shirgure
+[229 @    getattr()] getattr /
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /autorun.inf
+[229 @    getattr()] getattr /
+[229 @    getattr()] getattr /
+[412 @     access()] access / 1
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /ass7
+[229 @    getattr()] getattr /shirgure
+[229 @    getattr()] getattr /
+[229 @    getattr()] getattr /mayankc
+[379 @      mkdir()] mkdir
+[386 @      mkdir()] 
+[229 @    getattr()] getattr /mayankc
+[229 @    getattr()] getattr /
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /ass7
+[229 @    getattr()] getattr /shirgure
+[229 @    getattr()] getattr /
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /mayankc
+[229 @    getattr()] getattr /ass7
+[229 @    getattr()] getattr /shirgure
+[229 @    getattr()] getattr /prakhar
+[379 @      mkdir()] mkdir
+[391 @      mkdir()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.UNKNOWN
+	details = "Exception calling application: <_Rendezvous of RPC that terminated with:
+	status = StatusCode.UNKNOWN
+	details = "Exception calling application: '10.5.16.206'"
+	debug_error_string = "{"created":"@1556779310.750460637","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Exception calling application: '10.5.16.206'","grpc_status":2}"
+>"
+	debug_error_string = "{"created":"@1556779283.680605605","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Exception calling application: <_Rendezvous of RPC that terminated with:\n\tstatus = StatusCode.UNKNOWN\n\tdetails = "Exception calling application: '10.5.16.206'"\n\tdebug_error_string = "{"created":"@1556779310.750460637","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Exception calling application: '10.5.16.206'","grpc_status":2}"\n>","grpc_status":2}"
+>
+[229 @    getattr()] getattr /
+[238 @    getattr()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "Connection reset by peer"
+	debug_error_string = "{"created":"@1556779993.849210521","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Connection reset by peer","grpc_status":14}"
+>
+[214 @ changeChannel()] change channel
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /ass7
+[254 @    readdir()] readdir /ass7
+[229 @    getattr()] getattr /ass7/yay
+[254 @    readdir()] readdir /ass7/yay
+[229 @    getattr()] getattr /ass7/yay/Makefile
+[485 @   __init__()] fileinit ../myfs-replicas/10.5.16.206/ass7/yay/Makefile 34816 <class 'tuple'>
+[536 @       read()] read ../myfs-replicas/10.5.16.206/ass7/yay/Makefile 4096 0
+[515 @      get_v()] get_v ../myfs-replicas/10.5.16.206/ass7/yay/Makefile
+[530 @      get_v()] get_v ../myfs-replicas/10.5.16.206/ass7/yay/Makefile 0 425
+[540 @       read()] init vno = 0
+[599 @       read()] vno read = 0
+[677 @      flush()] flush
+[631 @    _fflush()] _fflush 0
+[691 @       lock()] lock
+[631 @    _fflush()] _fflush 0
+[661 @    release()] release
+[229 @    getattr()] getattr /ass7/yay/rsocket.h
+[485 @   __init__()] fileinit ../myfs-replicas/10.5.16.206/ass7/yay/rsocket.h 34816 <class 'tuple'>
+[536 @       read()] read ../myfs-replicas/10.5.16.206/ass7/yay/rsocket.h 4096 0
+[515 @      get_v()] get_v ../myfs-replicas/10.5.16.206/ass7/yay/rsocket.h
+[530 @      get_v()] get_v ../myfs-replicas/10.5.16.206/ass7/yay/rsocket.h 0 1260
+[540 @       read()] init vno = 0
+[599 @       read()] vno read = 0
+[677 @      flush()] flush
+[631 @    _fflush()] _fflush 0
+[691 @       lock()] lock
+[631 @    _fflush()] _fflush 0
+[661 @    release()] release
+[229 @    getattr()] getattr /ass7/yay/documentation.txt
+[485 @   __init__()] fileinit ../myfs-replicas/10.5.16.206/ass7/yay/documentation.txt 34816 <class 'tuple'>
+[536 @       read()] read ../myfs-replicas/10.5.16.206/ass7/yay/documentation.txt 4096 0
+[515 @      get_v()] get_v ../myfs-replicas/10.5.16.206/ass7/yay/documentation.txt
+[530 @      get_v()] get_v ../myfs-replicas/10.5.16.206/ass7/yay/documentation.txt 0 3765
+[540 @       read()] init vno = 0
+[599 @       read()] vno read = 0
+[677 @      flush()] flush
+[631 @    _fflush()] _fflush 0
+[691 @       lock()] lock
+[631 @    _fflush()] _fflush 0
+[661 @    release()] release
+[229 @    getattr()] getattr /ass7/yay/user1.c
+[485 @   __init__()] fileinit ../myfs-replicas/10.5.16.206/ass7/yay/user1.c 34816 <class 'tuple'>
+[536 @       read()] read ../myfs-replicas/10.5.16.206/ass7/yay/user1.c 4096 0
+[515 @      get_v()] get_v ../myfs-replicas/10.5.16.206/ass7/yay/user1.c
+[530 @      get_v()] get_v ../myfs-replicas/10.5.16.206/ass7/yay/user1.c 0 1335
+[540 @       read()] init vno = 0
+[599 @       read()] vno read = 0
+[677 @      flush()] flush
+[631 @    _fflush()] _fflush 0
+[691 @       lock()] lock
+[631 @    _fflush()] _fflush 0
+[661 @    release()] release
+[229 @    getattr()] getattr /ass7/yay/user2.c
+[485 @   __init__()] fileinit ../myfs-replicas/10.5.16.206/ass7/yay/user2.c 34816 <class 'tuple'>
+[536 @       read()] read ../myfs-replicas/10.5.16.206/ass7/yay/user2.c 4096 0
+[515 @      get_v()] get_v ../myfs-replicas/10.5.16.206/ass7/yay/user2.c
+[530 @      get_v()] get_v ../myfs-replicas/10.5.16.206/ass7/yay/user2.c 0 1206
+[540 @       read()] init vno = 0
+[599 @       read()] vno read = 0
+[677 @      flush()] flush
+[631 @    _fflush()] _fflush 0
+[691 @       lock()] lock
+[631 @    _fflush()] _fflush 0
+[661 @    release()] release
+[229 @    getattr()] getattr /ass7/yay/rsocket.c
+[485 @   __init__()] fileinit ../myfs-replicas/10.5.16.206/ass7/yay/rsocket.c 34816 <class 'tuple'>
+[536 @       read()] read ../myfs-replicas/10.5.16.206/ass7/yay/rsocket.c 8192 0
+[515 @      get_v()] get_v ../myfs-replicas/10.5.16.206/ass7/yay/rsocket.c
+[530 @      get_v()] get_v ../myfs-replicas/10.5.16.206/ass7/yay/rsocket.c 0 7786
+[540 @       read()] init vno = 0
+[599 @       read()] vno read = 0
+[677 @      flush()] flush
+[631 @    _fflush()] _fflush 0
+[691 @       lock()] lock
+[631 @    _fflush()] _fflush 0
+[661 @    release()] release
+[229 @    getattr()] getattr /ass7/mytraceroute_16CS10012.c
+[485 @   __init__()] fileinit ../myfs-replicas/10.5.16.206/ass7/mytraceroute_16CS10012.c 34816 <class 'tuple'>
+[536 @       read()] read ../myfs-replicas/10.5.16.206/ass7/mytraceroute_16CS10012.c 8192 0
+[515 @      get_v()] get_v ../myfs-replicas/10.5.16.206/ass7/mytraceroute_16CS10012.c
+[530 @      get_v()] get_v ../myfs-replicas/10.5.16.206/ass7/mytraceroute_16CS10012.c 0 6038
+[540 @       read()] init vno = 0
+[599 @       read()] vno read = 0
+[677 @      flush()] flush
+[631 @    _fflush()] _fflush 0
+[691 @       lock()] lock
+[631 @    _fflush()] _fflush 0
+[661 @    release()] release
+[229 @    getattr()] getattr /mayankc
+[254 @    readdir()] readdir /mayankc
+[229 @    getattr()] getattr /shirgure
+[254 @    readdir()] readdir /shirgure
+[229 @    getattr()] getattr /shirgure/ss.txt
+[485 @   __init__()] fileinit ../myfs-replicas/10.5.16.206/shirgure/ss.txt 34816 <class 'tuple'>
+[536 @       read()] read ../myfs-replicas/10.5.16.206/shirgure/ss.txt 4096 0
+[515 @      get_v()] get_v ../myfs-replicas/10.5.16.206/shirgure/ss.txt
+[530 @      get_v()] get_v ../myfs-replicas/10.5.16.206/shirgure/ss.txt 0 24
+[540 @       read()] init vno = 0
+[599 @       read()] vno read = 0
+[677 @      flush()] flush
+[631 @    _fflush()] _fflush 0
+[691 @       lock()] lock
+[631 @    _fflush()] _fflush 0
+[661 @    release()] release
+[229 @    getattr()] getattr /
+[191 @   __init__()] got replica id
+[472 @     fsinit()] fsinit
+[412 @     access()] access / 4
+[229 @    getattr()] getattr /.xdg-volume-info
+[229 @    getattr()] getattr /
+[229 @    getattr()] getattr /autorun.inf
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /.Trash
+[229 @    getattr()] getattr /mayankc
+[229 @    getattr()] getattr /.Trash-1000
+[229 @    getattr()] getattr /ass7
+[229 @    getattr()] getattr /shirgure
+[229 @    getattr()] getattr /
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /autorun.inf
+[229 @    getattr()] getattr /
+[229 @    getattr()] getattr /
+[412 @     access()] access / 1
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /mayankc
+[229 @    getattr()] getattr /ass7
+[229 @    getattr()] getattr /shirgure
+[229 @    getattr()] getattr /prakhar
+[379 @      mkdir()] mkdir
+[386 @      mkdir()] 
+[229 @    getattr()] getattr /prakhar
+[229 @    getattr()] getattr /
+[229 @    getattr()] getattr /prakhar
+[360 @      rmdir()] rmdir
+[229 @    getattr()] getattr /prakhar2
+[379 @      mkdir()] mkdir
+[386 @      mkdir()] 
+[229 @    getattr()] getattr /prakhar2
+[229 @    getattr()] getattr /
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /mayankc
+[229 @    getattr()] getattr /ass7
+[229 @    getattr()] getattr /prakhar2
+[229 @    getattr()] getattr /shirgure
+[229 @    getattr()] getattr /chenghiz
+[379 @      mkdir()] mkdir
+[386 @      mkdir()] 
+[229 @    getattr()] getattr /chenghiz
+[229 @    getattr()] getattr /
+[254 @    readdir()] readdir /
+[229 @    getattr()] getattr /mayankc
+[229 @    getattr()] getattr /ass7
+[229 @    getattr()] getattr /prakhar2
+[229 @    getattr()] getattr /shirgure
+[229 @    getattr()] getattr /chenghiz
+[229 @    getattr()] getattr /

@@ -1,0 +1,98 @@
+The code was tested with the 54-length character string
+
+"testingmrpprotocolwithalongstringbutnotaverylongstring" for various value of the drop
+probablity,p. The results are tabulated below. Also, one can easily see that the probaility of succesful transmission of both message and ACK = (1-p)^2, and thus the expected number of transmissions for each message before it is received and acknowledged is 1/(1-p)^2. In this calculation of theoretical expectation, there is of course the inherent assumption that if neither message/ACK is lost(dropped), then the ACK is received before the timeout(a valid assumption under the context). We compare these values below.
+
+
+    Value of p     Average no. of transmissions  Theoretical Expected value
+
+1.		0.05				1.111					1.108							
+
+2.		0.1					1.222					1.235
+
+3.		0.15				1.333					1.384
+
+4.		0.2					1.796					1.563				
+
+5.		0.25				1.833					1.778					
+
+6.  	0.3					1.926					2.048
+
+7.      0.35				2.3148					2.367
+
+8.		0.4					2.852					2.778
+
+9.		0.45				3.019					3.305				
+
+10.		0.5					3.222					4.000
+
+
+Using and testing the programs
+
+
+To create the library, run 
+
+make librsocket.a
+
+To cleanup, run
+
+make cleanlib.
+
+To directly test the programs, just run 
+make user1 user2
+./user1
+./user2
+
+To cleanup after testing user1 and user2
+
+make clean
+
+
+
+Message Format
+
+Application Message
+
+The message format is a 5-byte header followed by the message itself. The first byte is '0' for an Application Message ( it is '1' for an ACK).The next 4 bytes represent the message id encoded in ASCII. Though for this assignment message id's can only be three bytes long, in case of future extension one additional byte is reserved. The rest of the bytes are for the ASCII Message itself.
+
+
+ACK Message
+
+The first byte is a '1' as mentioned earlier. The next 4 bytes refer to the message id of the message which has been received. Each ACK message is exactly 5 bytes long.
+
+
+Data Structures Used
+
+Message_add is a structure which maintains message details. The message itself is stored along with its length(in siz), sender ip (ip) and port(port).
+
+The received message id table(Received_message_id_table) is implemented as a hash table. We store the number of messages(num_messages) received and table[i] = 0, if message i is not received, and table[i] = 1 if it is received.
+
+The Unacknowledged_message_table stores details of unacknowledged messages and is again a hash table. The Message_add structure is stored corresponding to each message. Further, isvalid[i] tells us if the message with id i is unacknowledged or not(it is 1 if unacknowledged, 0 if there is no message with id i or if the message with id i is acknowledged already). The timespec structure tim is used to keep track of the last time the message was sent( loaded with the clock_gettime() function).
+
+
+The receive buffer is implemented as a circular queue, to enable front extraction and efficiently utilise space. We store front,rear pointers, the messages themselves, their sizes, and the address parameters corresponding to the sender( to enable resend ).
+
+
+
+
+General comments
+
+
+
+Hashing for better complexity in access 
+
+The advantage of implementing a hash table is that it allows O(1) access in many instances, for example, when we want to check if a message that has been received has already been received(it is then dropped).
+
+The functions implemented, r_sendto,r_recvfrom,r_socket,r_close,r_bind do exactly as per the specifications in the assignment.
+
+Mutex locks have been used where shared access could possibly be an issue.
+
+Setsockopt has been used only for the sake of easier testing inside r_socket. 
+
+Sending time is recorded using clock_gettime() the high precision function, and converted to microseconds for comparison.
+
+
+
+
+
+

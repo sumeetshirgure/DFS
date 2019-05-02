@@ -50,8 +50,9 @@ message CReplicationRequest {
 
 message CMessageRequest {
 	optional string ip = 1;
-	optional string rchoice = 2;
-	optional bool byPrimary = 3;
+	optional bool byPrimary = 2;
+	optional bytes p1 = 3;
+	optional bytes p2 = 4;
 }
 
 

@@ -30,7 +30,7 @@ hdlr = logging.FileHandler('cserver.log')
 hdlr.setFormatter(logging.Formatter('[%(lineno)s @ %(funcName)10s()] %(message)s'))
 logger.addHandler(hdlr)
 logger.setLevel(logging.INFO)
-cip = ['10.145.134.255', '10.145.134.255']
+cip = ['10.145.134.255', '10.5.16.187']
 # cip = ['10.109.57.201', '10.109.57.201']
 cport = [7899,7900]
 rport = 7897
@@ -67,8 +67,8 @@ def getReadLock():
 class CGreeter(service_pb2_grpc.CGreeterServicer):
 
 	def c_getR(self, request, context):
-		logger.info('getR %s %s', request.ip, oip)
 		oip = replicaDict[request.ip]
+		logger.info('getR %s %s', request.ip, oip)
 		return service_pb2.MessageReply(pstr=pickle.dumps(oip))
 
 	def sand_nodes(self, request, context):
@@ -90,9 +90,15 @@ class CGreeter(service_pb2_grpc.CGreeterServicer):
 
 		if request.byPrimary:
 			logger.info('join %s', request.ip)
+			logger.info(allClients)
 			allClients.add(request.ip)
-			if request.rchoice:
-				replicaDict[request.ip] = request.rchoice
+			p1 = pickle.loads(request.p1)
+			p2 = pickle.loads(request.p2)
+			if p1[0]:
+				replicaDict[p1[0]] = p1[1]
+
+			if p2[0]:
+				replicaDict[p2[0]] = p2[1]
 			wlock.release()
 			return service_pb2.MessageReply(pstr=b'1')
 
@@ -103,11 +109,21 @@ class CGreeter(service_pb2_grpc.CGreeterServicer):
 		while True:
 			try:
 				rchoice = ''
-				if len(allClients) >= 1:
+				logger.info(allClients)
+				p1 = ('','')
+				p2 = ('','')
+
+				if len(allClients) == 1:
 					rchoice = random.choice(list(allClients))
+					p1 = (clientIP, rchoice)
+					p2 = (rchoice, clientIP)
+				else:
+					p1 = (clientIP, rchoice)
+
 				stub = service_pb2_grpc.CGreeterStub(cchannel)
-				stub.c_join(service_pb2.CMessageRequest(byPrimary=True,ip=clientIP, rchoice=rchoice),
-					timeout=random.uniform(3,5))
+				stub.c_join(service_pb2.CMessageRequest(byPrimary=True, ip=clientIP,
+					p1=pickle.dumps(p1), p2=pickle.dumps(p2)),
+					timeout=random.uniform(10,12))
 				break
 			except grpc.RpcError as e:
 				logger.info(str(e))
@@ -125,6 +141,8 @@ class CGreeter(service_pb2_grpc.CGreeterServicer):
 
 		ret = False
 		if clientIP in allClients:
+			if len(allClients) == 0:
+				pass
 			ret = True
 			otherIP = replicaDict[clientIP]
 

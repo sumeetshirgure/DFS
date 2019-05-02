@@ -1,0 +1,459 @@
+[184 @      serve()] sand nodes
+[197 @      serve()] got nodes
+[100 @     c_join()] join 10.5.16.206
+[107 @     c_join()] set()
+[100 @     c_join()] join 10.145.134.255
+[107 @     c_join()] {'10.5.16.206'}
+[71 @     c_getR()] getR 10.5.16.206 10.145.134.255
+[71 @     c_getR()] getR 10.145.134.255 10.5.16.206
+[71 @     c_getR()] getR 10.5.16.206 10.145.134.255
+[71 @     c_getR()] getR 10.145.134.255 10.5.16.206
+[71 @     c_getR()] getR 10.145.134.255 10.5.16.206
+[200 @      serve()] sand nodes
+[213 @      serve()] got nodes
+[105 @     c_join()] join 10.5.16.206
+[112 @     c_join()] set()
+[129 @     c_join()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.DEADLINE_EXCEEDED
+	details = "Deadline Exceeded"
+	debug_error_string = "{"created":"@1556780090.693022135","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Deadline Exceeded","grpc_status":4}"
+>
+[105 @     c_join()] join 10.5.16.206
+[112 @     c_join()] set()
+[129 @     c_join()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.DEADLINE_EXCEEDED
+	details = "Deadline Exceeded"
+	debug_error_string = "{"created":"@1556780093.899993094","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Deadline Exceeded","grpc_status":4}"
+>
+[112 @     c_join()] set()
+[129 @     c_join()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.DEADLINE_EXCEEDED
+	details = "Deadline Exceeded"
+	debug_error_string = "{"created":"@1556780098.488975282","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Deadline Exceeded","grpc_status":4}"
+>
+[112 @     c_join()] set()
+[129 @     c_join()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.DEADLINE_EXCEEDED
+	details = "Deadline Exceeded"
+	debug_error_string = "{"created":"@1556780101.599974688","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Deadline Exceeded","grpc_status":4}"
+>
+[112 @     c_join()] set()
+[129 @     c_join()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.DEADLINE_EXCEEDED
+	details = "Deadline Exceeded"
+	debug_error_string = "{"created":"@1556780105.819007535","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Deadline Exceeded","grpc_status":4}"
+>
+[112 @     c_join()] set()
+[129 @     c_join()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.DEADLINE_EXCEEDED
+	details = "Deadline Exceeded"
+	debug_error_string = "{"created":"@1556780109.350974738","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Deadline Exceeded","grpc_status":4}"
+>
+[112 @     c_join()] set()
+[129 @     c_join()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.DEADLINE_EXCEEDED
+	details = "Deadline Exceeded"
+	debug_error_string = "{"created":"@1556780112.651014045","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Deadline Exceeded","grpc_status":4}"
+>
+[112 @     c_join()] set()
+[129 @     c_join()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.DEADLINE_EXCEEDED
+	details = "Deadline Exceeded"
+	debug_error_string = "{"created":"@1556780116.640958912","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Deadline Exceeded","grpc_status":4}"
+>
+[112 @     c_join()] set()
+[129 @     c_join()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.DEADLINE_EXCEEDED
+	details = "Deadline Exceeded"
+	debug_error_string = "{"created":"@1556780121.509919304","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Deadline Exceeded","grpc_status":4}"
+>
+[112 @     c_join()] set()
+[129 @     c_join()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.DEADLINE_EXCEEDED
+	details = "Deadline Exceeded"
+	debug_error_string = "{"created":"@1556780126.419022931","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Deadline Exceeded","grpc_status":4}"
+>
+[112 @     c_join()] set()
+[129 @     c_join()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.DEADLINE_EXCEEDED
+	details = "Deadline Exceeded"
+	debug_error_string = "{"created":"@1556780130.298972118","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Deadline Exceeded","grpc_status":4}"
+>
+[112 @     c_join()] set()
+[129 @     c_join()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.DEADLINE_EXCEEDED
+	details = "Deadline Exceeded"
+	debug_error_string = "{"created":"@1556780134.108995765","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Deadline Exceeded","grpc_status":4}"
+>
+[112 @     c_join()] set()
+[129 @     c_join()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.DEADLINE_EXCEEDED
+	details = "Deadline Exceeded"
+	debug_error_string = "{"created":"@1556780138.162985982","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Deadline Exceeded","grpc_status":4}"
+>
+[112 @     c_join()] set()
+[129 @     c_join()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.DEADLINE_EXCEEDED
+	details = "Deadline Exceeded"
+	debug_error_string = "{"created":"@1556780141.663995087","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Deadline Exceeded","grpc_status":4}"
+>
+[112 @     c_join()] set()
+[129 @     c_join()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.DEADLINE_EXCEEDED
+	details = "Deadline Exceeded"
+	debug_error_string = "{"created":"@1556780145.869996615","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Deadline Exceeded","grpc_status":4}"
+>
+[112 @     c_join()] set()
+[129 @     c_join()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.DEADLINE_EXCEEDED
+	details = "Deadline Exceeded"
+	debug_error_string = "{"created":"@1556780149.302900449","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Deadline Exceeded","grpc_status":4}"
+>
+[112 @     c_join()] set()
+[129 @     c_join()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.DEADLINE_EXCEEDED
+	details = "Deadline Exceeded"
+	debug_error_string = "{"created":"@1556780153.767001155","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Deadline Exceeded","grpc_status":4}"
+>
+[112 @     c_join()] set()
+[129 @     c_join()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.DEADLINE_EXCEEDED
+	details = "Deadline Exceeded"
+	debug_error_string = "{"created":"@1556780157.658027551","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Deadline Exceeded","grpc_status":4}"
+>
+[112 @     c_join()] set()
+[129 @     c_join()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.DEADLINE_EXCEEDED
+	details = "Deadline Exceeded"
+	debug_error_string = "{"created":"@1556780160.958023217","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Deadline Exceeded","grpc_status":4}"
+>
+[112 @     c_join()] set()
+[129 @     c_join()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.DEADLINE_EXCEEDED
+	details = "Deadline Exceeded"
+	debug_error_string = "{"created":"@1556780165.240974072","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Deadline Exceeded","grpc_status":4}"
+>
+[112 @     c_join()] set()
+[129 @     c_join()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.DEADLINE_EXCEEDED
+	details = "Deadline Exceeded"
+	debug_error_string = "{"created":"@1556780169.239976885","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Deadline Exceeded","grpc_status":4}"
+>
+[112 @     c_join()] set()
+[129 @     c_join()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.DEADLINE_EXCEEDED
+	details = "Deadline Exceeded"
+	debug_error_string = "{"created":"@1556780173.657990474","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Deadline Exceeded","grpc_status":4}"
+>
+[112 @     c_join()] set()
+[129 @     c_join()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.DEADLINE_EXCEEDED
+	details = "Deadline Exceeded"
+	debug_error_string = "{"created":"@1556780177.205935594","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Deadline Exceeded","grpc_status":4}"
+>
+[112 @     c_join()] set()
+[129 @     c_join()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.DEADLINE_EXCEEDED
+	details = "Deadline Exceeded"
+	debug_error_string = "{"created":"@1556780180.755954335","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Deadline Exceeded","grpc_status":4}"
+>
+[112 @     c_join()] set()
+[129 @     c_join()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.DEADLINE_EXCEEDED
+	details = "Deadline Exceeded"
+	debug_error_string = "{"created":"@1556780183.767943226","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Deadline Exceeded","grpc_status":4}"
+>
+[112 @     c_join()] set()
+[129 @     c_join()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.DEADLINE_EXCEEDED
+	details = "Deadline Exceeded"
+	debug_error_string = "{"created":"@1556780187.528973614","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Deadline Exceeded","grpc_status":4}"
+>
+[112 @     c_join()] set()
+[129 @     c_join()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.DEADLINE_EXCEEDED
+	details = "Deadline Exceeded"
+	debug_error_string = "{"created":"@1556780192.500979876","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Deadline Exceeded","grpc_status":4}"
+>
+[112 @     c_join()] set()
+[129 @     c_join()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.DEADLINE_EXCEEDED
+	details = "Deadline Exceeded"
+	debug_error_string = "{"created":"@1556780197.092958065","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Deadline Exceeded","grpc_status":4}"
+>
+[112 @     c_join()] set()
+[129 @     c_join()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.DEADLINE_EXCEEDED
+	details = "Deadline Exceeded"
+	debug_error_string = "{"created":"@1556780201.489995620","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Deadline Exceeded","grpc_status":4}"
+>
+[112 @     c_join()] set()
+[129 @     c_join()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.DEADLINE_EXCEEDED
+	details = "Deadline Exceeded"
+	debug_error_string = "{"created":"@1556780204.506980377","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Deadline Exceeded","grpc_status":4}"
+>
+[112 @     c_join()] set()
+[129 @     c_join()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.DEADLINE_EXCEEDED
+	details = "Deadline Exceeded"
+	debug_error_string = "{"created":"@1556780208.713919198","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Deadline Exceeded","grpc_status":4}"
+>
+[112 @     c_join()] set()
+[129 @     c_join()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.DEADLINE_EXCEEDED
+	details = "Deadline Exceeded"
+	debug_error_string = "{"created":"@1556780213.652924007","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Deadline Exceeded","grpc_status":4}"
+>
+[112 @     c_join()] set()
+[129 @     c_join()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.UNKNOWN
+	details = "Exception calling application: '10.145.134.255'"
+	debug_error_string = "{"created":"@1556780215.086734066","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Exception calling application: '10.145.134.255'","grpc_status":2}"
+>
+[138 @     c_join()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.UNKNOWN
+	details = "Exception calling application: '10.145.134.255'"
+	debug_error_string = "{"created":"@1556780215.086734066","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Exception calling application: '10.145.134.255'","grpc_status":2}"
+>
+[112 @     c_join()] set()
+[129 @     c_join()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.INTERNAL
+	details = "Received RST_STREAM with error code 2"
+	debug_error_string = "{"created":"@1556780217.417756441","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Received RST_STREAM with error code 2","grpc_status":13}"
+>
+[138 @     c_join()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.INTERNAL
+	details = "Received RST_STREAM with error code 2"
+	debug_error_string = "{"created":"@1556780217.417756441","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Received RST_STREAM with error code 2","grpc_status":13}"
+>
+[200 @      serve()] sand nodes
+[213 @      serve()] got nodes
+[105 @     c_join()] join 10.145.134.255
+[112 @     c_join()] set()
+[129 @     c_join()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.UNKNOWN
+	details = "Exception calling application: rchoice"
+	debug_error_string = "{"created":"@1556780886.049161765","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Exception calling application: rchoice","grpc_status":2}"
+>
+[138 @     c_join()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.UNKNOWN
+	details = "Exception calling application: rchoice"
+	debug_error_string = "{"created":"@1556780886.049161765","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Exception calling application: rchoice","grpc_status":2}"
+>
+[105 @     c_join()] join 10.145.134.255
+[112 @     c_join()] set()
+[129 @     c_join()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.DEADLINE_EXCEEDED
+	details = "Deadline Exceeded"
+	debug_error_string = "{"created":"@1556780890.432278742","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Deadline Exceeded","grpc_status":4}"
+>
+[112 @     c_join()] set()
+[129 @     c_join()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.DEADLINE_EXCEEDED
+	details = "Deadline Exceeded"
+	debug_error_string = "{"created":"@1556780896.057248911","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Deadline Exceeded","grpc_status":4}"
+>
+[105 @     c_join()] join 10.5.16.206
+[112 @     c_join()] set()
+[129 @     c_join()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.DEADLINE_EXCEEDED
+	details = "Deadline Exceeded"
+	debug_error_string = "{"created":"@1556780901.778219001","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Deadline Exceeded","grpc_status":4}"
+>
+[112 @     c_join()] set()
+[129 @     c_join()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.DEADLINE_EXCEEDED
+	details = "Deadline Exceeded"
+	debug_error_string = "{"created":"@1556780906.216248497","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Deadline Exceeded","grpc_status":4}"
+>
+[112 @     c_join()] set()
+[129 @     c_join()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.DEADLINE_EXCEEDED
+	details = "Deadline Exceeded"
+	debug_error_string = "{"created":"@1556780909.772317069","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Deadline Exceeded","grpc_status":4}"
+>
+[112 @     c_join()] set()
+[129 @     c_join()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.DEADLINE_EXCEEDED
+	details = "Deadline Exceeded"
+	debug_error_string = "{"created":"@1556780914.579312280","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Deadline Exceeded","grpc_status":4}"
+>
+[112 @     c_join()] set()
+[129 @     c_join()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.DEADLINE_EXCEEDED
+	details = "Deadline Exceeded"
+	debug_error_string = "{"created":"@1556780918.102268093","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Deadline Exceeded","grpc_status":4}"
+>
+[112 @     c_join()] set()
+[129 @     c_join()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.DEADLINE_EXCEEDED
+	details = "Deadline Exceeded"
+	debug_error_string = "{"created":"@1556780921.563221364","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Deadline Exceeded","grpc_status":4}"
+>
+[112 @     c_join()] set()
+[129 @     c_join()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.DEADLINE_EXCEEDED
+	details = "Deadline Exceeded"
+	debug_error_string = "{"created":"@1556780925.406243332","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Deadline Exceeded","grpc_status":4}"
+>
+[112 @     c_join()] set()
+[129 @     c_join()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.DEADLINE_EXCEEDED
+	details = "Deadline Exceeded"
+	debug_error_string = "{"created":"@1556780929.526321877","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Deadline Exceeded","grpc_status":4}"
+>
+[112 @     c_join()] set()
+[129 @     c_join()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.DEADLINE_EXCEEDED
+	details = "Deadline Exceeded"
+	debug_error_string = "{"created":"@1556780933.394295625","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Deadline Exceeded","grpc_status":4}"
+>
+[112 @     c_join()] set()
+[129 @     c_join()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.DEADLINE_EXCEEDED
+	details = "Deadline Exceeded"
+	debug_error_string = "{"created":"@1556780936.421273286","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Deadline Exceeded","grpc_status":4}"
+>
+[112 @     c_join()] set()
+[129 @     c_join()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.DEADLINE_EXCEEDED
+	details = "Deadline Exceeded"
+	debug_error_string = "{"created":"@1556780940.383264852","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Deadline Exceeded","grpc_status":4}"
+>
+[112 @     c_join()] set()
+[129 @     c_join()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.INTERNAL
+	details = "Received RST_STREAM with error code 2"
+	debug_error_string = "{"created":"@1556780942.871866605","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Received RST_STREAM with error code 2","grpc_status":13}"
+>
+[138 @     c_join()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.INTERNAL
+	details = "Received RST_STREAM with error code 2"
+	debug_error_string = "{"created":"@1556780942.871866605","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Received RST_STREAM with error code 2","grpc_status":13}"
+>
+[105 @     c_join()] join 10.145.134.255
+[112 @     c_join()] set()
+[129 @     c_join()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "Connect Failed"
+	debug_error_string = "{"created":"@1556780942.980903506","description":"Failed to create subchannel","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":2267,"referenced_errors":[{"created":"@1556780942.980845189","description":"Pick Cancelled","file":"src/core/ext/filters/client_channel/lb_policy/pick_first/pick_first.cc","file_line":242,"referenced_errors":[{"created":"@1556780942.980799156","description":"Connect Failed","file":"src/core/ext/filters/client_channel/subchannel.cc","file_line":962,"grpc_status":14,"referenced_errors":[{"created":"@1556780942.980741601","description":"Failed to connect to remote host: Connection refused","errno":111,"file":"src/core/lib/iomgr/tcp_client_posix.cc","file_line":207,"os_error":"Connection refused","syscall":"connect","target_address":"ipv4:10.5.16.187:7900"}]}]}]}"
+>
+[112 @     c_join()] {'10.145.134.255'}
+[129 @     c_join()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "channel is in state TRANSIENT_FAILURE"
+	debug_error_string = "{"created":"@1556780943.286400462","description":"channel is in state TRANSIENT_FAILURE","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":2294,"grpc_status":14}"
+>
+[200 @      serve()] sand nodes
+[209 @      serve()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "Connect Failed"
+	debug_error_string = "{"created":"@1556781128.008692724","description":"Failed to create subchannel","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":2267,"referenced_errors":[{"created":"@1556781128.008690639","description":"Pick Cancelled","file":"src/core/ext/filters/client_channel/lb_policy/pick_first/pick_first.cc","file_line":242,"referenced_errors":[{"created":"@1556781128.008673897","description":"Connect Failed","file":"src/core/ext/filters/client_channel/subchannel.cc","file_line":962,"grpc_status":14,"referenced_errors":[{"created":"@1556781128.008653794","description":"Failed to connect to remote host: Connection refused","errno":111,"file":"src/core/lib/iomgr/tcp_client_posix.cc","file_line":207,"os_error":"Connection refused","syscall":"connect","target_address":"ipv4:10.5.16.187:7900"}]}]}]}"
+>
+[209 @      serve()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "channel is in state TRANSIENT_FAILURE"
+	debug_error_string = "{"created":"@1556781128.109368065","description":"channel is in state TRANSIENT_FAILURE","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":2294,"grpc_status":14}"
+>
+[209 @      serve()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "channel is in state TRANSIENT_FAILURE"
+	debug_error_string = "{"created":"@1556781128.210250785","description":"channel is in state TRANSIENT_FAILURE","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":2294,"grpc_status":14}"
+>
+[209 @      serve()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "channel is in state TRANSIENT_FAILURE"
+	debug_error_string = "{"created":"@1556781128.311202335","description":"channel is in state TRANSIENT_FAILURE","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":2294,"grpc_status":14}"
+>
+[209 @      serve()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "channel is in state TRANSIENT_FAILURE"
+	debug_error_string = "{"created":"@1556781128.412243415","description":"channel is in state TRANSIENT_FAILURE","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":2294,"grpc_status":14}"
+>
+[209 @      serve()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "channel is in state TRANSIENT_FAILURE"
+	debug_error_string = "{"created":"@1556781128.513360358","description":"channel is in state TRANSIENT_FAILURE","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":2294,"grpc_status":14}"
+>
+[209 @      serve()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "channel is in state TRANSIENT_FAILURE"
+	debug_error_string = "{"created":"@1556781128.614542186","description":"channel is in state TRANSIENT_FAILURE","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":2294,"grpc_status":14}"
+>
+[209 @      serve()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "channel is in state TRANSIENT_FAILURE"
+	debug_error_string = "{"created":"@1556781128.715670606","description":"channel is in state TRANSIENT_FAILURE","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":2294,"grpc_status":14}"
+>
+[209 @      serve()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "channel is in state TRANSIENT_FAILURE"
+	debug_error_string = "{"created":"@1556781128.816851623","description":"channel is in state TRANSIENT_FAILURE","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":2294,"grpc_status":14}"
+>
+[209 @      serve()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "channel is in state TRANSIENT_FAILURE"
+	debug_error_string = "{"created":"@1556781128.918069289","description":"channel is in state TRANSIENT_FAILURE","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":2294,"grpc_status":14}"
+>
+[213 @      serve()] got nodes
+[105 @     c_join()] join 10.5.16.206
+[112 @     c_join()] set()
+[129 @     c_join()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.UNKNOWN
+	details = "Exception calling application: rchoice"
+	debug_error_string = "{"created":"@1556781140.866669288","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Exception calling application: rchoice","grpc_status":2}"
+>
+[138 @     c_join()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.UNKNOWN
+	details = "Exception calling application: rchoice"
+	debug_error_string = "{"created":"@1556781140.866669288","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Exception calling application: rchoice","grpc_status":2}"
+>
+[105 @     c_join()] join 10.5.16.206
+[112 @     c_join()] set()
+[129 @     c_join()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.DEADLINE_EXCEEDED
+	details = "Deadline Exceeded"
+	debug_error_string = "{"created":"@1556781151.550423598","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Deadline Exceeded","grpc_status":4}"
+>
+[112 @     c_join()] set()
+[129 @     c_join()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.DEADLINE_EXCEEDED
+	details = "Deadline Exceeded"
+	debug_error_string = "{"created":"@1556781163.978435642","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Deadline Exceeded","grpc_status":4}"
+>
+[112 @     c_join()] set()
+[129 @     c_join()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.DEADLINE_EXCEEDED
+	details = "Deadline Exceeded"
+	debug_error_string = "{"created":"@1556781176.873456527","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Deadline Exceeded","grpc_status":4}"
+>
+[112 @     c_join()] set()
+[129 @     c_join()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.INTERNAL
+	details = "Received RST_STREAM with error code 2"
+	debug_error_string = "{"created":"@1556781181.481271974","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Received RST_STREAM with error code 2","grpc_status":13}"
+>
+[138 @     c_join()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.INTERNAL
+	details = "Received RST_STREAM with error code 2"
+	debug_error_string = "{"created":"@1556781181.481271974","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Received RST_STREAM with error code 2","grpc_status":13}"
+>
+[105 @     c_join()] join 10.5.16.206
+[112 @     c_join()] set()
+[129 @     c_join()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "Connection refused"
+	debug_error_string = "{"created":"@1556781181.590743617","description":"Error received from peer","file":"src/core/lib/surface/call.cc","file_line":1039,"grpc_message":"Connection refused","grpc_status":14}"
+>
+[200 @      serve()] sand nodes
+[213 @      serve()] got nodes
+[105 @     c_join()] join 10.5.16.206
+[112 @     c_join()] set()
+[105 @     c_join()] join 10.145.134.255
+[112 @     c_join()] {'10.5.16.206'}
+[71 @     c_getR()] getR 10.5.16.206 10.145.134.255
+[71 @     c_getR()] getR 10.5.16.206 10.145.134.255
+[200 @      serve()] sand nodes
+[213 @      serve()] got nodes
+[71 @     c_getR()] getR 10.5.16.206 10.145.134.255

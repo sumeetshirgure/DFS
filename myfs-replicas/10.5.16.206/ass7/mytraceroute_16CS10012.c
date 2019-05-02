@@ -17,25 +17,24 @@
 #include <time.h>
 
 
-
 #define MSG_SIZE 2048
 #define LISTEN_PORT1 22000
 #define LISTEN_PORT2 31000
-___Integer___ main(){
+int main(){
     // Part 1
     //Taking input and getting ip 
     char domain[50];
-    pr___Integer___f("Give website:\n");
+    printf("Give website:\n");
     scanf("%s", domain);
     struct hostent *b;
-    ___Integer___ i;
+    int i;
     b = gethostbyname(domain);
     struct in_addr **addr_list = (struct in_addr **)b->h_addr_list;
     memset(domain,0,100);
-    pr___Integer___f("IP address - \n");
+    printf("IP address - \n");
     for(i = 0; addr_list[i] != NULL; i++) {
         strcpy(domain,inet_ntoa(*addr_list[i]));
-        pr___Integer___f("%s\n", domain);
+        printf("%s\n", domain);
     }
 
 
@@ -43,13 +42,13 @@ ___Integer___ main(){
     //create 2 raw sockets S1,S2
     //S1 to send udp packets
     //S2 to receive ICMP packets
-    ___Integer___ sockfd1, sockfd2;
+    int sockfd1, sockfd2;
     struct sockaddr_in saddr_sfd1, saddr_sfd2,saddr_sfd3,raddr;
-    ___Integer___ saddr_sfd1_len, saddr_sfd2_len, saddr_sfd3_len,raddr_len;
+    int saddr_sfd1_len, saddr_sfd2_len, saddr_sfd3_len,raddr_len;
     raddr_len = sizeof(raddr);
 
     char msg[MSG_SIZE];
-    ___Integer___ msglen;
+    int msglen;
 
     sockfd1 = socket(AF_INET, SOCK_RAW, IPPROTO_UDP);
     if  (sockfd1 < 0){
@@ -82,7 +81,7 @@ ___Integer___ main(){
     
     // Part 3 
     // sock option on socket S1 
-    ___Integer___ k =1;
+    int k =1;
     setsockopt(sockfd1, IPPROTO_IP, IP_HDRINCL, &k, sizeof(k)); // enabling option to include IP header
 
 
@@ -106,7 +105,7 @@ ___Integer___ main(){
     hdr_ip->protocol = 17;
     hdr_ip->check = 0;
     hdr_ip->saddr = inet_addr("0.0.0.0");
-    hdr_ip->daddr = *((u___Integer___32_t*) b -> h_addr_list[0]);
+    hdr_ip->daddr = *((uint32_t*) b -> h_addr_list[0]);
 
 
     struct udphdr *hdr_udp = (struct udphdr*) (buff + sizeof(struct iphdr));// udp header 
@@ -126,26 +125,32 @@ ___Integer___ main(){
 
     saddr_sfd3.sin_family = AF_INET;
     saddr_sfd3.sin_port = htons(32164);
-    saddr_sfd3.sin_addr.s_addr =  *((u___Integer___32_t*) b -> h_addr_list[0]) ;
+    saddr_sfd3.sin_addr.s_addr =  *((uint32_t*) b -> h_addr_list[0]) ;
     saddr_sfd3_len = sizeof(saddr_sfd3);
+
+  
+    
+
+    
+ 
 
     //Part 5 
     // select call to wait for ICMP message 
     fd_set rfds;
-    ___Integer___ nfds = sockfd2 + 1 ;
+    int nfds = sockfd2 + 1 ;
     struct timespec t1,t2,t3,t4;
     struct timeval tv;
-    tv.tv_sec = 1;
-    tv.tv_usec = 0;
-    ___Integer___ val;
-    ___Integer___ tcount = 0 ;
-
+	tv.tv_sec = 1;
+	tv.tv_usec = 0;
+	int val;
+    int tcount = 0 ;
+    
 
     struct iphdr* r_hdr_ip;
     float time_diff,q;
     struct icmphdr* r_hdr_icmp;
     char r_dest[100];
-    while( TRUE )
+    while(1)
     {
 
         sendto(sockfd1,buff,sizeof(buff),0,(const struct sockaddr*) &saddr_sfd3, saddr_sfd3_len);
@@ -160,13 +165,13 @@ ___Integer___ main(){
         {   
             char r_buff[100];
             
-            ___Integer___ msg_len = recvfrom(sockfd2,r_buff,100,0,(struct sockaddr *)&raddr,&raddr_len);
+            int msg_len = recvfrom(sockfd2,r_buff,100,0,(struct sockaddr *)&raddr,&raddr_len);
             clock_gettime(CLOCK_MONOTONIC,&t2);
             time_diff = (t2.tv_sec - t1.tv_sec)*1000 + (float)((t2.tv_nsec - t1.tv_nsec)/1000000);
             
             if(msg_len == 0)
             {
-                pr___Integer___f("nothing has been received");
+                printf("nothing has been received");
                 continue;
             }
 
@@ -175,7 +180,7 @@ ___Integer___ main(){
             if(r_hdr_icmp->type == 11)
             {
                 strcpy(r_dest,(char*)inet_ntoa(*(struct in_addr*)&r_hdr_ip->saddr));
-                pr___Integer___f("TTL : %d Dest : %s Resp: %f\n",hdr_ip->ttl,r_dest,time_diff);
+                printf("TTL : %d Dest : %s Resp: %f\n",hdr_ip->ttl,r_dest,time_diff);
                 hdr_ip->ttl+=1;
                 tv.tv_sec=1;
                 tv.tv_usec=0;
@@ -183,13 +188,13 @@ ___Integer___ main(){
             else if(r_hdr_icmp->type==3)
             {
                 strcpy(r_dest,(char*)inet_ntoa(*(struct in_addr*)&r_hdr_ip->saddr));
-                pr___Integer___f("TTL : %d Dest : %s Resp: %f\n",hdr_ip->ttl,r_dest,time_diff);
+                printf("TTL : %d Dest : %s Resp: %f\n",hdr_ip->ttl,r_dest,time_diff);
                 break;
             }
             else
             {
                 q = 1 - ((t4.tv_sec - t3.tv_sec)*1000 + (float)((t4.tv_nsec - t3.tv_nsec)/1000)) ;
-                tv.tv_sec = (___Integer___)q;
+                tv.tv_sec = (int)q;
                 tv.tv_usec = 1000000*(q - tv.tv_sec);
             }
         }
@@ -198,7 +203,7 @@ ___Integer___ main(){
             tcount+=1;
             if(tcount==3)
             {
-                pr___Integer___f("TTL : %d Dest : * Resp: *\n",hdr_ip->ttl);
+                printf("TTL : %d Dest : * Resp: *\n",hdr_ip->ttl);
                 tcount=0;
                 hdr_ip->ttl+=1;
             }
@@ -207,5 +212,7 @@ ___Integer___ main(){
         }
     }
 
+
+     
 
 }
