@@ -9,16 +9,25 @@ service Greeter {
   rpc fuse_getattr (MessageRequest) returns (MessageReply) {}
   rpc fuse_read (MessageRequest) returns (MessageReply) {}
   rpc fuse_fgetattr (MessageRequest) returns (MessageReply) {}
+  rpc fuse_mkdir (MessageRequest) returns (MessageReply) {}
+  rpc fuse_rmdir (MessageRequest) returns (MessageReply) {}
+  rpc fuse_rename (MessageRequest) returns (MessageReply) {}
+  rpc fuse_unlink (MessageRequest) returns (MessageReply) {}
+  rpc fuse_truncate (MessageRequest) returns (MessageReply) {}
+  rpc fuse_write (MessageRequest) returns (MessageReply) {}
 
   rpc s_replicate(SReplicationRequest) returns (MessageReply) {}
   rpc c_replicate(stream CReplicationRequest) returns (MessageReply) {}
 
   rpc c_empty(CReplicationRequest) returns (MessageReply) {}
+
+  rpc get_v(MessageRequest) returns (MessageReply) {}
 }
 
 service CGreeter {
  	rpc c_join (CMessageRequest) returns (MessageReply) {}
  	rpc c_getR (CMessageRequest) returns (MessageReply) {}
+ 	rpc sand_nodes(CMessageRequest) returns (MessageReply) {}
 }
 
 
@@ -36,10 +45,13 @@ message CReplicationRequest {
 	optional bool isdir = 3;
 	optional string ip = 4;
 	optional int32 type = 5;
+	optional int32 vno = 6;
 }
 
 message CMessageRequest {
 	optional string ip = 1;
+	optional string rchoice = 2;
+	optional bool byPrimary = 3;
 }
 
 
@@ -50,6 +62,11 @@ message MessageRequest {
   optional int32 length = 4;
   optional int32 offset = 5;
   optional int32 flags = 6;
+  optional bool isReplica = 7;
+  optional bool byPrimary = 8;
+  optional bytes blist = 9;
+  optional int32 vno = 10;
+  optional string path1 = 11;
 }
 
 message MessageReply {

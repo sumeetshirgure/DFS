@@ -39,6 +39,36 @@ class GreeterStub(object):
         request_serializer=service__pb2.MessageRequest.SerializeToString,
         response_deserializer=service__pb2.MessageReply.FromString,
         )
+    self.fuse_mkdir = channel.unary_unary(
+        '/Greeter/fuse_mkdir',
+        request_serializer=service__pb2.MessageRequest.SerializeToString,
+        response_deserializer=service__pb2.MessageReply.FromString,
+        )
+    self.fuse_rmdir = channel.unary_unary(
+        '/Greeter/fuse_rmdir',
+        request_serializer=service__pb2.MessageRequest.SerializeToString,
+        response_deserializer=service__pb2.MessageReply.FromString,
+        )
+    self.fuse_rename = channel.unary_unary(
+        '/Greeter/fuse_rename',
+        request_serializer=service__pb2.MessageRequest.SerializeToString,
+        response_deserializer=service__pb2.MessageReply.FromString,
+        )
+    self.fuse_unlink = channel.unary_unary(
+        '/Greeter/fuse_unlink',
+        request_serializer=service__pb2.MessageRequest.SerializeToString,
+        response_deserializer=service__pb2.MessageReply.FromString,
+        )
+    self.fuse_truncate = channel.unary_unary(
+        '/Greeter/fuse_truncate',
+        request_serializer=service__pb2.MessageRequest.SerializeToString,
+        response_deserializer=service__pb2.MessageReply.FromString,
+        )
+    self.fuse_write = channel.unary_unary(
+        '/Greeter/fuse_write',
+        request_serializer=service__pb2.MessageRequest.SerializeToString,
+        response_deserializer=service__pb2.MessageReply.FromString,
+        )
     self.s_replicate = channel.unary_unary(
         '/Greeter/s_replicate',
         request_serializer=service__pb2.SReplicationRequest.SerializeToString,
@@ -52,6 +82,11 @@ class GreeterStub(object):
     self.c_empty = channel.unary_unary(
         '/Greeter/c_empty',
         request_serializer=service__pb2.CReplicationRequest.SerializeToString,
+        response_deserializer=service__pb2.MessageReply.FromString,
+        )
+    self.get_v = channel.unary_unary(
+        '/Greeter/get_v',
+        request_serializer=service__pb2.MessageRequest.SerializeToString,
         response_deserializer=service__pb2.MessageReply.FromString,
         )
 
@@ -95,6 +130,48 @@ class GreeterServicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
+  def fuse_mkdir(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def fuse_rmdir(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def fuse_rename(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def fuse_unlink(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def fuse_truncate(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def fuse_write(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
   def s_replicate(self, request, context):
     # missing associated documentation comment in .proto file
     pass
@@ -110,6 +187,13 @@ class GreeterServicer(object):
     raise NotImplementedError('Method not implemented!')
 
   def c_empty(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def get_v(self, request, context):
     # missing associated documentation comment in .proto file
     pass
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -144,6 +228,36 @@ def add_GreeterServicer_to_server(servicer, server):
           request_deserializer=service__pb2.MessageRequest.FromString,
           response_serializer=service__pb2.MessageReply.SerializeToString,
       ),
+      'fuse_mkdir': grpc.unary_unary_rpc_method_handler(
+          servicer.fuse_mkdir,
+          request_deserializer=service__pb2.MessageRequest.FromString,
+          response_serializer=service__pb2.MessageReply.SerializeToString,
+      ),
+      'fuse_rmdir': grpc.unary_unary_rpc_method_handler(
+          servicer.fuse_rmdir,
+          request_deserializer=service__pb2.MessageRequest.FromString,
+          response_serializer=service__pb2.MessageReply.SerializeToString,
+      ),
+      'fuse_rename': grpc.unary_unary_rpc_method_handler(
+          servicer.fuse_rename,
+          request_deserializer=service__pb2.MessageRequest.FromString,
+          response_serializer=service__pb2.MessageReply.SerializeToString,
+      ),
+      'fuse_unlink': grpc.unary_unary_rpc_method_handler(
+          servicer.fuse_unlink,
+          request_deserializer=service__pb2.MessageRequest.FromString,
+          response_serializer=service__pb2.MessageReply.SerializeToString,
+      ),
+      'fuse_truncate': grpc.unary_unary_rpc_method_handler(
+          servicer.fuse_truncate,
+          request_deserializer=service__pb2.MessageRequest.FromString,
+          response_serializer=service__pb2.MessageReply.SerializeToString,
+      ),
+      'fuse_write': grpc.unary_unary_rpc_method_handler(
+          servicer.fuse_write,
+          request_deserializer=service__pb2.MessageRequest.FromString,
+          response_serializer=service__pb2.MessageReply.SerializeToString,
+      ),
       's_replicate': grpc.unary_unary_rpc_method_handler(
           servicer.s_replicate,
           request_deserializer=service__pb2.SReplicationRequest.FromString,
@@ -157,6 +271,11 @@ def add_GreeterServicer_to_server(servicer, server):
       'c_empty': grpc.unary_unary_rpc_method_handler(
           servicer.c_empty,
           request_deserializer=service__pb2.CReplicationRequest.FromString,
+          response_serializer=service__pb2.MessageReply.SerializeToString,
+      ),
+      'get_v': grpc.unary_unary_rpc_method_handler(
+          servicer.get_v,
+          request_deserializer=service__pb2.MessageRequest.FromString,
           response_serializer=service__pb2.MessageReply.SerializeToString,
       ),
   }
@@ -185,6 +304,11 @@ class CGreeterStub(object):
         request_serializer=service__pb2.CMessageRequest.SerializeToString,
         response_deserializer=service__pb2.MessageReply.FromString,
         )
+    self.sand_nodes = channel.unary_unary(
+        '/CGreeter/sand_nodes',
+        request_serializer=service__pb2.CMessageRequest.SerializeToString,
+        response_deserializer=service__pb2.MessageReply.FromString,
+        )
 
 
 class CGreeterServicer(object):
@@ -205,6 +329,13 @@ class CGreeterServicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
+  def sand_nodes(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
 
 def add_CGreeterServicer_to_server(servicer, server):
   rpc_method_handlers = {
@@ -215,6 +346,11 @@ def add_CGreeterServicer_to_server(servicer, server):
       ),
       'c_getR': grpc.unary_unary_rpc_method_handler(
           servicer.c_getR,
+          request_deserializer=service__pb2.CMessageRequest.FromString,
+          response_serializer=service__pb2.MessageReply.SerializeToString,
+      ),
+      'sand_nodes': grpc.unary_unary_rpc_method_handler(
+          servicer.sand_nodes,
           request_deserializer=service__pb2.CMessageRequest.FromString,
           response_serializer=service__pb2.MessageReply.SerializeToString,
       ),

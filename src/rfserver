@@ -7,6 +7,7 @@ import os, sys
 import grpc, pickle
 import fuse
 import simplejson, json
+from collections import defaultdict
 
 from errno import *
 from stat import *
@@ -18,21 +19,32 @@ from fuse import Fuse
 import service_pb2
 import service_pb2_grpc
 import shutil
-import threading
+import threading, socket
+from readerwriterlock import rwlock
 
-_ONE_DAY_IN_SECONDS = 60 * 24 * 24
+_ONE_DAY_IN_SECONDS = 60 * 60 * 24
 
 logging.basicConfig()
 logger = logging.getLogger('tcpserver')
 hdlr = logging.FileHandler('server.log')
+hdlr.setFormatter(logging.Formatter('[%(lineno)s @ %(funcName)10s()] %(message)s'))
 logger.addHandler(hdlr)
 logger.setLevel(logging.INFO)
 rport = 7897
-cip = '10.5.16.76'
-cport = 7899
-isBackup = False
+# cip = '10.109.57.201'
+# cport = 7899
+# isPrimary = True
+cchannel1 = None
+cchannel2 = None
+myip = ''
 
-wmutex = threading.Lock()
+BSIZE = 10
+
+cip = ['10.145.134.255', '10.145.134.255']
+# cip = [10.109.57.201, 10.109.57.201]
+cport = [7899,7900]
+
+fslock = rwlock.RWLockFair()
 
 def flag2mode(flags):
 	md = {os.O_RDONLY: 'r', os.O_WRONLY: 'w', os.O_RDWR: 'w+'}
@@ -43,38 +55,145 @@ def flag2mode(flags):
 
 	return m
 
+def getWriteLock():
+	w = fslock.gen_wlock()
+	while not w.acquire(blocking=True, timeout=0.2):
+		time.sleep(random.uniform(0, 0.1))
+	return w
+
+def getReadLock():
+	r = fslock.gen_rlock()
+	while not r.acquire(blocking=True, timeout=0.2):
+		time.sleep(random.uniform(0, 0.1))
+	return r
+
+
+class FileBlock(object):
+	def __init__(self,offset,path,dat,vno,isDirty=False):
+		self.offset=offset
+		self.path=path
+
+		self.dat=dat
+		self.vno=vno
+
+
+		# for something else
+		self.isDirty=isDirty
+		self.okay = True
+		self.elems = {}
+
+	def merge(self, ofb):
+		fb = copy.deepcopy(self)
+		if self.okay and ofb.okay and self.offset >= ofb.offset and self.offset+len(self.dat) <= ofb.offset+len(self.dat):
+			return copy.deepcopy(ofb)
+
+
+		if fb.okay:
+			fb.okay = False
+			for i in range(0, len(fb.dat)):
+				fb.elems[i+ofb.offset] = ofb.dat[i]
+			fb.dat = ''
+
+		if not ofb.okay:
+			for i, c in ofb.elems.items():
+				fb.elems[i] = c
+		else:
+			for i in range(0, len(ofb.dat)):
+				fb.elems[i+ofb.offset] = ofb.dat[i]
+
+		return fb
+	@staticmethod
+	def cfname(path,offset,isDirty=False):
+		ans=ip1+":"+ovdir.replace('_','__').replace('/', '_')+path.replace('_','__').replace('/','_')+"@"+str(offset)
+		if isDirty:
+			return str(hash(ans))
+		if len(ans) > 200:
+			ans = str(zlib.adler32(bytes(ans, encoding='utf-8')))
+		return ans
+
+fvMap = defaultdict(int)
+channelMemo = {}
+def getChannel(ip):
+	global channelMemo
+	if ip not in channelMemo:
+		channelMemo[ip] = grpc.insecure_channel('%s:%d'%(ip, rport))
+	return channelMemo[ip]
+
+def getReplica(ip1):
+	global cchannel1, cchannel2
+
+	while True:
+		try:
+			stub = service_pb2_grpc.CGreeterStub(cchannel1)
+			response = stub.c_getR(service_pb2.CMessageRequest(ip=ip1))
+			ip2 = pickle.loads(response.pstr)
+			break
+		except grpc.RpcError as e:
+			if e.code() == grpc.StatusCode.UNAVAILABLE:
+				cchannel1, cchannel2 = cchannel2, cchannel1
+				time.sleep(0.1)
+				continue
+			else:
+				raise e
+
+	return ip2
+
 
 class Greeter(service_pb2_grpc.GreeterServicer):
 
+
+	def get_v(self, request, context):
+		rlock = getReadLock()
+
+		global fvMap
+		path = request.mpt + request.path
+		logger.info('get_v %s', path)
+		
+		if not os.path.isfile(path):
+			ans = service_pb2.MessageReply(pstr=pickle.dumps((-1, 0)))
+		else:
+			ans = service_pb2.MessageReply(pstr=pickle.dumps((fvMap[path], os.path.getsize(path))))
+
+		rlock.release()
+		return ans
+
 	def c_empty(self, request, context):
-		wmutex.acquire()
+		wlock = getWriteLock()
 
 		logger.info('empty %s', request.path)
 		if os.path.exists(request.path):
 			shutil.rmtree(request.path)
 		os.mkdir(request.path)
 
-		wmutex.release()
+		wlock.release()
 		return service_pb2.MessageReply(pstr=b'1')
 
 
 	def c_replicate(self, request_iterator, context):
-		wmutex.acquire()
+		wlock = getWriteLock()
+
+		global fvMap
 		logger.info('replicate c')
 		for req in request_iterator:
 			logger.info(req.path)
 			if req.isdir:
 				os.mkdir(req.path)
 			else:
+				fvMap[req.path] = req.vno
 				f=open(req.path,'wb')
 				f.write(req.dat)
 				f.close()
-		wmutex.release()
+				os.chmod(req.path, 0o777)
+		
+		wlock.release()
 		return service_pb2.MessageReply(pstr=b'1')
 
 
 
 	def s_replicate(self, request, context):
+		rlock = getReadLock()
+
+		global fvMap
 		logger.info('replicate s %s %s %d', request.myip, request.oip, request.type)
 		oip = request.oip
 		
@@ -98,7 +217,7 @@ class Greeter(service_pb2_grpc.GreeterServicer):
 						dat = fd.read()
 					
 					path = ff.replace(p2, p1, 1)
-					yield service_pb2.CReplicationRequest(dat=dat,path=path,isdir=False,ip=request.myip,type=request.type)
+					yield service_pb2.CReplicationRequest(dat=dat,path=path,isdir=False,ip=request.myip,type=request.type, vno=fvMap[ff])
 
 		ans=[]
 		for i in dfs():
@@ -107,12 +226,278 @@ class Greeter(service_pb2_grpc.GreeterServicer):
 		s1 = service_pb2_grpc.GreeterStub(c1)
 		s1.c_empty(service_pb2.CReplicationRequest(path='..'+p1))
 		s1.c_replicate(iter(ans))
+
+		rlock.release()
 		return service_pb2.MessageReply(pstr=b'1')
+
+	def fuse_unlink(self, request, context):
+		wlock = getWriteLock()
+
+		path = request.mpt + request.path
+		logger.info('fuse_unlink %s', request.path)
+		oip = ''
+
+		if not request.byPrimary:
+			try:
+				if request.isReplica:
+					pos1 = path.find('/myfs-replicas/') + len('/myfs-replicas/')
+					pos2 = path.find('/', pos1)
+					oip = path[pos1:pos2]
+					logger.info(oip)
+					ompt = request.mpt.replace('/myfs-replicas/%s'%oip, '/myfs', 1)
+					stub = service_pb2_grpc.GreeterStub(getChannel(oip))
+					ans = stub.fuse_unlink(service_pb2.MessageRequest(mpt=ompt, path=request.path, isReplica=False, byPrimary=True))
+					if isinstance(ans, OSError):
+						wlock.release()
+						return ans
+
+				else:
+					oip = getReplica(myip)
+					logger.info(oip)
+					c = getChannel(oip)
+					ompt = request.mpt.replace('/myfs', '/myfs-replicas/%s'%myip, 1)
+
+					stub = service_pb2_grpc.GreeterStub(getChannel(oip))
+					ans = stub.fuse_unlink(service_pb2.MessageRequest(mpt=ompt, path=request.path, isReplica=True, byPrimary=True))
+					if isinstance(ans, OSError):
+						wlock.release()
+						return ans
+			except grpc.RpcError as e:
+				# Replica Offline
+				logger.info(str(e))
+				if e.code() != grpc.StatusCode.UNAVAILABLE:
+					wlock.release()
+					raise e
+
+		# sent to other machine. Now copy your work
+		try:
+			ans = os.unlink(path)
+		except OSError as e:
+			logging.info(str(e))
+			ans = e
+		ans = pickle.dumps(ans)
+		wlock.release()
+		return service_pb2.MessageReply(pstr=ans)
+
+
+	def fuse_truncate(self, request, context):
+		wlock = getWriteLock()
+
+		path = request.mpt + request.path
+		logger.info('fuse_truncate %s', request.path)
+		oip = ''
+
+		if not request.byPrimary:
+			try:
+				if request.isReplica:
+					pos1 = path.find('/myfs-replicas/') + len('/myfs-replicas/')
+					pos2 = path.find('/', pos1)
+					oip = path[pos1:pos2]
+					logger.info(oip)
+					ompt = request.mpt.replace('/myfs-replicas/%s'%oip, '/myfs', 1)
+					stub = service_pb2_grpc.GreeterStub(getChannel(oip))
+					ans = stub.fuse_truncate(service_pb2.MessageRequest(mpt=ompt, path=request.path, length=request.length,
+						isReplica=False, byPrimary=True))
+					if isinstance(ans, OSError):
+						logger.info(str(ans))
+						wlock.release()
+						return ans
+
+				else:
+					oip = getReplica(myip)
+					logger.info(oip)
+					c = getChannel(oip)
+					ompt = request.mpt.replace('/myfs', '/myfs-replicas/%s'%myip, 1)
+
+					stub = service_pb2_grpc.GreeterStub(getChannel(oip))
+					ans = stub.fuse_truncate(service_pb2.MessageRequest(mpt=ompt, path=request.path, length=request.length,
+						isReplica=True, byPrimary=True))
+					if isinstance(ans, OSError):
+						logger.info(str(ans))
+						wlock.release()
+						return ans
+			except grpc.RpcError as e:
+				# Replica Offline
+				logger.info(str(e))
+				if e.code() != grpc.StatusCode.UNAVAILABLE:
+					wlock.release()
+					raise e
+
+		# sent to other machine. Now copy your work
+		ans = ''
+		fvMap[path] += 1
+		try:
+			f = open(path, 'a')
+			f.truncate(request.length)
+			f.close()
+		except OSError as e:
+			logging.info(str(e))
+			ans = e
+		ans = pickle.dumps(ans)
+		logger.info('truncate done')
+		wlock.release()
+		return service_pb2.MessageReply(pstr=ans)
 		
-		
+	
+	def fuse_rmdir(self, request, context):
+		wlock = getWriteLock()
+
+		path = request.mpt + request.path
+		logger.info('fuse_rmdir %s', request.path)
+		oip = ''
+
+		if not request.byPrimary:
+			try:
+				if request.isReplica:
+					pos1 = path.find('/myfs-replicas/') + len('/myfs-replicas/')
+					pos2 = path.find('/', pos1)
+					oip = path[pos1:pos2]
+					logger.info(oip)
+					ompt = request.mpt.replace('/myfs-replicas/%s'%oip, '/myfs', 1)
+					stub = service_pb2_grpc.GreeterStub(getChannel(oip))
+					ans = stub.fuse_rmdir(service_pb2.MessageRequest(mpt=ompt, path=request.path, isReplica=False, byPrimary=True))
+					if isinstance(ans, OSError):
+						wlock.release()
+						return ans
+
+				else:
+					oip = getReplica(myip)
+					logger.info(oip)
+					c = getChannel(oip)
+					ompt = request.mpt.replace('/myfs', '/myfs-replicas/%s'%myip, 1)
+
+					stub = service_pb2_grpc.GreeterStub(getChannel(oip))
+					ans = stub.fuse_rmdir(service_pb2.MessageRequest(mpt=ompt, path=request.path, isReplica=True, byPrimary=True))
+					if isinstance(ans, OSError):
+						wlock.release()
+						return ans
+			except grpc.RpcError as e:
+				# Replica Offline
+				logger.info(str(e))
+				if e.code() != grpc.StatusCode.UNAVAILABLE:
+					wlock.release()
+					raise e
+
+		# sent to other machine. Now copy your work
+		ans=''
+		try:
+			os.rmdir(path)
+		except OSError as e:
+			logging.info(str(e))
+			ans = e
+		ans = pickle.dumps(ans)
+		wlock.release()
+		return service_pb2.MessageReply(pstr=ans)
+
+
+	def fuse_mkdir(self, request, context):
+		wlock = getWriteLock()
+
+		path = request.mpt + request.path
+		logger.info('fuse_mkdir %s', request.path)
+		oip = ''
+
+		if not request.byPrimary:
+			try:
+				if request.isReplica:
+					pos1 = path.find('/myfs-replicas/') + len('/myfs-replicas/')
+					pos2 = path.find('/', pos1)
+					oip = path[pos1:pos2]
+					logger.info(oip)
+					ompt = request.mpt.replace('/myfs-replicas/%s'%oip, '/myfs', 1)
+					stub = service_pb2_grpc.GreeterStub(getChannel(oip))
+					ans = stub.fuse_mkdir(service_pb2.MessageRequest(mpt=ompt, path=request.path, isReplica=False, byPrimary=True))
+					if isinstance(ans, OSError):
+						wlock.release()
+						return ans
+
+				else:
+					oip = getReplica(myip)
+					logger.info(oip)
+					c = getChannel(oip)
+					ompt = request.mpt.replace('/myfs', '/myfs-replicas/%s'%myip, 1)
+
+					stub = service_pb2_grpc.GreeterStub(getChannel(oip))
+					ans = stub.fuse_mkdir(service_pb2.MessageRequest(mpt=ompt, path=request.path, isReplica=True, byPrimary=True))
+					if isinstance(ans, OSError):
+						wlock.release()
+						return ans
+			except grpc.RpcError as e:
+				# Replica Offline
+				logger.info(str(e))
+				if e.code() != grpc.StatusCode.UNAVAILABLE:
+					wlock.release()
+					raise e
+
+		# sent to other machine. Now copy your work
+		ans = ''
+		try:
+			os.mkdir(path)
+		except OSError as e:
+			logging.info(str(e))
+			ans = e
+		ans = pickle.dumps(ans)
+		wlock.release()
+		return service_pb2.MessageReply(pstr=ans)
+
+
+	def fuse_rename(self, request, context):
+		wlock = getWriteLock()
+
+		path = request.mpt + request.path
+		path1 = request.mpt + request.path1
+		logger.info('fuse_rename %s', request.path)
+		oip = ''
+
+		if not request.byPrimary:
+			try:
+				if request.isReplica:
+					pos1 = path.find('/myfs-replicas/') + len('/myfs-replicas/')
+					pos2 = path.find('/', pos1)
+					oip = path[pos1:pos2]
+					logger.info(oip)
+					ompt = request.mpt.replace('/myfs-replicas/%s'%oip, '/myfs', 1)
+					stub = service_pb2_grpc.GreeterStub(getChannel(oip))
+					ans = stub.fuse_rename(service_pb2.MessageRequest(mpt=ompt, path=request.path,
+						isReplica=False, byPrimary=True, path1=request.path1))
+					if isinstance(ans, OSError):
+						wlock.release()
+						return ans
+
+				else:
+					oip = getReplica(myip)
+					logger.info(oip)
+					c = getChannel(oip)
+					ompt = request.mpt.replace('/myfs', '/myfs-replicas/%s'%myip, 1)
+
+					stub = service_pb2_grpc.GreeterStub(getChannel(oip))
+					ans = stub.fuse_rename(service_pb2.MessageRequest(mpt=ompt, path=request.path,
+						isReplica=True, byPrimary=True, path1=request.path1))
+					if isinstance(ans, OSError):
+						wlock.release()
+						return ans
+			except grpc.RpcError as e:
+				# Replica Offline
+				logger.info(str(e))
+				if e.code() != grpc.StatusCode.UNAVAILABLE:
+					wlock.release()
+					raise e
+
+		# sent to other machine. Now copy your work
+		ans = ''
+		try:
+			os.rename(path, path1)
+		except OSError as e:
+			logging.info(str(e))
+			ans = e
+		ans = pickle.dumps(ans)
+		wlock.release()
+		return service_pb2.MessageReply(pstr=ans)
 
 
 	def fuse_access(self, request, context):
+		rlock = getReadLock()
+
 		path = request.mpt + request.path
 		ans = 0
 		if not os.access(path, request.mode):
@@ -120,17 +505,24 @@ class Greeter(service_pb2_grpc.GreeterServicer):
 
 		logger.info("access called on %s %d %d", path, request.mode, ans)
 		ans = pickle.dumps(ans)
+		rlock.release()
+
 		return service_pb2.MessageReply(pstr=ans)
 
 	def fuse_readdir(self, request, context):
+		rlock = getReadLock()
+
 		path = request.mpt + request.path
 		logger.info("readdir called on %s", path)
 		ans = list(map(fuse.Direntry, list(os.listdir(path))))
 		ans = pickle.dumps(ans)
 
+		rlock.release()
 		return service_pb2.MessageReply(pstr=ans)
 
 	def fuse_getattr(self, request, context):
+		rlock = getReadLock()
+
 		path = request.mpt + request.path
 		logger.info("getattr called on %s", path)
 
@@ -139,50 +531,221 @@ class Greeter(service_pb2_grpc.GreeterServicer):
 		except OSError as e:
 			ans = e
 
+		rlock.release()
 		ans = pickle.dumps(ans)
 		
 		return service_pb2.MessageReply(pstr=ans)
 
 	def fuse_read(self, request, context):
-		path = request.mpt + request.path
-		logger.info("read called on %s %d %d", path, request.length, request.offset)
-		
-		f = os.fdopen(os.open(path, request.flags), flag2mode(request.flags))
-		f.seek(request.offset)
-		ans = pickle.dumps(f.read(request.length))
-		f.close()
+		rlock = getReadLock()
 
+		global fvMap
+		path = request.mpt + request.path
+		logger.info("read called on %s", path)
+		
+		ans = {}
+		#update
+		avno = fvMap[path]
+		rbnos = pickle.loads(request.blist)
+		if avno != request.vno:
+			rbnos = []
+			for st in range((request.offset // BSIZE) * BSIZE,  request.length+request.offset, BSIZE):
+				rbnos.append(st)
+
+		with os.fdopen(os.open(path, request.flags), 'r') as f:
+			for r in rbnos:
+				f.seek(r)
+				ans[r]=f.read(BSIZE)
+
+		# logger.info(ans)
 		# f = os.open(path, request.flags)
 		# os.lseek(f, request.offset, 0)
 		# ans = pickle.dumps(os.read(f, request.length))
 		# os.close(f)
+		
+		rlock.release()
+		return service_pb2.MessageReply(pstr=pickle.dumps((ans, avno)))
 
+	def fuse_write(self, request, context):
+		wlock = getWriteLock()
+
+		global fvMap
+		path = request.mpt + request.path
+		logger.info("write called on %s", path)
+
+		oip = ''
+
+		if not request.byPrimary:
+			try:
+				if request.isReplica:
+					pos1 = path.find('/myfs-replicas/') + len('/myfs-replicas/')
+					pos2 = path.find('/', pos1)
+					oip = path[pos1:pos2]
+					logger.info(oip)
+					ompt = request.mpt.replace('/myfs-replicas/%s'%oip, '/myfs', 1)
+					stub = service_pb2_grpc.GreeterStub(getChannel(oip))
+					ans = stub.fuse_write(service_pb2.MessageRequest(mpt=ompt, path=request.path,
+						flags=request.flags, blist=request.blist, isReplica=False, byPrimary=True))
+					if isinstance(ans, OSError):
+						wlock.release()
+						return ans
+
+				else:
+					oip = getReplica(myip)
+					logger.info(oip)
+					c = getChannel(oip)
+					ompt = request.mpt.replace('/myfs', '/myfs-replicas/%s'%myip, 1)
+
+					stub = service_pb2_grpc.GreeterStub(getChannel(oip))
+					ans = stub.fuse_write(service_pb2.MessageRequest(mpt=ompt, path=request.path,
+						flags=request.flags, blist=request.blist, isReplica=True, byPrimary=True))
+					if isinstance(ans, OSError):
+						wlock.release()
+						return ans
+			except grpc.RpcError as e:
+				# Replica Offline
+				logger.info(str(e))
+				if e.code() != grpc.StatusCode.UNAVAILABLE:
+					wlock.release()
+					raise e
+
+		# sent to other machine. Now copy your work
+		ans = ''
+		logger.info('yelo %s %d', path, fvMap[path])
+		fvMap[path] += 1
+		try:
+			dirtyBlocks = pickle.loads(request.blist)
+			with open(path, 'r+') as fh:
+				for pos, fb in sorted(dirtyBlocks.items()):
+					if fb.okay:
+						logger.info('off %d %s', fb.offset, fb.dat)
+						fh.seek(fb.offset)
+						fh.write(fb.dat)
+					else:
+						for i, c in sorted(fb.elems.items()):
+							logger.info('offf %d %s', i, str(c))
+							fh.seek(i)
+							fh.write(c)
+				fh.flush()
+		except OSError as e:
+			logging.info(str(e))
+			ans = e
+		ans = pickle.dumps(ans)
+		wlock.release()
 		return service_pb2.MessageReply(pstr=ans)
+		
 
 	def fuse_fgetattr(self, request, context):
+		if request.flags & os.O_CREAT:
+			schrodingerLock = getWriteLock()
+		else:
+			schrodingerLock = getReadLock()
+
+
 		path = request.mpt + request.path
 		logger.info("fgetattr called on %s %d", path, request.flags)
+
+		if request.flags & os.O_CREAT:
+			oip = ''
+
+			if not request.byPrimary:
+				try:
+					if request.isReplica:
+						pos1 = path.find('/myfs-replicas/') + len('/myfs-replicas/')
+						pos2 = path.find('/', pos1)
+						oip = path[pos1:pos2]
+						logger.info(oip)
+						ompt = request.mpt.replace('/myfs-replicas/%s'%oip, '/myfs', 1)
+						stub = service_pb2_grpc.GreeterStub(getChannel(oip))
+						ans = stub.fuse_fgetattr(service_pb2.MessageRequest(mpt=ompt, path=request.path,
+							flags=request.flags, isReplica=False, byPrimary=True))
+						if isinstance(ans, OSError):
+							schrodingerLock.release()
+							return ans
+
+					else:
+						oip = getReplica(myip)
+						logger.info(oip)
+						c = getChannel(oip)
+						ompt = request.mpt.replace('/myfs', '/myfs-replicas/%s'%myip, 1)
+
+						stub = service_pb2_grpc.GreeterStub(getChannel(oip))
+						ans = stub.fuse_fgetattr(service_pb2.MessageRequest(mpt=ompt, path=request.path,
+							flags=request.flags, isReplica=True, byPrimary=True))
+						if isinstance(ans, OSError):
+							schrodingerLock.release()
+							return ans
+
+				except grpc.RpcError as e:
+					# Replica Offline
+					logger.info(str(e))
+					if e.code() != grpc.StatusCode.UNAVAILABLE:
+						schrodingerLock.release()
+						raise e
+
 		
 		try:
+			p = False
+			if not os.path.isfile(path) and request.flags & os.O_CREAT:
+				p = True
 			f = os.open(path, request.flags)
+			if p:
+				os.chmod(path, 0o777)
 			ans = pickle.dumps(os.fstat(f))
 			os.close(f)
+			
 		except OSError as e:
 			ans = e
-		
+
+		schrodingerLock.release()
 		return service_pb2.MessageReply(pstr=ans)
 
 def serve():
+	# Pray this works
+	global myip
+	temp = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+	temp.connect(('10.255.255.255', 1))
+	myip = temp.getsockname()[0]
+	logger.info('myip %s', myip)
+
+	global cchannel1, cchannel2
+	cchannel1 = grpc.insecure_channel('%s:%d'%(cip[0], cport[0]))
+	cchannel2 = grpc.insecure_channel('%s:%d'%(cip[1], cport[1]))
+
 	server = grpc.server(futures.ThreadPoolExecutor(max_workers=1))
 	service_pb2_grpc.add_GreeterServicer_to_server(Greeter(), server)
 	server.add_insecure_port('[::]:%d' % rport)
 	server.start()
 
-	cserver = grpc.insecure_channel('%s:%d'%(cip, cport))
-	stub = service_pb2_grpc.CGreeterStub(cserver)
-	# get ip from context in server
-	stub.c_join(service_pb2.CMessageRequest())
-	logger.info('Replication done')
+	while True:
+		try:
+			stub = service_pb2_grpc.CGreeterStub(cchannel1)
+			# get ip from context in server
+			logger.info('Wanna Replication')
+			ans = stub.c_join(service_pb2.CMessageRequest(byPrimary=False))
+			ans = pickle.loads(ans.pstr)
+			logger.info('Replication done')
+			break
+		except grpc.RpcError as e:
+			if e.code() == grpc.StatusCode.UNAVAILABLE:
+				logger.info(str(e))
+				cchannel1, cchannel2 = cchannel2, cchannel1
+			time.sleep(0.1)
+			continue
+			
+
+
+	try:
+		if not os.path.exists('../../MyFS'):
+			os.mkdir('../../MyFS')
+		os.system('fusermount -u ../../MyFS')
+		# os.system('./rfmount %s:../myfs ../../MyFS'%myip)
+	except Exception as e:
+		logger.info(e)
+		server.stop(0)
+		exit(0)
+		
+	logger.info('mounted')
 
 	try:
 		while True:

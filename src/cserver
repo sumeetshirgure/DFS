@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+from readerwriterlock import rwlock
 from concurrent import futures
 import time
 import logging
@@ -20,17 +21,23 @@ import service_pb2_grpc
 import random, threading
 
 
-_ONE_DAY_IN_SECONDS = 60 * 24 * 24
+
+_ONE_DAY_IN_SECONDS = 60 * 60 * 24
 
 logging.basicConfig()
 logger = logging.getLogger('cserver')
 hdlr = logging.FileHandler('cserver.log')
+hdlr.setFormatter(logging.Formatter('[%(lineno)s @ %(funcName)10s()] %(message)s'))
 logger.addHandler(hdlr)
 logger.setLevel(logging.INFO)
-cport = 7899
+cip = ['10.145.134.255', '10.145.134.255']
+# cip = ['10.109.57.201', '10.109.57.201']
+cport = [7899,7900]
 rport = 7897
+oid = 0
+cchannel = None
 
-
+fslock = rwlock.RWLockFair()
 
 def flag2mode(flags):
 	md = {os.O_RDONLY: 'r', os.O_WRONLY: 'w', os.O_RDWR: 'w+'}
@@ -43,24 +50,82 @@ def flag2mode(flags):
 
 allClients = set()
 replicaDict = {}
-dmutex = threading.Lock()
+
+def getWriteLock():
+	w = fslock.gen_wlock()
+	while not w.acquire(blocking=True, timeout=1):
+		time.sleep(random.uniform(0, 1))
+	return w
+
+def getReadLock():
+	r = fslock.gen_rlock()
+	while not r.acquire(blocking=True, timeout=1):
+		time.sleep(random.uniform(0, 1))
+	return r
+
 
 class CGreeter(service_pb2_grpc.CGreeterServicer):
 
 	def c_getR(self, request, context):
-		oip = replicaDict[request.ip]
 		logger.info('getR %s %s', request.ip, oip)
+		oip = replicaDict[request.ip]
 		return service_pb2.MessageReply(pstr=pickle.dumps(oip))
+
+	def sand_nodes(self, request, context):
+		rlock = getReadLock()
+		ans = (allClients, replicaDict)
+		rlock.release()
+		return service_pb2.MessageReply(pstr=pickle.dumps(ans))
+		
+
 
 	def c_join(self, request, context):
 
-		dmutex.acquire()
+		wlock = getWriteLock()
 		global allClients, replicaDict
 
-		# please be ipv4
 		clientIP = context.peer().split(':')[1]
+		# please be ipv4
+		
+
+		if request.byPrimary:
+			logger.info('join %s', request.ip)
+			allClients.add(request.ip)
+			if request.rchoice:
+				replicaDict[request.ip] = request.rchoice
+			wlock.release()
+			return service_pb2.MessageReply(pstr=b'1')
+
 		logger.info('join %s', clientIP)
+		
+
+		#sand nodes to frand
+		while True:
+			try:
+				rchoice = ''
+				if len(allClients) >= 1:
+					rchoice = random.choice(list(allClients))
+				stub = service_pb2_grpc.CGreeterStub(cchannel)
+				stub.c_join(service_pb2.CMessageRequest(byPrimary=True,ip=clientIP, rchoice=rchoice),
+					timeout=random.uniform(3,5))
+				break
+			except grpc.RpcError as e:
+				logger.info(str(e))
+				if e.code() == grpc.StatusCode.DEADLINE_EXCEEDED:
+					wlock.release()
+					time.sleep(random.uniform(0,2))
+					wlock = getWriteLock()
+					continue
+				elif e.code() == grpc.StatusCode.UNAVAILABLE:
+					break
+				else:
+					logger.info(str(e))
+					wlock.release()
+					raise e
+
+		ret = False
 		if clientIP in allClients:
+			ret = True
 			otherIP = replicaDict[clientIP]
 
 			logger.info('here')
@@ -95,7 +160,7 @@ class CGreeter(service_pb2_grpc.CGreeterServicer):
 				replicaDict[otherIP] = clientIP
 
 			else:
-				otherIP = random.choice(list(allClients))
+				otherIP = rchoice
 				with grpc.insecure_channel('%s:%d'%(clientIP, rport)) as c1:
 					s1 = service_pb2_grpc.GreeterStub(c1)
 					s1.s_replicate(service_pb2.SReplicationRequest(myip=clientIP, oip=otherIP, type=1))
@@ -104,15 +169,30 @@ class CGreeter(service_pb2_grpc.CGreeterServicer):
 
 			allClients.add(clientIP)
 
-		dmutex.release()
-		return service_pb2.MessageReply(pstr=b'1')
+		wlock.release()
+		return service_pb2.MessageReply(pstr=pickle.dumps(ret))
 	
 
 def serve():
-	server = grpc.server(futures.ThreadPoolExecutor(max_workers=1))
+	server = grpc.server(futures.ThreadPoolExecutor(max_workers=2))
 	service_pb2_grpc.add_CGreeterServicer_to_server(CGreeter(), server)
-	server.add_insecure_port('[::]:%d'%cport)
+	server.add_insecure_port('[::]:%d'%cport[1-oid])
 	server.start()
+
+	logger.info('sand nodes')
+	global allClients, replicaDict
+	while True:
+		try:
+			stub = service_pb2_grpc.CGreeterStub(cchannel)
+			ans = stub.sand_nodes(service_pb2.CMessageRequest())
+			allClients, replicaDict = pickle.loads(ans.pstr)
+			break
+		except grpc.RpcError as e:
+			logger.info(str(e))
+			time.sleep(0.1)
+			continue
+
+	logger.info('got nodes')
 	try:
 		while True:
 			time.sleep(_ONE_DAY_IN_SECONDS)
@@ -121,4 +201,7 @@ def serve():
 
 
 if __name__ == '__main__':
+	oid = 1 - int(sys.argv[1])
+	cchannel = grpc.insecure_channel('%s:%d'%(cip[oid], cport[oid]))
+
 	serve()

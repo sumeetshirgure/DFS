@@ -20,6 +20,9 @@ import service_pb2
 import service_pb2_grpc
 import simplejson, json
 import threading, time
+import zlib, random
+from collections import defaultdict
+import copy 
 
 
 if not hasattr(fuse, '__version__'):
@@ -38,46 +41,158 @@ def flag2mode(flags):
 
 	return m
 
+ovdir=''
 vdir = ""
 rport = 7897
 channel1 = None
 channel2 = None
 ip1 = ''
 ip2 = ''
-cchannel = None
+cchannel1 = None
+cchannel2 = None
 isReplica = False
+myosdir = os.path.abspath('.')
 
-cip = '10.5.16.76'
-cport = 7899
+cip = ['10.145.134.255', '10.145.134.255']
+# cip = ['10.109.57.201', '10.109.57.201']
+cport = [7899, 7900]
 
 logging.basicConfig()
 logger = logging.getLogger('mounter')
 hdlr = logging.FileHandler('client.log')
+hdlr.setFormatter(logging.Formatter('[%(lineno)s @ %(funcName)10s()] %(message)s'))
 logger.addHandler(hdlr)
 logger.setLevel(logging.INFO)
 
 channelLock = threading.Lock()
+BSIZE = 10
 
+
+
+class FileBlock(object):
+	def __init__(self,offset,path,dat,vno,isDirty=False,okay=True,elems={}):
+		self.offset=offset
+		self.path=path
+
+		self.dat=dat
+		self.vno=vno
+
+
+		# for something else
+		self.isDirty=isDirty
+		self.okay=okay
+		self.elems = elems
+
+	def merge(self, ofb):
+		fb = copy.deepcopy(self)
+		if self.okay and ofb.okay and self.offset >= ofb.offset and self.offset+len(self.dat) <= ofb.offset+len(ofb.dat):
+			return copy.deepcopy(ofb)
+
+
+		if fb.okay:
+			fb.okay = False
+			for i in range(0, len(fb.dat)):
+				fb.elems[fb.offset+i] = fb.dat[i]
+			fb.dat = ''
+			
+		if not ofb.okay:
+			for i, c in ofb.elems.items():
+				fb.elems[i] = c
+		else:
+			for i in range(0, len(ofb.dat)):
+				fb.elems[i+ofb.offset] = ofb.dat[i]
+
+		return fb
+	@staticmethod
+	def cfname(path,offset,isDirty=False):
+		ans=ip1+":"+ovdir.replace('_','__').replace('/', '_')+path.replace('_','__').replace('/','_')+"@"+str(offset)
+		if isDirty:
+			return str(hash(ans))
+		if len(ans) > 200:
+			ans = str(zlib.adler32(bytes(ans, encoding='utf-8')))
+		return ans
+
+
+
+class FileCache(object):
+
+	CSIZE = 10
+	def __init__(self):
+		self.sz = len(os.listdir('../cache/'))
+
+	def get(self,path,offset):
+		# logger.info('get %s %d', path, offset)
+
+		fname = FileBlock.cfname(path, offset)
+		fname = '../cache/'+fname
+		if os.path.isfile(fname):
+			logger.info('Found in cache: %s %d', path, offset)
+			with open(fname, 'rb') as fh:
+				dat, fvno, isDirty = pickle.load(fh)
+				return FileBlock(offset=offset,path=path,dat=dat,vno=fvno,isDirty=isDirty)
+		else:
+			return None
+
+	def put(self,fb):
+		# logger.info('put %s %d %d', fb.path, fb.offset, fb.vno)
+
+		fname = FileBlock.cfname(fb.path, fb.offset)
+		fname = '../cache/'+fname
+
+		clist = os.listdir('../cache/')
+		self.sz = len(clist)
+		if self.sz > self.CSIZE:
+			rcname = '../cache/'+random.choice(clist)
+			tm = os.path.getmtime(rcname)
+			toDel = False
+			with open(rcname, 'rb') as fh:
+				isDirty = pickle.load(fh)[2]
+				if not isDirty or tm-time.time() > 48*3600:
+					toDel = True
+			if toDel:
+				os.remove(rcname)
+
+
+		# if not os.path.isfile(fname):
+		# 	self.sz += 1
+
+		with open(fname, 'wb') as fh:
+			pickle.dump((fb.dat, fb.vno, fb.isDirty), fh)
+
+
+fcache = FileCache()
+# (ip, path, version, dirty, dat)
 class Xmp(Fuse):
 
 	def __init__(self, *args, **kw):
 		
 		Fuse.__init__(self, *args, **kw)
 
-		global cchannel, channel1, channel2, isReplica, ip2
+		global cchannel1, cchannel2, channel1, channel2, isReplica, ip2
 		# self.hostname, self.vdir, self.rport = hostname, vdir, rport
 
 
-		cchannel = grpc.insecure_channel('%s:%d' % (cip, cport))
+		cchannel1 = grpc.insecure_channel('%s:%d' % (cip[0], cport[0]))
+		cchannel2 = grpc.insecure_channel('%s:%d' % (cip[1], cport[1]))
 
-		stub = service_pb2_grpc.CGreeterStub(cchannel)
-		response = stub.c_getR(service_pb2.CMessageRequest(ip=ip1))
-		ip2 = pickle.loads(response.pstr)
-		
+		while True:
+			try:
+				stub = service_pb2_grpc.CGreeterStub(cchannel1)
+				response = stub.c_getR(service_pb2.CMessageRequest(ip=ip1))
+				ip2 = pickle.loads(response.pstr)
+				break
+			except grpc.RpcError as e:
+				if e.code() == grpc.StatusCode.UNAVAILABLE:
+					# logger.info(str(e))
+					cchannel, cchannel2 = cchannel2, cchannel1
+				time.sleep(0.1)
+				continue
+
+		logger.info('got replica id')
 		channel1 = grpc.insecure_channel('%s:%d' % (ip1, rport))
 		channel2 = grpc.insecure_channel('%s:%d' % (ip2, rport))
 		isReplica = False
-		
+
 		# do stuff to set up your filesystem here, if you want
 		#import thread
 		#thread.start_new_thread(self.mythread, ())
@@ -98,6 +213,7 @@ class Xmp(Fuse):
 		global channel1, channel2, isReplica, vdir
 		logger.info('change channel')
 
+		time.sleep(0.2)
 		channelLock.acquire()
 
 		channel1, channel2 = channel2, channel1
@@ -111,21 +227,22 @@ class Xmp(Fuse):
 
 	def getattr(self, path):
 		logger.info("getattr %s", path)
-		
-		try:
-			stub = service_pb2_grpc.GreeterStub(channel1)
-			response = stub.fuse_getattr(service_pb2.MessageRequest(mpt=vdir, path=path))
-			ans = pickle.loads(response.pstr)
-			if isinstance(ans, OSError):
-				raise ans
-		except grpc.RpcError as e:
-			logger.info(str(e))
-			if e.code() == grpc.StatusCode.UNAVAILABLE:
-				self.changeChannel()
-				return self.getattr(path)
-			else:
-				raise e
-
+		ans=None
+		while True:
+			try:
+				stub = service_pb2_grpc.GreeterStub(channel1)
+				response = stub.fuse_getattr(service_pb2.MessageRequest(mpt=vdir, path=path))
+				ans = pickle.loads(response.pstr)
+				break
+			except grpc.RpcError as e:
+				logger.info(str(e))
+				if e.code() == grpc.StatusCode.UNAVAILABLE:
+					self.changeChannel()
+					continue
+				else:
+					raise e
+		if isinstance(ans, OSError):
+			raise ans
 		return ans
 
 	def readlink(self, path):
@@ -135,30 +252,22 @@ class Xmp(Fuse):
 
 	def readdir(self, path, offset):
 		logger.info("readdir %s", path)
-
-		try:
-			stub = service_pb2_grpc.GreeterStub(channel1)
-			response = stub.fuse_readdir(service_pb2.MessageRequest(mpt=vdir, path=path))
-			ans = pickle.loads(response.pstr)
-		except grpc.RpcError as e:
-			logger.info(str(e))
-			if e.code() == grpc.StatusCode.UNAVAILABLE:
-				self.changeChannel()
-				return self.readdir(path, offset)
-			else:
-				raise e
+		ans=None
+		while True:
+			try:
+				stub = service_pb2_grpc.GreeterStub(channel1)
+				response = stub.fuse_readdir(service_pb2.MessageRequest(mpt=vdir, path=path))
+				ans = pickle.loads(response.pstr)
+				break
+			except grpc.RpcError as e:
+				logger.info(str(e))
+				if e.code() == grpc.StatusCode.UNAVAILABLE:
+					self.changeChannel()
+					continue
+				else:
+					raise e
 
 		return ans
-
-	def unlink(self, path):
-		logger.info('unlink')
-		# os.unlink(self.vdir + path)
-		pass
-
-	def rmdir(self, path):
-		logger.info('rmdir')
-		# os.rmdir(self.vdir + path)
-		pass
 
 	def symlink(self, path, path1):
 		logger.info('symlink')
@@ -167,7 +276,23 @@ class Xmp(Fuse):
 
 	def rename(self, path, path1):
 		logger.info('rename')
-		# os.rename(self.vdir + path, self.vdir + path1)
+		while True:
+			try:
+				stub = service_pb2_grpc.GreeterStub(channel1)
+				response = stub.fuse_rename(service_pb2.MessageRequest(mpt=vdir, path=path, mode=mode, 
+					isReplica=isReplica, byPrimary=False, path1=path1))
+				ans = pickle.loads(response.pstr)
+				logger.info(ans)
+				if isinstance(ans, OSError):
+					raise ans
+				break
+			except grpc.RpcError as e:
+				logger.info(str(e))
+				if e.code() == grpc.StatusCode.UNAVAILABLE:
+					self.changeChannel()
+					continue
+				else:
+					raise e
 		pass
 
 	def link(self, path, path1):
@@ -186,21 +311,89 @@ class Xmp(Fuse):
 		pass
 
 	def truncate(self, path, len):
-		logger.info('truncate')
-		# f = open(self.vdir + path, "a")
-		# f.truncate(len)
-		# f.close()
-		pass
+		logger.info('truncate %s %d', path, len)
+		while True:
+			try:
+				stub = service_pb2_grpc.GreeterStub(channel1)
+				response = stub.fuse_truncate(service_pb2.MessageRequest(mpt=vdir, path=path, length=len,
+					isReplica=isReplica, byPrimary=False))
+				ans = pickle.loads(response.pstr)
+				if isinstance(ans, OSError):
+					raise ans
+				break
+			except grpc.RpcError as e:
+				logger.info(str(e))
+				if e.code() == grpc.StatusCode.UNAVAILABLE:
+					self.changeChannel()
+					continue
+				else:
+					raise e
+		logger.info('truncate done')
+
 
 	def mknod(self, path, mode, dev):
 		logger.info('mknod')
 		# os.mknod(self.vdir + path, mode, dev)
 		pass
 
+	def unlink(self, path):
+		logger.info('unlink')
+		while True:
+			try:
+				stub = service_pb2_grpc.GreeterStub(channel1)
+				response = stub.fuse_unlink(service_pb2.MessageRequest(mpt=vdir, path=path,
+					isReplica=isReplica, byPrimary=False))
+				ans = pickle.loads(response.pstr)
+				if isinstance(ans, OSError):
+					raise ans
+				break
+			except grpc.RpcError as e:
+				logger.info(str(e))
+				if e.code() == grpc.StatusCode.UNAVAILABLE:
+					self.changeChannel()
+					continue
+				else:
+					raise e
+
+
+	def rmdir(self, path):
+		logger.info('rmdir')
+		while True:
+			try:
+				stub = service_pb2_grpc.GreeterStub(channel1)
+				response = stub.fuse_rmdir(service_pb2.MessageRequest(mpt=vdir, path=path,
+					isReplica=isReplica, byPrimary=False))
+				ans = pickle.loads(response.pstr)
+				if isinstance(ans, OSError):
+					raise ans
+				break
+			except grpc.RpcError as e:
+				logger.info(str(e))
+				if e.code() == grpc.StatusCode.UNAVAILABLE:
+					self.changeChannel()
+					continue
+				else:
+					raise e
+
 	def mkdir(self, path, mode):
 		logger.info('mkdir')
-		# os.mkdir(self.vdir + path, mode)
-		pass
+		while True:
+			try:
+				stub = service_pb2_grpc.GreeterStub(channel1)
+				response = stub.fuse_mkdir(service_pb2.MessageRequest(mpt=vdir, path=path, mode=mode, 
+					isReplica=isReplica, byPrimary=False))
+				ans = pickle.loads(response.pstr)
+				logger.info(ans)
+				if isinstance(ans, OSError):
+					raise ans
+				break
+			except grpc.RpcError as e:
+				logger.info(str(e))
+				if e.code() == grpc.StatusCode.UNAVAILABLE:
+					self.changeChannel()
+					continue
+				else:
+					raise e
 
 	def utime(self, path, times):
 		logger.info('utime')
@@ -216,19 +409,21 @@ class Xmp(Fuse):
 
 	def access(self, path, mode):
 
-		logger.info("access %s", path)
-
-		try:
-			stub = service_pb2_grpc.GreeterStub(channel1)
-			response = stub.fuse_access(service_pb2.MessageRequest(mpt=vdir, path=path, mode=mode))
-			ans = pickle.loads(response.pstr)
-		except grpc.RpcError as e:
-			logger.info(str(e))
-			if e.code() == grpc.StatusCode.UNAVAILABLE:
-				self.changeChannel()
-				return self.access(path, mode)
-			else:
-				raise e
+		logger.info("access %s %d", path, mode)
+		ans=None
+		while True:
+			try:
+				stub = service_pb2_grpc.GreeterStub(channel1)
+				response = stub.fuse_access(service_pb2.MessageRequest(mpt=vdir, path=path, mode=mode))
+				ans = pickle.loads(response.pstr)
+				break
+			except grpc.RpcError as e:
+				logger.info(str(e))
+				if e.code() == grpc.StatusCode.UNAVAILABLE:
+					self.changeChannel()
+					continue
+				else:
+					raise e
 
 		return ans
 
@@ -282,78 +477,196 @@ class Xmp(Fuse):
 			
 			self.path = path
 			self.flags = flags
+			self.dirtyBlocks = {}
+			self.offset = 0
+			if flags & os.O_APPEND:				
+				self.offset = self.get_v()[1]
 			
 			logger.info("fileinit %s %d %s", vdir+path, flags, type(mode))
 			for i in mode:
-				logger.info(i)
+				logger.info('mode', i)
+			os.chdir(myosdir)
 
 
 		def fgetattr(self):
 
 			logger.info("fgetattr %s", vdir+self.path)
 
-			try:
-				stub = service_pb2_grpc.GreeterStub(channel1)            
-				response = stub.fuse_fgetattr(service_pb2.MessageRequest(mpt=vdir, path=self.path, 
-					flags=self.flags))
-				ans = pickle.loads(response.pstr)
-				if isinstance(ans, OSError):
-					raise ans
-			except grpc.RpcError as e:
-				logger.info(str(e))
-				if e.code() == grpc.StatusCode.UNAVAILABLE:
-					self.changeChannel()
-					return self.fgetattr()
-				else:
-					raise e
+			while True:
+				try:
+					stub = service_pb2_grpc.GreeterStub(channel1)            
+					response = stub.fuse_fgetattr(service_pb2.MessageRequest(mpt=vdir, path=self.path, 
+						flags=self.flags, isReplica=isReplica, byPrimary=False))
+					ans = pickle.loads(response.pstr)
+					if isinstance(ans, OSError):
+						raise ans
+					break
+				except grpc.RpcError as e:
+					logger.info(str(e))
+					if e.code() == grpc.StatusCode.UNAVAILABLE:
+						self.changeChannel()
+						continue
+					else:
+						raise e
 
 			return ans
 
+		def get_v(self):
+			logger.info("get_v %s", vdir+self.path)
+
+			while True:
+				try:
+					stub = service_pb2_grpc.GreeterStub(channel1)            
+					response = stub.get_v(service_pb2.MessageRequest(mpt=vdir, path=self.path))
+					ans = pickle.loads(response.pstr)
+					break
+				except grpc.RpcError as e:
+					logger.info(str(e))
+					if e.code() == grpc.StatusCode.UNAVAILABLE:
+						self.changeChannel()
+						continue
+					else:
+						raise e
+			logger.info("get_v %s %d %d", vdir+self.path, ans[0], ans[1])
+			return ans
+
+
 		def read(self, length, offset):
+			# offset += self.offset
 			logger.info("read %s %d %d", vdir+self.path, length, offset)
 
-			try:
-				stub = service_pb2_grpc.GreeterStub(channel1)            
-				response = stub.fuse_read(service_pb2.MessageRequest(mpt=vdir, path=self.path,
-					length=length, offset=offset, flags=self.flags))
-				ans = pickle.loads(response.pstr)
-				logger.info(ans)
-			except grpc.RpcError as e:
-				logger.info(str(e))
-				if e.code() == grpc.StatusCode.UNAVAILABLE:
-					self.changeChannel()
-					return self.read(length, offset)
-				else:
-					raise e
+			ans = ''
+			avno = self.get_v()[0]
+			logger.info('init vno = %d', avno)
+			if avno == -1:
+				raise OSError(2, 'No such file or directory', self.path)
 
-			return str(ans)
+
+			toReadBlocks = []
+			cacheDict = {}
+			for st in range((offset // BSIZE) * BSIZE,  length+offset, BSIZE):
+				fb = fcache.get(self.path, st)
+				if fb is None or fb.vno != avno:
+					toReadBlocks.append(st)
+				else:
+					cacheDict[st] = fb
+
+
+			while True:
+				if len(toReadBlocks) == 0:
+					break
+				try:
+					stub = service_pb2_grpc.GreeterStub(channel1)            
+					response = stub.fuse_read(service_pb2.MessageRequest(mpt=vdir, path=self.path,
+						flags=self.flags, vno=avno, blist=pickle.dumps(toReadBlocks), length=length, offset=offset))
+					retVal = pickle.loads(response.pstr)
+
+					# logger.info(retVal)
+					if retVal[1] != avno:
+						cacheDict = {}
+						avno = retVal[1]
+					break
+
+				except grpc.RpcError as e:
+					logger.info(str(e))
+					if e.code() == grpc.StatusCode.UNAVAILABLE:
+						self.changeChannel()
+						continue
+					else:
+						raise e
+
+			ans = ''
+			try:
+				for st in range((offset // BSIZE) * BSIZE,  length+offset, BSIZE):
+					_st = max(st, offset) - st
+					now = ''
+					if st in cacheDict:
+						fb = cacheDict[st]
+						now = fb.dat
+					else:
+						now = retVal[0][st]
+						fb = FileBlock(offset=st, dat=now, vno=avno, path=self.path)
+						if st not in self.dirtyBlocks:
+							fcache.put(fb)
+
+					_en = min(st+len(now), length+offset) - st
+
+					# logger.info('%d %d %d %d',st,len(now),_st,_en)
+					ans += now[_st:_en]
+			except Exception as e:
+				logger.info(str(e))
+
+			logger.info('vno read = %d', avno)
+			return ans
+
+		def write(self, buf, offset):
+			# offset += self.offset
+			logger.info("write %s %s %d", vdir+self.path, buf, offset)
+			if self.flags == os.O_RDONLY:
+				return 0
+
+			ans = 0
+			avno = self.get_v()[0]
+			if avno == -1:
+				raise OSError(2, 'No such file or directory', self.path)
+
+			length = len(buf)
+
+			for st in range((offset // BSIZE) * BSIZE,  length+offset, BSIZE):
+				logger.info('here %d', st)
+				_st = max(st, offset)-offset
+				_en = min(st+BSIZE, length+offset)-offset
+				yo = FileBlock(offset=_st+offset,path=self.path,dat=buf[_st:_en],vno=avno,isDirty=True)
+
+				if st in self.dirtyBlocks:
+					self.dirtyBlocks[st] = self.dirtyBlocks[st].merge(yo)
+				else:
+					self.dirtyBlocks[st] = yo
+
+			return len(buf)
+
 
 		# do nothing
-		def write(self, buf, offset):
-			logger.info('write')
-			pass
-			# self.file.seek(offset)
-			# self.file.write(buf)
-			# return len(buf)
+		def _fflush(self):
+			logger.info('_fflush %d', len(self.dirtyBlocks))
+
+			while True:
+				if len(self.dirtyBlocks) == 0:
+					break
+				try:
+					stub = service_pb2_grpc.GreeterStub(channel1)            
+					response = stub.fuse_write(service_pb2.MessageRequest(mpt=vdir, path=self.path,
+						flags=self.flags, blist=pickle.dumps(self.dirtyBlocks), byPrimary=False, isReplica=isReplica))
+					retVal = pickle.loads(response.pstr)
+
+					if isinstance(retVal, Exception):
+						logger.info('lmao')
+						raise retVal
+					break
+
+				except grpc.RpcError as e:
+					logger.info(str(e))
+					if e.code() == grpc.StatusCode.UNAVAILABLE:
+						self.changeChannel()
+						continue
+					else:
+						raise e
+
+			self.dirtyBlocks = {}
+			
 
 		# do nothing
 		def release(self, flags):
+			self._fflush()
 			logger.info('release')
 			pass
 			# self.file.close()
 
 		# do nothing
-		def _fflush(self):
-			logger.info('_fflush')
-			pass
-			# if 'w' in self.file.mode or 'a' in self.file.mode:
-			#     self.file.flush()
-
-		# do nothing
 		def fsync(self, isfsyncfile):
 			logger.info('fsync')
+			self._fflush()
 			pass            
-			# self._fflush()
 			# if isfsyncfile and hasattr(os, 'fdatasync'):
 			#     os.fdatasync(self.fd)
 			# else:
@@ -362,8 +675,8 @@ class Xmp(Fuse):
 		# do nothing
 		def flush(self):
 			logger.info('flush')
+			self._fflush()
 			pass
-			# self._fflush()
 			# cf. xmp_flush() in fusexmp_fh.c
 			# os.close(os.dup(self.fd))
 
@@ -425,9 +738,11 @@ class Xmp(Fuse):
 
 def main():
 
-	global ip1, ip2, vdir
+	global ip1, ip2, vdir, ovdir
 	ip1, vdir = sys.argv[1].split(':')
-	sys.argv = [sys.argv[0], sys.argv[2]]
+	ovdir = vdir
+	sys.argv = [sys.argv[0]] + sys.argv[2:]
+	# print(sys.argv)
 
 	usage = """
 Userspace nullfs-alike: mirror the filesystem tree from some point on.
@@ -435,7 +750,8 @@ Userspace nullfs-alike: mirror the filesystem tree from some point on.
 
 	server = Xmp(version="%prog " + fuse.__version__,
 				 usage=usage,
-				 dash_s_do='setsingle')
+				 dash_s_do='setsingle'
+				 )
 
 	server.parser.add_option(mountopt="root", metavar="PATH", default='/',
 							 help="mirror filesystem from under PATH [default: %default]")
