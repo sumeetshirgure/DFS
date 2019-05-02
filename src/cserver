@@ -30,7 +30,7 @@ hdlr = logging.FileHandler('cserver.log')
 hdlr.setFormatter(logging.Formatter('[%(lineno)s @ %(funcName)10s()] %(message)s'))
 logger.addHandler(hdlr)
 logger.setLevel(logging.INFO)
-cip = ['10.145.134.255', '10.5.16.187']
+cip = ['10.145.134.255', '10.5.16.206']
 # cip = ['10.109.57.201', '10.109.57.201']
 cport = [7899,7900]
 rport = 7897

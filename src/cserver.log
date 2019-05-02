@@ -457,3 +457,152 @@
 [200 @      serve()] sand nodes
 [213 @      serve()] got nodes
 [71 @     c_getR()] getR 10.5.16.206 10.145.134.255
+[200 @      serve()] sand nodes
+[213 @      serve()] got nodes
+[105 @     c_join()] join 10.145.134.255
+[112 @     c_join()] set()
+[105 @     c_join()] join 10.5.16.206
+[112 @     c_join()] {'10.145.134.255'}
+[105 @     c_join()] join 10.145.18.66
+[112 @     c_join()] {'10.145.134.255', '10.5.16.206'}
+[200 @      serve()] sand nodes
+[209 @      serve()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "Connect Failed"
+	debug_error_string = "{"created":"@1556782064.351497527","description":"Failed to create subchannel","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":2267,"referenced_errors":[{"created":"@1556782064.351494568","description":"Pick Cancelled","file":"src/core/ext/filters/client_channel/lb_policy/pick_first/pick_first.cc","file_line":242,"referenced_errors":[{"created":"@1556782064.351468170","description":"Connect Failed","file":"src/core/ext/filters/client_channel/subchannel.cc","file_line":962,"grpc_status":14,"referenced_errors":[{"created":"@1556782064.351434537","description":"Failed to connect to remote host: Connection refused","errno":111,"file":"src/core/lib/iomgr/tcp_client_posix.cc","file_line":207,"os_error":"Connection refused","syscall":"connect","target_address":"ipv4:10.5.16.187:7900"}]}]}]}"
+>
+[209 @      serve()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "channel is in state TRANSIENT_FAILURE"
+	debug_error_string = "{"created":"@1556782064.452196835","description":"channel is in state TRANSIENT_FAILURE","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":2294,"grpc_status":14}"
+>
+[209 @      serve()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "channel is in state TRANSIENT_FAILURE"
+	debug_error_string = "{"created":"@1556782064.552828504","description":"channel is in state TRANSIENT_FAILURE","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":2294,"grpc_status":14}"
+>
+[209 @      serve()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "channel is in state TRANSIENT_FAILURE"
+	debug_error_string = "{"created":"@1556782064.653472711","description":"channel is in state TRANSIENT_FAILURE","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":2294,"grpc_status":14}"
+>
+[209 @      serve()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "channel is in state TRANSIENT_FAILURE"
+	debug_error_string = "{"created":"@1556782064.754131379","description":"channel is in state TRANSIENT_FAILURE","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":2294,"grpc_status":14}"
+>
+[209 @      serve()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "channel is in state TRANSIENT_FAILURE"
+	debug_error_string = "{"created":"@1556782064.854850811","description":"channel is in state TRANSIENT_FAILURE","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":2294,"grpc_status":14}"
+>
+[209 @      serve()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "channel is in state TRANSIENT_FAILURE"
+	debug_error_string = "{"created":"@1556782064.955675044","description":"channel is in state TRANSIENT_FAILURE","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":2294,"grpc_status":14}"
+>
+[209 @      serve()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "channel is in state TRANSIENT_FAILURE"
+	debug_error_string = "{"created":"@1556782065.056452245","description":"channel is in state TRANSIENT_FAILURE","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":2294,"grpc_status":14}"
+>
+[209 @      serve()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "channel is in state TRANSIENT_FAILURE"
+	debug_error_string = "{"created":"@1556782065.157170819","description":"channel is in state TRANSIENT_FAILURE","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":2294,"grpc_status":14}"
+>
+[209 @      serve()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "channel is in state TRANSIENT_FAILURE"
+	debug_error_string = "{"created":"@1556782065.257914476","description":"channel is in state TRANSIENT_FAILURE","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":2294,"grpc_status":14}"
+>
+[209 @      serve()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "channel is in state TRANSIENT_FAILURE"
+	debug_error_string = "{"created":"@1556782065.358630321","description":"channel is in state TRANSIENT_FAILURE","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":2294,"grpc_status":14}"
+>
+[209 @      serve()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "channel is in state TRANSIENT_FAILURE"
+	debug_error_string = "{"created":"@1556782065.459363403","description":"channel is in state TRANSIENT_FAILURE","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":2294,"grpc_status":14}"
+>
+[209 @      serve()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "channel is in state TRANSIENT_FAILURE"
+	debug_error_string = "{"created":"@1556782065.560070836","description":"channel is in state TRANSIENT_FAILURE","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":2294,"grpc_status":14}"
+>
+[209 @      serve()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "channel is in state TRANSIENT_FAILURE"
+	debug_error_string = "{"created":"@1556782065.660799340","description":"channel is in state TRANSIENT_FAILURE","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":2294,"grpc_status":14}"
+>
+[209 @      serve()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "channel is in state TRANSIENT_FAILURE"
+	debug_error_string = "{"created":"@1556782065.761533244","description":"channel is in state TRANSIENT_FAILURE","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":2294,"grpc_status":14}"
+>
+[209 @      serve()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "channel is in state TRANSIENT_FAILURE"
+	debug_error_string = "{"created":"@1556782065.862326904","description":"channel is in state TRANSIENT_FAILURE","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":2294,"grpc_status":14}"
+>
+[209 @      serve()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "channel is in state TRANSIENT_FAILURE"
+	debug_error_string = "{"created":"@1556782065.963211292","description":"channel is in state TRANSIENT_FAILURE","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":2294,"grpc_status":14}"
+>
+[209 @      serve()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "channel is in state TRANSIENT_FAILURE"
+	debug_error_string = "{"created":"@1556782066.064068160","description":"channel is in state TRANSIENT_FAILURE","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":2294,"grpc_status":14}"
+>
+[209 @      serve()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "channel is in state TRANSIENT_FAILURE"
+	debug_error_string = "{"created":"@1556782066.164814976","description":"channel is in state TRANSIENT_FAILURE","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":2294,"grpc_status":14}"
+>
+[209 @      serve()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "channel is in state TRANSIENT_FAILURE"
+	debug_error_string = "{"created":"@1556782066.265666469","description":"channel is in state TRANSIENT_FAILURE","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":2294,"grpc_status":14}"
+>
+[209 @      serve()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "channel is in state TRANSIENT_FAILURE"
+	debug_error_string = "{"created":"@1556782066.366534801","description":"channel is in state TRANSIENT_FAILURE","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":2294,"grpc_status":14}"
+>
+[209 @      serve()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "channel is in state TRANSIENT_FAILURE"
+	debug_error_string = "{"created":"@1556782066.467347228","description":"channel is in state TRANSIENT_FAILURE","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":2294,"grpc_status":14}"
+>
+[209 @      serve()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "channel is in state TRANSIENT_FAILURE"
+	debug_error_string = "{"created":"@1556782066.568031629","description":"channel is in state TRANSIENT_FAILURE","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":2294,"grpc_status":14}"
+>
+[209 @      serve()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "channel is in state TRANSIENT_FAILURE"
+	debug_error_string = "{"created":"@1556782066.668723250","description":"channel is in state TRANSIENT_FAILURE","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":2294,"grpc_status":14}"
+>
+[209 @      serve()] <_Rendezvous of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "channel is in state TRANSIENT_FAILURE"
+	debug_error_string = "{"created":"@1556782066.769432653","description":"channel is in state TRANSIENT_FAILURE","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":2294,"grpc_status":14}"
+>
+[213 @      serve()] got nodes
+[105 @     c_join()] join 10.145.134.255
+[112 @     c_join()] set()
+[105 @     c_join()] join 10.5.16.206
+[112 @     c_join()] {'10.145.134.255'}
+[105 @     c_join()] join 10.145.18.66
+[112 @     c_join()] {'10.145.134.255', '10.5.16.206'}
+[200 @      serve()] sand nodes
+[213 @      serve()] got nodes
+[105 @     c_join()] join 10.145.18.66
+[112 @     c_join()] set()
+[105 @     c_join()] join 10.145.134.255
+[112 @     c_join()] {'10.145.18.66'}
+[105 @     c_join()] join 10.5.16.206
+[112 @     c_join()] {'10.145.134.255', '10.145.18.66'}

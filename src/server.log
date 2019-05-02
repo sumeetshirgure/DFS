@@ -8317,3 +8317,80 @@ ___I
 [346 @ fuse_rmdir()] fuse_rmdir /prakhar
 [397 @ fuse_mkdir()] fuse_mkdir /prakhar2
 [397 @ fuse_mkdir()] fuse_mkdir /chenghiz
+[709 @      serve()] myip 10.145.134.255
+[724 @      serve()] Wanna Replication
+[727 @      serve()] Replication done
+[748 @      serve()] mounted
+[163 @    c_empty()] empty ../myfs-replicas/10.5.16.206
+[176 @ c_replicate()] replicate c
+[178 @ c_replicate()] ../myfs-replicas/10.5.16.206/mayankc
+[178 @ c_replicate()] ../myfs-replicas/10.5.16.206/ass7
+[178 @ c_replicate()] ../myfs-replicas/10.5.16.206/prakhar2
+[178 @ c_replicate()] ../myfs-replicas/10.5.16.206/chenghiz
+[178 @ c_replicate()] ../myfs-replicas/10.5.16.206/ass7/yay
+[178 @ c_replicate()] ../myfs-replicas/10.5.16.206/ass7/mytraceroute_16CS10012.c
+[178 @ c_replicate()] ../myfs-replicas/10.5.16.206/ass7/test
+[178 @ c_replicate()] ../myfs-replicas/10.5.16.206/ass7/yay/rsocket.h
+[178 @ c_replicate()] ../myfs-replicas/10.5.16.206/ass7/yay/user1.c
+[178 @ c_replicate()] ../myfs-replicas/10.5.16.206/ass7/yay/rsocket.c
+[178 @ c_replicate()] ../myfs-replicas/10.5.16.206/ass7/yay/user2.c
+[178 @ c_replicate()] ../myfs-replicas/10.5.16.206/ass7/yay/Makefile
+[178 @ c_replicate()] ../myfs-replicas/10.5.16.206/ass7/yay/documentation.txt
+[197 @ s_replicate()] replicate s 10.145.134.255 10.5.16.206 1
+[205 @ s_replicate()] /myfs-replicas/10.145.134.255 /myfs
+[215 @        dfs()] repff ../myfs/ass7/mytraceroute_16CS10012.c
+[215 @        dfs()] repff ../myfs/ass7/test
+[215 @        dfs()] repff ../myfs/ass7/yay/Makefile
+[215 @        dfs()] repff ../myfs/ass7/yay/rsocket.h
+[215 @        dfs()] repff ../myfs/ass7/yay/documentation.txt
+[215 @        dfs()] repff ../myfs/ass7/yay/user1.c
+[215 @        dfs()] repff ../myfs/ass7/yay/user2.c
+[215 @        dfs()] repff ../myfs/ass7/yay/rsocket.c
+[709 @      serve()] myip 10.145.134.255
+[724 @      serve()] Wanna Replication
+[727 @      serve()] Replication done
+[748 @      serve()] mounted
+[163 @    c_empty()] empty ../myfs-replicas/10.5.16.206
+[176 @ c_replicate()] replicate c
+[178 @ c_replicate()] ../myfs-replicas/10.5.16.206/mayankc
+[178 @ c_replicate()] ../myfs-replicas/10.5.16.206/ass7
+[178 @ c_replicate()] ../myfs-replicas/10.5.16.206/prakhar2
+[178 @ c_replicate()] ../myfs-replicas/10.5.16.206/chenghiz
+[178 @ c_replicate()] ../myfs-replicas/10.5.16.206/ass7/yay
+[178 @ c_replicate()] ../myfs-replicas/10.5.16.206/ass7/mytraceroute_16CS10012.c
+[178 @ c_replicate()] ../myfs-replicas/10.5.16.206/ass7/test
+[178 @ c_replicate()] ../myfs-replicas/10.5.16.206/ass7/yay/rsocket.h
+[178 @ c_replicate()] ../myfs-replicas/10.5.16.206/ass7/yay/user1.c
+[178 @ c_replicate()] ../myfs-replicas/10.5.16.206/ass7/yay/rsocket.c
+[178 @ c_replicate()] ../myfs-replicas/10.5.16.206/ass7/yay/user2.c
+[178 @ c_replicate()] ../myfs-replicas/10.5.16.206/ass7/yay/Makefile
+[178 @ c_replicate()] ../myfs-replicas/10.5.16.206/ass7/yay/documentation.txt
+[197 @ s_replicate()] replicate s 10.145.134.255 10.5.16.206 1
+[205 @ s_replicate()] /myfs-replicas/10.145.134.255 /myfs
+[215 @        dfs()] repff ../myfs/ass7/mytraceroute_16CS10012.c
+[215 @        dfs()] repff ../myfs/ass7/test
+[215 @        dfs()] repff ../myfs/ass7/yay/Makefile
+[215 @        dfs()] repff ../myfs/ass7/yay/rsocket.h
+[215 @        dfs()] repff ../myfs/ass7/yay/documentation.txt
+[215 @        dfs()] repff ../myfs/ass7/yay/user1.c
+[215 @        dfs()] repff ../myfs/ass7/yay/user2.c
+[215 @        dfs()] repff ../myfs/ass7/yay/rsocket.c
+[709 @      serve()] myip 10.145.134.255
+[724 @      serve()] Wanna Replication
+[197 @ s_replicate()] replicate s 10.145.134.255 10.145.18.66 1
+[205 @ s_replicate()] /myfs-replicas/10.145.134.255 /myfs
+[215 @        dfs()] repff ../myfs/ass7/mytraceroute_16CS10012.c
+[215 @        dfs()] repff ../myfs/ass7/test
+[215 @        dfs()] repff ../myfs/ass7/yay/Makefile
+[215 @        dfs()] repff ../myfs/ass7/yay/rsocket.h
+[215 @        dfs()] repff ../myfs/ass7/yay/documentation.txt
+[215 @        dfs()] repff ../myfs/ass7/yay/user1.c
+[215 @        dfs()] repff ../myfs/ass7/yay/user2.c
+[215 @        dfs()] repff ../myfs/ass7/yay/rsocket.c
+[163 @    c_empty()] empty ../myfs-replicas/10.145.18.66
+[176 @ c_replicate()] replicate c
+[178 @ c_replicate()] ../myfs-replicas/10.145.18.66/gg
+[178 @ c_replicate()] ../myfs-replicas/10.145.18.66/hh
+[178 @ c_replicate()] ../myfs-replicas/10.145.18.66/a.txt
+[727 @      serve()] Replication done
+[748 @      serve()] mounted
