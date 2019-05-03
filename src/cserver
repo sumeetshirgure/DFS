@@ -30,7 +30,7 @@ hdlr = logging.FileHandler('cserver.log')
 hdlr.setFormatter(logging.Formatter('[%(lineno)s @ %(funcName)10s()] %(message)s'))
 logger.addHandler(hdlr)
 logger.setLevel(logging.INFO)
-cip = ['10.145.134.255', '10.5.16.206']
+cip = ['10.145.134.255', '10.145.134.255']
 # cip = ['10.109.57.201', '10.109.57.201']
 cport = [7899,7900]
 rport = 7897
@@ -113,23 +113,26 @@ class CGreeter(service_pb2_grpc.CGreeterServicer):
 				p1 = ('','')
 				p2 = ('','')
 
-				if len(allClients) == 1:
+				if len(allClients) == 0:
+					pass
+				elif len(allClients) == 1:
 					rchoice = random.choice(list(allClients))
 					p1 = (clientIP, rchoice)
 					p2 = (rchoice, clientIP)
-				else:
+				elif len(allClients) > 1:
+					rchoice = random.choice(list(allClients))
 					p1 = (clientIP, rchoice)
 
 				stub = service_pb2_grpc.CGreeterStub(cchannel)
 				stub.c_join(service_pb2.CMessageRequest(byPrimary=True, ip=clientIP,
 					p1=pickle.dumps(p1), p2=pickle.dumps(p2)),
-					timeout=random.uniform(10,12))
+					timeout=random.uniform(5,7))
 				break
 			except grpc.RpcError as e:
 				logger.info(str(e))
 				if e.code() == grpc.StatusCode.DEADLINE_EXCEEDED:
 					wlock.release()
-					time.sleep(random.uniform(0,2))
+					time.sleep(random.uniform(0,1))
 					wlock = getWriteLock()
 					continue
 				elif e.code() == grpc.StatusCode.UNAVAILABLE:
@@ -146,7 +149,8 @@ class CGreeter(service_pb2_grpc.CGreeterServicer):
 			ret = True
 			otherIP = replicaDict[clientIP]
 
-			logger.info('here')
+			logger.info('here %s', otherIP)
+
 
 			with grpc.insecure_channel('%s:%d'%(otherIP, rport)) as c1:
 				s1 = service_pb2_grpc.GreeterStub(c1)
@@ -179,9 +183,13 @@ class CGreeter(service_pb2_grpc.CGreeterServicer):
 
 			else:
 				otherIP = rchoice
-				with grpc.insecure_channel('%s:%d'%(clientIP, rport)) as c1:
-					s1 = service_pb2_grpc.GreeterStub(c1)
-					s1.s_replicate(service_pb2.SReplicationRequest(myip=clientIP, oip=otherIP, type=1))
+				try:
+					with grpc.insecure_channel('%s:%d'%(clientIP, rport)) as c1:
+						s1 = service_pb2_grpc.GreeterStub(c1)
+						s1.s_replicate(service_pb2.SReplicationRequest(myip=clientIP, oip=otherIP, type=1))
+				except:
+					logger.info('replica offline')
+					pass
 
 				replicaDict[clientIP] = otherIP
 

@@ -20,6 +20,7 @@ import service_pb2
 import service_pb2_grpc
 import shutil
 import threading, socket
+import random
 from readerwriterlock import rwlock
 
 _ONE_DAY_IN_SECONDS = 60 * 60 * 24
@@ -40,7 +41,7 @@ myip = ''
 
 BSIZE = 10
 
-cip = ['10.145.134.255', '10.5.16.206']
+cip = ['10.145.134.255', '10.145.134.255']
 # cip = [10.109.57.201, 10.109.57.201]
 cport = [7899,7900]
 
@@ -267,7 +268,7 @@ class Greeter(service_pb2_grpc.GreeterServicer):
 				logger.info(str(e))
 				if e.code() != grpc.StatusCode.UNAVAILABLE:
 					wlock.release()
-					raise e
+					return self.fuse_unlink(request, context)
 
 		# sent to other machine. Now copy your work
 		try:
@@ -321,7 +322,7 @@ class Greeter(service_pb2_grpc.GreeterServicer):
 				logger.info(str(e))
 				if e.code() != grpc.StatusCode.UNAVAILABLE:
 					wlock.release()
-					raise e
+					return self.fuse_truncate(request, context)
 
 		# sent to other machine. Now copy your work
 		ans = ''
@@ -376,7 +377,7 @@ class Greeter(service_pb2_grpc.GreeterServicer):
 				logger.info(str(e))
 				if e.code() != grpc.StatusCode.UNAVAILABLE:
 					wlock.release()
-					raise e
+					return self.fuse_rmdir(request, context)
 
 		# sent to other machine. Now copy your work
 		ans=''
@@ -427,7 +428,7 @@ class Greeter(service_pb2_grpc.GreeterServicer):
 				logger.info(str(e))
 				if e.code() != grpc.StatusCode.UNAVAILABLE:
 					wlock.release()
-					raise e
+					return self.fuse_mkdir(request, context)
 
 		# sent to other machine. Now copy your work
 		ans = ''
@@ -607,7 +608,7 @@ class Greeter(service_pb2_grpc.GreeterServicer):
 				logger.info(str(e))
 				if e.code() != grpc.StatusCode.UNAVAILABLE:
 					wlock.release()
-					raise e
+					return self.fuse_write(request, context)
 
 		# sent to other machine. Now copy your work
 		ans = ''
@@ -744,7 +745,7 @@ def serve():
 		logger.info(e)
 		server.stop(0)
 		exit(0)
-		
+
 	logger.info('mounted')
 
 	try:

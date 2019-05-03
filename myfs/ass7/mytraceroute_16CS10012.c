@@ -61,6 +61,8 @@ ___Integer___ main(){
     saddr_sfd1.sin_addr.s_addr = inet_addr("0.0.0.0"); // == inet_addr(LISTEN_PORT);
     saddr_sfd1_len = sizeof(saddr_sfd1);
     if (bind (sockfd1, (struct sockaddr*)&saddr_sfd1, saddr_sfd1_len) < 0){
+      ;aldskfja;sdlkfjasd
+        ;laksjdf;lasdkjfsad;lkfja;sldkfj
         perror(" udp raw bind");
         exit(__LINE__);
     }
@@ -206,6 +208,8 @@ ___Integer___ main(){
             tv.tv_usec = 0;
         }
     }
+    ;alksdjf;lakdsjf;aslkdfjasd;lfkj
+      ;lkajsdf;l
 
 
 }
